@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Outfit', 'Inter', system-ui, sans-serif;
+  --font-heading: 'Outfit', system-ui, sans-serif;
+}
+
+:root {
+  --bg-color: #f8fafc;
+  --nav-bg: rgba(255, 255, 255, 0.7);
+  --nav-border: rgba(0, 0, 0, 0.08);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --accent-color: #3b82f6;
+  --accent-hover: #2563eb;
+  --dropdown-bg: rgba(255, 255, 255, 0.95);
+  --transition-speed: 0.3s;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --gradient-1: #e0f2fe;
+  --gradient-2: #f1f5f9;
+  --gradient-3: #bae6fd;
+}
+
+.dark {
+  --bg-color: #0f172a;
+  --nav-bg: rgba(15, 23, 42, 0.7);
+  --nav-border: rgba(255, 255, 255, 0.08);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --accent-color: #3b82f6;
+  --accent-hover: #60a5fa;
+  --dropdown-bg: rgba(15, 23, 42, 0.95);
+  --gradient-1: #0f172a;
+  --gradient-2: #1e293b;
+  --gradient-3: #111827;
+}
+
+@layer base {
+  body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color);
+    background-image: linear-gradient(-45deg, var(--gradient-1), var(--gradient-2), var(--gradient-3));
+    background-size: 400% 400%;
+    animation: gradientAnimation 15s ease infinite;
+    color: var(--text-primary);
+    @apply overflow-x-hidden antialiased;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+  }
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Decorative ambient glow orbs */
+.background-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.15;
+  pointer-events: none;
+  animation: backgroundGlowPulse 12s ease-in-out infinite;
+}
+
+.background-glow-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #60a5fa, transparent 75%);
+  top: -100px;
+  right: -150px;
+  animation-delay: 0s;
+}
+
+.background-glow-2 {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, #818cf8, transparent 75%);
+  bottom: 40px;
+  left: -120px;
+  animation-delay: 4s;
+}
+
+@keyframes backgroundGlowPulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.15;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: 0.25;
+  }
+}
