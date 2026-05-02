@@ -15,7 +15,7 @@ export const CubeView: React.FC = () => {
       <h1 className="text-4xl font-bold font-heading mb-6" style={{ color: 'var(--text-primary)' }}>
         Rubik's {type}
       </h1>
-      <div 
+      <div
         className="backdrop-blur-sm border rounded-2xl h-[600px] flex items-center justify-center shadow-sm"
         style={{ backgroundColor: 'var(--nav-bg)', borderColor: 'var(--nav-border)' }}
       >

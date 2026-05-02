@@ -48,7 +48,7 @@ export const Navbar: React.FC = () => {
         className="fixed w-full z-40 top-0 start-0 border-b backdrop-blur-md"
         style={{ backgroundColor: 'var(--nav-bg)', borderColor: 'var(--nav-border)' }}
       >
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between p-4">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-2 py-4">
           <Link to="/" className="flex items-center space-x-3">
             <span
               className="self-center text-2xl font-semibold whitespace-nowrap font-heading tracking-tight"
@@ -82,8 +82,8 @@ export const Navbar: React.FC = () => {
                   {item.dropdown ? (
                     <div
                       className="flex items-center justify-between py-2 rounded hover:bg-transparent cursor-pointer transition-colors"
-                      style={{ 
-                        color: activeDropdown === item.name ? 'var(--accent-color)' : 'var(--text-secondary)' 
+                      style={{
+                        color: activeDropdown === item.name ? 'var(--accent-color)' : 'var(--text-secondary)'
                       }}
                       onMouseEnter={() => setActiveDropdown(item.name)}
                       onMouseLeave={() => setActiveDropdown(null)}

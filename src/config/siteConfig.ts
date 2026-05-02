@@ -10,7 +10,7 @@ interface AppState {
 }
 
 export const useSiteConfig = create<AppState>((set) => ({
-  websiteName: "Rubiks' Art",
+  websiteName: "Rubik's Art",
   themeColor: 'bg-transparent', // Allow custom body background to show through
   isDarkMode: false,
   setWebsiteName: (name) => set({ websiteName: name }),

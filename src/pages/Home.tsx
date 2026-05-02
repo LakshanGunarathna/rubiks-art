@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { SceneCanvas } from '../components/3d/SceneCanvas';
 
 export const Home: React.FC = () => {
   return (
@@ -29,7 +28,7 @@ export const Home: React.FC = () => {
           className="col-span-4 md:col-span-8 lg:col-span-8 backdrop-blur-sm border rounded-2xl h-[500px] flex items-center justify-center relative overflow-hidden shadow-sm"
           style={{ backgroundColor: 'var(--nav-bg)', borderColor: 'var(--nav-border)' }}
         >
-          <SceneCanvas />
+          {/* Future 3D content or showcase will be implemented here */}
         </div>
 
         {/* Info Cards Area */}
