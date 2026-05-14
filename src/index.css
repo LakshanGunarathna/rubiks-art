@@ -31,6 +31,8 @@
   --accent-color: #3b82f6;
   --accent-hover: #60a5fa;
   --dropdown-bg: rgba(15, 23, 42, 0.95);
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
   --gradient-1: #0f172a;
   --gradient-2: #1e293b;
   --gradient-3: #111827;

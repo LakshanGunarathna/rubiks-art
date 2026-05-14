@@ -108,7 +108,7 @@ export const Navbar: React.FC = () => {
                                 <li key={subItem.name}>
                                   <Link
                                     to={subItem.path}
-                                    className="block px-4 py-2 hover:bg-[var(--accent-hover)]/10 hover:text-[var(--accent-color)] transition-colors"
+                                    className="block px-4 py-4 hover:bg-[var(--accent-hover)]/10 hover:text-[var(--accent-color)] transition-colors"
                                   >
                                     {subItem.name}
                                   </Link>
