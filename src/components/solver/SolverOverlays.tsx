@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { AlertCircle, CheckCircle2, Loader2, X } from 'lucide-react';
+import { CheckCircle2, Loader2, X } from 'lucide-react';
 
 interface ModalProps {
   isOpen: boolean;
@@ -35,25 +35,38 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, title }) => (
 );
 
 export const ErrorModal: React.FC<{ isOpen: boolean; onClose: () => void; errors: string[] }> = ({ isOpen, onClose, errors }) => (
-  <Modal isOpen={isOpen} onClose={onClose} title="Validation Errors">
-    <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-3 text-red-500">
-        <AlertCircle className="w-6 h-6" />
-        <span className="font-semibold text-lg">Please check your cube</span>
+  <AnimatePresence>
+    {isOpen && (
+      <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 backdrop-blur-sm bg-black/20">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.9, y: 20 }}
+          className="w-full max-w-md bg-[#e6e8eb] rounded-[2rem] shadow-2xl overflow-hidden p-8 text-center"
+        >
+          <h3 className="text-[22px] font-extrabold text-[#bc2a25] mb-2 flex justify-center items-center gap-2">
+            <span className="text-2xl">⚠️</span> Your Cube is not colored correctly
+          </h3>
+          <p className="text-[#1d3b5e] font-bold mb-5 text-[15px]">
+            You should consider the following:
+          </p>
+          <ul className="space-y-1.5 mb-6 text-left">
+            {errors.map((err, i) => (
+              <li key={i} className="bg-gradient-to-r from-[#f4f5f7] to-[#eef0f2] py-2 px-4 rounded-xl text-[#1d3b5e] text-sm font-semibold border-l-[3px] border-[#bc2a25] shadow-[0_2px_4px_rgba(0,0,0,0.02)]">
+                {err}
+              </li>
+            ))}
+          </ul>
+          <p className="text-[13px] italic text-[#5a6a80] mb-6 font-medium">
+            After fixing the coloring issues press "Solve!" again.
+          </p>
+          <button onClick={onClose} className="bg-[#f8f9fa] text-[#1d3b5e] font-extrabold py-3 px-12 rounded-2xl shadow-[0_4px_10px_rgba(0,0,0,0.05)] hover:shadow-[0_6px_15px_rgba(0,0,0,0.1)] hover:bg-white transition-all active:scale-95">
+            OK
+          </button>
+        </motion.div>
       </div>
-      <ul className="space-y-2 max-h-60 overflow-y-auto pr-2 custom-scrollbar text-[var(--text-primary)] font-medium">
-        {errors.map((err, i) => (
-          <li key={i} className="flex gap-2">
-            <span className="text-red-500 mt-1.5 w-1.5 h-1.5 rounded-full shrink-0" />
-            <span>{err}</span>
-          </li>
-        ))}
-      </ul>
-      <button onClick={onClose} className="w-full py-3 mt-4 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold transition-all shadow-lg active:scale-95">
-        Close
-      </button>
-    </div>
-  </Modal>
+    )}
+  </AnimatePresence>
 );
 
 export const SolvedModal: React.FC<{ isOpen: boolean; onClose: () => void }> = ({ isOpen, onClose }) => (
@@ -72,19 +85,33 @@ export const SolvedModal: React.FC<{ isOpen: boolean; onClose: () => void }> = (
 );
 
 export const ResetConfirmation: React.FC<{ isOpen: boolean; onClose: () => void; onConfirm: () => void }> = ({ isOpen, onClose, onConfirm }) => (
-  <Modal isOpen={isOpen} onClose={onClose} title="Reset Colors?">
-    <div className="flex flex-col gap-4">
-      <p className="text-[var(--text-primary)] font-medium">This will clear all painted colors and reset the cube. Are you sure you want to continue?</p>
-      <div className="flex gap-3 mt-4">
-        <button onClick={onClose} className="flex-1 py-3 rounded-xl bg-white bg-opacity-10 hover:bg-opacity-20 text-[var(--text-primary)] font-bold transition-all">
-          Cancel
-        </button>
-        <button onClick={() => { onConfirm(); onClose(); }} className="flex-1 py-3 rounded-xl bg-red-600 hover:bg-red-500 text-white font-bold transition-all shadow-lg active:scale-95">
-          Reset Now
-        </button>
+  <AnimatePresence>
+    {isOpen && (
+      <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 backdrop-blur-sm bg-black/20">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.9, y: 20 }}
+          className="w-full max-w-sm bg-[#e6e8eb] rounded-[2rem] shadow-2xl overflow-hidden p-8 text-center"
+        >
+          <h3 className="text-[22px] font-extrabold text-[#bc2a25] mb-2 flex justify-center items-center gap-2">
+            <span className="text-2xl">🔄</span> Reset Coloring?
+          </h3>
+          <p className="text-[#1d3b5e] font-bold mb-8 text-[15px]">
+            If you continue your current coloring will be lost.
+          </p>
+          <div className="flex justify-center gap-4">
+            <button onClick={onClose} className="flex-1 bg-[#f8f9fa] text-[#1d3b5e] font-extrabold py-3.5 px-6 rounded-2xl shadow-[0_4px_10px_rgba(0,0,0,0.05)] hover:bg-white transition-all active:scale-95">
+              Cancel
+            </button>
+            <button onClick={() => { onConfirm(); onClose(); }} className="flex-1 bg-[#f3cece] border border-[#eabfbf] text-[#bc2a25] font-extrabold py-3.5 px-6 rounded-2xl shadow-[0_4px_10px_rgba(0,0,0,0.05)] hover:bg-[#eabfbf] transition-all active:scale-95">
+              Reset
+            </button>
+          </div>
+        </motion.div>
       </div>
-    </div>
-  </Modal>
+    )}
+  </AnimatePresence>
 );
 
 export const LoadingOverlay: React.FC<{ isOpen: boolean; onCancel: () => void }> = ({ isOpen, onCancel }) => (

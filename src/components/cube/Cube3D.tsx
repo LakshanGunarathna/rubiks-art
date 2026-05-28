@@ -288,9 +288,16 @@ const CubeContent: React.FC<Cube3DProps> = ({ size, engine, isActive, onStickerC
   }, [isActive, engine.isAnimating, rotateLayer, rotateWholeCube, isPaintingMode]);
 
 
+  const fov = size === 2 ? 25 : size === 3 ? 30 : size === 4 ? 32 : size === 5 ? 33 : 30;
+  const cameraPosition: [number, number, number] =
+    size === 2 || size === 3 ? [5, 5, 8] :
+      size === 4 ? [7, 7, 10] :
+        size === 5 ? [8, 8, 12] :
+          [5, 5, 8];
+
   return (
     <>
-      <PerspectiveCamera makeDefault position={[5, 5, 8]} fov={30} />
+      <PerspectiveCamera makeDefault position={cameraPosition} fov={fov} />
       <OrbitControls
         ref={controlsRef}
         enableDamping
@@ -313,8 +320,12 @@ const CubeContent: React.FC<Cube3DProps> = ({ size, engine, isActive, onStickerC
 };
 
 export const Cube3D: React.FC<Cube3DProps> = (props) => {
+  const cursorClass = (props.isSolverMode && !props.isPaintingMode)
+    ? "cursor-not-allowed"
+    : "cursor-pointer active:cursor-grabbing";
+
   return (
-    <div className="w-full h-full relative cursor-grab active:cursor-grabbing">
+    <div className={`w-full h-full relative ${cursorClass}`}>
       <Canvas dpr={[1, 2]} flat gl={{ antialias: true, alpha: true }}>
         <CubeContent {...props} />
       </Canvas>

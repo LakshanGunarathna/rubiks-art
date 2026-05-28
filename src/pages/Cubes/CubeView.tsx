@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
 const Cube3DWrapper = lazy(() => import('../../components/cube/Cube3DWrapper'));
 
-import { MoveButton } from '../../components/ui/MoveButton';
 import type { Axis } from '../../types/cube';
 
 const LoadingCube = () => (
@@ -21,7 +20,6 @@ export const CubeView: React.FC = () => {
 
   const [engine, setEngine] = useState<any>(null);
   const rotateLayer = engine?.rotateLayer;
-  const rotateWholeCube = engine?.rotateWholeCube;
   const snapReset = engine?.snapReset;
   const shuffle = engine?.shuffle;
   const reset = engine?.reset;
@@ -84,12 +82,21 @@ export const CubeView: React.FC = () => {
 
           <div className="grid grid-cols-3 gap-3 mb-8">
             {Object.keys(moves).map((key) => (
-              <MoveButton
+              <button
                 key={key}
-                label={key}
                 onClick={() => rotateLayer(...moves[key])}
                 disabled={isAnimating}
-              />
+                className={`
+                  px-4 py-2 rounded-lg font-bold transition-all
+                  bg-opacity-10 backdrop-blur-md border
+                  hover:bg-opacity-20 active:scale-95
+                  disabled:opacity-50 disabled:cursor-not-allowed
+                  border-white border-opacity-20 text-white
+                `}
+                style={{ backgroundColor: 'rgba(255, 255, 255, 0.1)' }}
+              >
+                {key}
+              </button>
             ))}
           </div>
 
