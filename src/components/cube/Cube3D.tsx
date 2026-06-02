@@ -108,6 +108,25 @@ const CubeContent: React.FC<Cube3DProps> = ({ size, engine, isActive, onStickerC
     engine.noiseTexture = noiseTexture;
   }, [size, noiseTexture, coreMat]);
 
+  useEffect(() => {
+    engine.resetCamera = () => {
+      const endCamPos =
+        size === 2 || size === 3 ? new THREE.Vector3(5, 5, 8) :
+          size === 4 ? new THREE.Vector3(7, 7, 10) :
+            size === 5 ? new THREE.Vector3(8, 8, 12) :
+              new THREE.Vector3(5, 5, 8);
+
+      cameraAnimStateRef.current = {
+        startCamPos: camera.position.clone(),
+        startTarget: controlsRef.current ? controlsRef.current.target.clone() : new THREE.Vector3(0, 0, 0),
+        endCamPos: endCamPos,
+        endTarget: new THREE.Vector3(0, 0, 0),
+        duration: 500,
+        elapsed: 0
+      };
+    };
+  }, [size, camera, engine]);
+
   // Animation Loop
   useFrame((_state, delta) => {
     if (!isActive) return;
@@ -264,28 +283,43 @@ const CubeContent: React.FC<Cube3DProps> = ({ size, engine, isActive, onStickerC
       const key = e.key.toLowerCase();
       const shift = e.shiftKey;
 
-      // Simple mapping for now, can be expanded
-      const MOVES_3X3: any = {
-        r: ['x', 1, -Math.PI / 2], l: ['x', -1, Math.PI / 2],
-        u: ['y', 1, -Math.PI / 2], d: ['y', -1, Math.PI / 2],
-        f: ['z', 1, -Math.PI / 2], b: ['z', -1, Math.PI / 2],
+      const getLayerCoord = (cubeSize: number): number => {
+        if (cubeSize === 2) return 0.5;
+        if (cubeSize === 3) return 1;
+        if (cubeSize === 4) return 1.5;
+        if (cubeSize === 5) return 2;
+        return 1;
       };
 
-      if (MOVES_3X3[key]) {
+      const coord = getLayerCoord(size);
+
+      const MOVES_DYNAMIC: Record<string, [Axis, number, number]> = {
+        r: ['x', coord, -Math.PI / 2],
+        l: ['x', -coord, Math.PI / 2],
+        u: ['y', coord, -Math.PI / 2],
+        d: ['y', -coord, Math.PI / 2],
+        f: ['z', coord, -Math.PI / 2],
+        b: ['z', -coord, Math.PI / 2],
+      };
+
+      if (MOVES_DYNAMIC[key]) {
         if (isSolverMode) return;
-        let [axis, layer, angle] = MOVES_3X3[key];
+        e.preventDefault();
+        let [axis, layer, angle] = MOVES_DYNAMIC[key];
         if (shift) angle = -angle;
         rotateLayer(axis, layer, angle, 300);
-      } else if (isPaintingMode && (key === 'arrowleft' || key === 'arrowright')) {
+      } else if (key === 'arrowleft' || key === 'arrowright') {
+        e.preventDefault();
         rotateWholeCube('y', (Math.PI / 2) * (key === 'arrowleft' ? -1 : 1), 300);
-      } else if (isPaintingMode && (key === 'arrowup' || key === 'arrowdown')) {
+      } else if (key === 'arrowup' || key === 'arrowdown') {
+        e.preventDefault();
         rotateWholeCube('x', (Math.PI / 2) * (key === 'arrowup' ? -1 : 1), 300);
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isActive, engine.isAnimating, rotateLayer, rotateWholeCube, isPaintingMode]);
+  }, [isActive, engine.isAnimating, rotateLayer, rotateWholeCube, size, isSolverMode]);
 
 
   const fov = size === 2 ? 25 : size === 3 ? 30 : size === 4 ? 32 : size === 5 ? 33 : 30;

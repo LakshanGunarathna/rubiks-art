@@ -4,8 +4,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import * as THREE from 'three';
 import * as Rubiks2x2Solver from '../../utils/solver2x2';
 import * as Rubiks3x3Solver from '../../utils/solver3x3';
+import * as Rubiks4x4Solver from '../../utils/solver4x4';
+import * as Rubiks5x5Solver from '../../utils/solver5x5';
 
-const Solver3DWrapper = lazy(() => import('../../components/cube/Solver3DWrapper'));
+const Solver3DWrapper = lazy(() => import('../../components/solver/Solver3DWrapper'));
 
 import { RUBIKS_CUBE_COLORS } from '../../types/cube';
 import type { PaintedPiece } from '../../types/cube';
@@ -18,9 +20,12 @@ import { ErrorModal, SolvedModal, ResetConfirmation, LoadingOverlay } from '../.
 
 import { getHumanReadableMove } from '../../utils/cubeFormatters';
 import { OPPOSITE_COLORS, MOVES_2X2, MOVES_3X3 } from '../../utils/cubeConstants';
-import { getCubeArray2x2, getCubeString3x3 } from '../../utils/cubeStateUtils';
+import { getCubeArray2x2, getCubeString3x3, getCubeString4x4, getCubeString5x5 } from '../../utils/cubeStateUtils';
 import { autoDeducePieces, autoFillCenters } from '../../utils/cubeAutoPainter';
-import { validate2x2, validate3x3, checkIfSolved2x2, checkIfSolved3x3 } from '../../utils/cubeValidation';
+import { 
+  validate2x2, validate3x3, validate4x4, validate5x5, 
+  checkIfSolved2x2, checkIfSolved3x3, checkIfSolved4x4, checkIfSolved5x5 
+} from '../../utils/cubeValidation';
 
 const LoadingCube = () => (
   <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-white rounded-3xl">
@@ -48,6 +53,11 @@ export const SolverView: React.FC = () => {
   const [solutionSteps, setSolutionSteps] = useState<any[]>([]);
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [playbackSpeed, setPlaybackSpeed] = useState(500);
+
+  const solveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const solveAbortControllerRef = useRef<AbortController | null>(null);
+  const [lastActionDir, setLastActionDir] = useState<1 | -1>(1);
 
   // Overlay states
   const [errors, setErrors] = useState<string[]>([]);
@@ -55,10 +65,6 @@ export const SolverView: React.FC = () => {
   const [isSolvedModalOpen, setIsSolvedModalOpen] = useState(false);
   const [isResetModalOpen, setIsResetModalOpen] = useState(false);
   const [isLoadingOverlayOpen, setIsLoadingOverlayOpen] = useState(false);
-  const [lastActionDir, setLastActionDir] = useState<1 | -1>(1);
-  const [playbackSpeed, setPlaybackSpeed] = useState(1000);
-
-  const solveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const resetToGray = useCallback(() => {
     if (!cubiesRef?.current) return;
@@ -85,39 +91,7 @@ export const SolverView: React.FC = () => {
     }
   }, [engine, type, snapReset, resetToGray]);
 
-  const debugFill = useCallback(() => {
-    if (!cubiesRef?.current) return;
-    const noiseTexture = engine?.noiseTexture || null;
 
-    // 1. Reset to solved state first
-    cubiesRef.current.forEach((cubie: any) => {
-      cubie.children.forEach((child: any) => {
-        if (child.userData.isSticker) {
-          const face = child.userData.faceName;
-          const defaultColors: any = {
-            top: RUBIKS_CUBE_COLORS.white, bottom: RUBIKS_CUBE_COLORS.yellow,
-            front: RUBIKS_CUBE_COLORS.red, back: RUBIKS_CUBE_COLORS.orange,
-            left: RUBIKS_CUBE_COLORS.green, right: RUBIKS_CUBE_COLORS.blue
-          };
-          child.material = getStickerMat(defaultColors[face], noiseTexture);
-        }
-      });
-    });
-
-    // 2. Apply a few real moves without animation to get a valid scramble
-    const scrambleMoves = [
-      { axis: 'x', layer: size === 2 ? 0.5 : 1, angle: Math.PI / 2 },
-      { axis: 'y', layer: size === 2 ? 0.5 : 1, angle: Math.PI / 2 },
-      { axis: 'z', layer: size === 2 ? 0.5 : 1, angle: Math.PI / 2 },
-      { axis: 'x', layer: size === 2 ? -0.5 : -1, angle: -Math.PI / 2 },
-    ];
-
-    (async () => {
-      for (const m of scrambleMoves) {
-        await rotateLayer(m.axis, m.layer as any, m.angle, 0);
-      }
-    })();
-  }, [cubiesRef, engine, rotateLayer, size]);
 
   const handleStickerClick = useCallback((cubie: any, sticker: any) => {
     if (phase !== 'paint') return;
@@ -149,19 +123,18 @@ export const SolverView: React.FC = () => {
       }
     }
 
-    autoFillCenters(cubiesRef, engine);
-    setTimeout(() => autoDeducePieces(cubiesRef, engine), 0);
-  }, [phase, selectedColor, engine, cubiesRef]);
+    autoFillCenters(cubiesRef, engine, size);
+    setTimeout(() => autoDeducePieces(cubiesRef, engine, size), 0);
+  }, [phase, selectedColor, engine, cubiesRef, size]);
 
   const handleStartSolve = async () => {
     setErrors([]);
 
     try {
-      if (size !== 2 && size !== 3) {
-        setErrors([`Solving ${size}x${size} is currently not supported.`]);
-        setIsErrorModalOpen(true);
-        return;
+      if (solveAbortControllerRef.current) {
+        solveAbortControllerRef.current.abort();
       }
+      solveAbortControllerRef.current = new AbortController();
 
       const colorCounts: Record<number, number> = {};
       let hasUnpainted = false;
@@ -213,7 +186,7 @@ export const SolverView: React.FC = () => {
         });
 
         setSolutionSteps(steps);
-      } else {
+      } else if (size === 3) {
         const validationErrors = validate3x3(hasUnpainted, colorCounts, paintedPieces);
         if (validationErrors.length > 0) {
           setErrors(validationErrors);
@@ -242,6 +215,40 @@ export const SolverView: React.FC = () => {
         });
 
         setSolutionSteps(steps);
+      } else if (size === 4) {
+        const colorErrors = validate4x4(hasUnpainted, colorCounts, paintedPieces);
+        if (colorErrors.length > 0) {
+          setErrors(colorErrors);
+          setIsErrorModalOpen(true);
+          return;
+        }
+
+        const cubeString = getCubeString4x4(cubiesRef);
+        if (checkIfSolved4x4(cubeString)) {
+          setIsSolvedModalOpen(true);
+          return;
+        }
+
+        setIsLoadingOverlayOpen(true);
+        const steps = await Rubiks4x4Solver.solve(cubeString, solveAbortControllerRef.current);
+        setSolutionSteps(steps);
+      } else if (size === 5) {
+        const colorErrors = validate5x5(hasUnpainted, colorCounts);
+        if (colorErrors.length > 0) {
+          setErrors(colorErrors);
+          setIsErrorModalOpen(true);
+          return;
+        }
+
+        const cubeString = getCubeString5x5(cubiesRef);
+        if (checkIfSolved5x5(cubeString)) {
+          setIsSolvedModalOpen(true);
+          return;
+        }
+
+        setIsLoadingOverlayOpen(true);
+        const steps = await Rubiks5x5Solver.solve(cubeString, solveAbortControllerRef.current);
+        setSolutionSteps(steps);
       }
 
       solveTimerRef.current = setTimeout(() => {
@@ -253,7 +260,11 @@ export const SolverView: React.FC = () => {
 
     } catch (err: any) {
       setIsLoadingOverlayOpen(false);
-      setErrors(["Your puzzle cannot be solved. Please check your color layout."]);
+      if (err.name === 'AbortError') {
+        console.log('Solve request cancelled.');
+        return;
+      }
+      setErrors([err.message || "Your puzzle cannot be solved. Please check your color layout."]);
       setIsErrorModalOpen(true);
     }
   };
@@ -262,6 +273,10 @@ export const SolverView: React.FC = () => {
     if (solveTimerRef.current) {
       clearTimeout(solveTimerRef.current);
       solveTimerRef.current = null;
+    }
+    if (solveAbortControllerRef.current) {
+      solveAbortControllerRef.current.abort();
+      solveAbortControllerRef.current = null;
     }
     setIsLoadingOverlayOpen(false);
   };
@@ -329,7 +344,6 @@ export const SolverView: React.FC = () => {
                   rotateWholeCube={rotateWholeCube}
                   onSolve={handleStartSolve}
                   onResetRequest={() => setIsResetModalOpen(true)}
-                  onDebugFill={debugFill}
                   isAnimating={isAnimating}
                   engineReady={!!engine}
                 />

@@ -42,7 +42,6 @@ interface CubePainterPanelProps {
   rotateWholeCube?: (axis: 'x' | 'y' | 'z', angle: number) => void;
   onSolve: () => void;
   onResetRequest: () => void;
-  onDebugFill?: () => void;
   isAnimating: boolean;
   engineReady: boolean;
 }
@@ -53,7 +52,6 @@ export const CubePainterPanel: React.FC<CubePainterPanelProps> = ({
   rotateWholeCube,
   onSolve,
   onResetRequest,
-  onDebugFill,
   isAnimating,
   engineReady,
 }) => {
@@ -94,15 +92,6 @@ export const CubePainterPanel: React.FC<CubePainterPanelProps> = ({
           <FontAwesomeIcon icon={faRotateLeft} />
           Reset
         </button>
-
-        {import.meta.env.DEV && onDebugFill && (
-          <button 
-            onClick={onDebugFill}
-            className="w-full py-2 rounded-xl border border-dashed border-white/20 text-white/40 hover:text-white/60 hover:border-white/40 text-xs transition-all mt-2"
-          >
-            [DEV] Quick Fill (Scramble)
-          </button>
-        )}
       </div>
     </div>
   );

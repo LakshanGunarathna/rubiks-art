@@ -5,7 +5,7 @@ export type Axis = 'x' | 'y' | 'z';
 
 export interface Move {
   axis: Axis;
-  layer: number;
+  layer: number | number[];
   angle: number;
   duration?: number;
   record?: boolean;
@@ -20,7 +20,7 @@ export interface WholeCubeRotation {
 
 export interface HistoryItem {
   axis: Axis;
-  layer?: number;
+  layer?: number | number[];
   angle: number;
   wholeCube: boolean;
 }

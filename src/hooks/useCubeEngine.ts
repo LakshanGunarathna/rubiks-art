@@ -38,7 +38,7 @@ export const useCubeEngine = () => {
     if (resolve) resolve();
   }, []);
 
-  const rotateLayer = useCallback((axis: Axis, layer: number, angle: number, duration = 300, record = true) => {
+  const rotateLayer = useCallback((axis: Axis, layer: number | number[], angle: number, duration = 300, record = true) => {
     return new Promise<void>((resolve) => {
       if (isAnimating && duration > 0) {
         resolve();
@@ -55,9 +55,12 @@ export const useCubeEngine = () => {
 
       setIsAnimating(true);
 
-      const activeCubies = cubiesRef.current.filter(
-        (c) => Math.abs(c.position[axis] - layer) < 0.1
-      );
+      const activeCubies = cubiesRef.current.filter((c) => {
+        if (Array.isArray(layer)) {
+          return layer.some(ly => Math.abs(c.position[axis] - ly) < 0.1);
+        }
+        return Math.abs(c.position[axis] - layer) < 0.1;
+      });
 
       pivotRef.current.rotation.set(0, 0, 0);
       activeCubies.forEach((c) => pivotRef.current?.attach(c));

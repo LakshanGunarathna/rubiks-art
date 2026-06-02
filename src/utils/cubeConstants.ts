@@ -80,3 +80,60 @@ export const MOVES_2X2: Record<string, [Axis, number, number]> = {
   'U': ['y', 0.5, -Math.PI / 2], 'D': ['y', -0.5, Math.PI / 2],
   'F': ['z', 0.5, -Math.PI / 2], 'B': ['z', -0.5, Math.PI / 2]
 };
+
+export const MOVES_4X4: Record<string, [Axis, number[], number]> = {
+  'U': ['y', [1.5], -Math.PI / 2], 'D': ['y', [-1.5], Math.PI / 2],
+  'L': ['x', [-1.5], Math.PI / 2], 'R': ['x', [1.5], -Math.PI / 2],
+  'F': ['z', [1.5], -Math.PI / 2], 'B': ['z', [-1.5], Math.PI / 2],
+
+  'Uw': ['y', [1.5, 0.5], -Math.PI / 2], 'Dw': ['y', [-1.5, -0.5], Math.PI / 2],
+  'Lw': ['x', [-1.5, -0.5], Math.PI / 2], 'Rw': ['x', [1.5, 0.5], -Math.PI / 2],
+  'Fw': ['z', [1.5, 0.5], -Math.PI / 2], 'Bw': ['z', [-1.5, -0.5], Math.PI / 2],
+
+  'u': ['y', [0.5], -Math.PI / 2], 'd': ['y', [-0.5], Math.PI / 2],
+  'l': ['x', [-0.5], Math.PI / 2], 'r': ['x', [0.5], -Math.PI / 2],
+  'f': ['z', [0.5], -Math.PI / 2], 'b': ['z', [-0.5], Math.PI / 2],
+
+  'M': ['x', [-0.5, 0.5], Math.PI / 2],
+  'E': ['y', [-0.5, 0.5], Math.PI / 2],
+  'S': ['z', [-0.5, 0.5], -Math.PI / 2],
+
+  'x': ['x', [-1.5, -0.5, 0.5, 1.5], -Math.PI / 2],
+  'y': ['y', [-1.5, -0.5, 0.5, 1.5], -Math.PI / 2],
+  'z': ['z', [-1.5, -0.5, 0.5, 1.5], -Math.PI / 2]
+};
+
+export const MOVES_5X5: Record<string, [Axis, number[], number]> = {
+  'U': ['y', [2], -Math.PI / 2], 'D': ['y', [-2], Math.PI / 2],
+  'L': ['x', [-2], Math.PI / 2], 'R': ['x', [2], -Math.PI / 2],
+  'F': ['z', [2], -Math.PI / 2], 'B': ['z', [-2], Math.PI / 2],
+
+  'Uw': ['y', [1, 2], -Math.PI / 2], '2Uw': ['y', [1, 2], -Math.PI / 2],
+  'Dw': ['y', [-2, -1], Math.PI / 2], '2Dw': ['y', [-2, -1], Math.PI / 2],
+  'Lw': ['x', [-2, -1], Math.PI / 2], '2Lw': ['x', [-2, -1], Math.PI / 2],
+  'Rw': ['x', [1, 2], -Math.PI / 2], '2Rw': ['x', [1, 2], -Math.PI / 2],
+  'Fw': ['z', [1, 2], -Math.PI / 2], '2Fw': ['z', [1, 2], -Math.PI / 2],
+  'Bw': ['z', [-2, -1], Math.PI / 2], '2Bw': ['z', [-2, -1], Math.PI / 2],
+
+  '3Uw': ['y', [0, 1, 2], -Math.PI / 2], '3Dw': ['y', [-2, -1, 0], Math.PI / 2],
+  '3Lw': ['x', [-2, -1, 0], Math.PI / 2], '3Rw': ['x', [0, 1, 2], -Math.PI / 2],
+  '3Fw': ['z', [0, 1, 2], -Math.PI / 2], '3Bw': ['z', [-2, -1, 0], Math.PI / 2],
+
+  'u': ['y', [1], -Math.PI / 2], '2U': ['y', [1], -Math.PI / 2],
+  'd': ['y', [-1], Math.PI / 2], '2D': ['y', [-1], Math.PI / 2],
+  'l': ['x', [-1], Math.PI / 2], '2L': ['x', [-1], Math.PI / 2],
+  'r': ['x', [1], -Math.PI / 2], '2R': ['x', [1], -Math.PI / 2],
+  'f': ['z', [1], -Math.PI / 2], '2F': ['z', [1], -Math.PI / 2],
+  'b': ['z', [-1], Math.PI / 2], '2B': ['z', [-1], Math.PI / 2],
+
+  'M': ['x', [0], Math.PI / 2], '3L': ['x', [0], Math.PI / 2],
+  '3R': ['x', [0], -Math.PI / 2],
+  'E': ['y', [0], Math.PI / 2], '3D': ['y', [0], Math.PI / 2],
+  '3U': ['y', [0], -Math.PI / 2],
+  'S': ['z', [0], -Math.PI / 2], '3F': ['z', [0], -Math.PI / 2],
+  '3B': ['z', [0], Math.PI / 2],
+
+  'x': ['x', [-2, -1, 0, 1, 2], -Math.PI / 2],
+  'y': ['y', [-2, -1, 0, 1, 2], -Math.PI / 2],
+  'z': ['z', [-2, -1, 0, 1, 2], -Math.PI / 2]
+};

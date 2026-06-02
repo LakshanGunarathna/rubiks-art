@@ -8,7 +8,7 @@ import {
   COLOR_FROM_NORMAL
 } from './cubeConstants';
 
-export function autoDeducePieces(cubiesRef: any, engine: any): void {
+export function autoDeducePieces(cubiesRef: any, engine: any, size: number = 3): void {
   if (!cubiesRef?.current) return;
   let madeChanges = false;
   const noiseTexture = engine?.noiseTexture || null;
@@ -38,7 +38,8 @@ export function autoDeducePieces(cubiesRef: any, engine: any): void {
         const c1 = paintedColors[0];
         const possiblePairs = VALID_EDGES.filter(pair => pair.includes(c1));
         const remainingPairs = possiblePairs.filter(pair => {
-          return !fullyPaintedEdges.some(fp => fp.includes(pair[0]) && fp.includes(pair[1]));
+          const count = fullyPaintedEdges.filter(fp => fp.includes(pair[0]) && fp.includes(pair[1])).length;
+          return count < size - 2;
         });
 
         if (remainingPairs.length === 1) {
@@ -71,23 +72,28 @@ export function autoDeducePieces(cubiesRef: any, engine: any): void {
   });
 
   if (madeChanges) {
-    autoDeducePieces(cubiesRef, engine);
+    autoDeducePieces(cubiesRef, engine, size);
   }
 }
 
-export function autoFillCenters(cubiesRef: any, engine: any): void {
+export function autoFillCenters(cubiesRef: any, engine: any, size: number = 3): void {
   if (!cubiesRef?.current) return;
   const noiseTexture = engine?.noiseTexture || null;
 
   const centerStickers: any[] = [];
+  const centerCoord = Math.floor(size / 2);
   cubiesRef.current.forEach((c: any) => {
     const absSum = Math.abs(Math.round(c.position.x)) + Math.abs(Math.round(c.position.y)) + Math.abs(Math.round(c.position.z));
-    if (absSum === 1) {
+    if (absSum === centerCoord && (Math.abs(Math.round(c.position.x)) === centerCoord || Math.abs(Math.round(c.position.y)) === centerCoord || Math.abs(Math.round(c.position.z)) === centerCoord)) {
       const st = c.children.find((child: any) => child.userData?.isSticker);
       if (st) {
         centerStickers.push({
           sticker: st,
-          normal: new THREE.Vector3(Math.round(c.position.x), Math.round(c.position.y), Math.round(c.position.z)),
+          normal: new THREE.Vector3(
+            Math.round(c.position.x) / centerCoord,
+            Math.round(c.position.y) / centerCoord,
+            Math.round(c.position.z) / centerCoord
+          ),
           color: st.material.color.getHex()
         });
       }

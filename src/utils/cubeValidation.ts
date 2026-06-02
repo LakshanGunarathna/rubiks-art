@@ -1,4 +1,4 @@
-import { ALL_COLORS, HEX_TO_NAME } from './cubeConstants';
+import { ALL_COLORS, HEX_TO_NAME, OPPOSITE_COLORS } from './cubeConstants';
 import type { PaintedPiece } from '../types/cube';
 
 export function validate2x2(hasUnpainted: boolean, colorCounts: Record<number, number>): string[] {
@@ -108,6 +108,94 @@ export function checkIfSolved2x2(posit: number[]): boolean {
 export function checkIfSolved3x3(cubeString: string): boolean {
   for (let i = 0; i < 54; i += 9) {
     const segment = cubeString.substring(i, i + 9);
+    if (new Set(segment).size > 1) {
+      return false;
+    }
+  }
+  return true;
+}
+
+export function validate4x4(
+  hasUnpainted: boolean,
+  colorCounts: Record<number, number>,
+  paintedPieces: PaintedPiece[]
+): string[] {
+  const validationErrors: string[] = [];
+
+  if (hasUnpainted) {
+    validationErrors.push("You have unpainted tiles on the cube.");
+  }
+
+  ALL_COLORS.forEach(hex => {
+    const name = HEX_TO_NAME[hex];
+    const count = colorCounts[hex] || 0;
+    if (count < 16) validationErrors.push(`You do not have enough ${name} tiles (${count}/16).`);
+    else if (count > 16) validationErrors.push(`You have too many ${name} tiles (${count}/16).`);
+  });
+
+  if (hasUnpainted) {
+    return validationErrors;
+  }
+
+  let edgeErrors = 0;
+  let cornerErrors = 0;
+  paintedPieces.forEach(p => {
+    if (p.colors.length > 1) {
+      let hasError = false;
+      for (let i = 0; i < p.colors.length; i++) {
+        for (let j = i + 1; j < p.colors.length; j++) {
+          if (OPPOSITE_COLORS[p.colors[i]] === p.colors[j]) hasError = true;
+          if (p.colors[i] === p.colors[j]) hasError = true;
+        }
+      }
+      if (hasError) {
+        if (p.colors.length === 2) edgeErrors++;
+        else cornerErrors++;
+      }
+    }
+  });
+
+  if (edgeErrors || cornerErrors) {
+    if (edgeErrors) validationErrors.push(`${edgeErrors} edge piece(s) have invalid color combinations.`);
+    if (cornerErrors) validationErrors.push(`${cornerErrors} corner piece(s) have invalid color combinations.`);
+  }
+
+  return validationErrors;
+}
+
+export function checkIfSolved4x4(cubeString: string): boolean {
+  for (let i = 0; i < 96; i += 16) {
+    const segment = cubeString.substring(i, i + 16);
+    if (new Set(segment).size > 1) {
+      return false;
+    }
+  }
+  return true;
+}
+
+export function validate5x5(
+  hasUnpainted: boolean,
+  colorCounts: Record<number, number>
+): string[] {
+  const validationErrors: string[] = [];
+
+  if (hasUnpainted) {
+    validationErrors.push("You have unpainted tiles on the cube.");
+  }
+
+  ALL_COLORS.forEach(hex => {
+    const name = HEX_TO_NAME[hex];
+    const count = colorCounts[hex] || 0;
+    if (count < 25) validationErrors.push(`You do not have enough ${name} tiles (${count}/25).`);
+    else if (count > 25) validationErrors.push(`You have too many ${name} tiles (${count}/25).`);
+  });
+
+  return validationErrors;
+}
+
+export function checkIfSolved5x5(cubeString: string): boolean {
+  for (let i = 0; i < 150; i += 25) {
+    const segment = cubeString.substring(i, i + 25);
     if (new Set(segment).size > 1) {
       return false;
     }
