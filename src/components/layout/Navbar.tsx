@@ -4,6 +4,7 @@ import { useSiteConfig } from '../../config/siteConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCubes, faPuzzlePiece, faMagic, faBars, faTimes, faChevronDown, faChevronUp, faHome, faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import { motion, AnimatePresence } from 'framer-motion';
+import logoImg from '../../assets/Logo.png';
 
 export const Navbar: React.FC = () => {
   const websiteName = useSiteConfig((state) => state.websiteName);
@@ -49,7 +50,8 @@ export const Navbar: React.FC = () => {
         style={{ backgroundColor: 'var(--nav-bg)', borderColor: 'var(--nav-border)' }}
       >
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-2 py-4">
-          <Link to="/" className="flex items-center space-x-3">
+          <Link to="/" className="flex items-center gap-2">
+            <img src={logoImg} alt="Logo" className="w-8 h-8 md:w-9 md:h-9 object-contain" />
             <span
               className="self-center text-2xl font-semibold whitespace-nowrap font-heading tracking-tight"
               style={{ color: 'var(--text-primary)' }}
@@ -155,7 +157,10 @@ export const Navbar: React.FC = () => {
               style={{ backgroundColor: 'var(--bg-color)', borderColor: 'var(--nav-border)' }}
             >
               <div className="flex justify-between items-center mb-8 border-b pb-4" style={{ borderColor: 'var(--nav-border)' }}>
-                <span className="text-xl font-bold font-heading" style={{ color: 'var(--text-primary)' }}>{websiteName}</span>
+                <div className="flex items-center gap-2">
+                  <img src={logoImg} alt="Logo" className="w-6 h-6 object-contain" />
+                  <span className="text-xl font-bold font-heading" style={{ color: 'var(--text-primary)' }}>{websiteName}</span>
+                </div>
                 <button
                   onClick={() => setIsOpen(false)}
                   className="hover:text-[var(--accent-color)]"

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSiteConfig } from '../../config/siteConfig';
+import logoImg from '../../assets/Logo.png';
 
 export const Footer: React.FC = () => {
   const websiteName = useSiteConfig((state) => state.websiteName);
@@ -10,8 +11,11 @@ export const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center md:items-start gap-6">
         
         {/* Brand / Copy */}
-        <div className="text-center md:text-left">
-          <h3 className="text-xl font-bold font-heading" style={{ color: 'var(--text-primary)' }}>{websiteName}</h3>
+        <div className="text-center md:text-left flex flex-col items-center md:items-start">
+          <div className="flex items-center gap-2">
+            <img src={logoImg} alt="Logo" className="w-6 h-6 object-contain" />
+            <h3 className="text-xl font-bold font-heading" style={{ color: 'var(--text-primary)' }}>{websiteName}</h3>
+          </div>
           <p className="text-sm mt-2" style={{ color: 'var(--text-secondary)' }}>
             © {new Date().getFullYear()} {websiteName}. All rights reserved.
           </p>
