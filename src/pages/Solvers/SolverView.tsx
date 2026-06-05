@@ -2,10 +2,10 @@ import React, { useState, useCallback, useEffect, useRef, lazy, Suspense } from 
 import { useParams } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as THREE from 'three';
-import * as Rubiks2x2Solver from '../../utils/solver2x2';
-import * as Rubiks3x3Solver from '../../utils/solver3x3';
-import * as Rubiks4x4Solver from '../../utils/solver4x4';
-import * as Rubiks5x5Solver from '../../utils/solver5x5';
+import * as Rubiks2x2Solver from '../../types/cube2x2';
+import * as Rubiks3x3Solver from '../../types/cube3x3';
+import * as Rubiks4x4Solver from '../../types/cube4x4';
+import * as Rubiks5x5Solver from '../../types/cube5x5';
 
 const Solver3DWrapper = lazy(() => import('../../components/solver/Solver3DWrapper'));
 

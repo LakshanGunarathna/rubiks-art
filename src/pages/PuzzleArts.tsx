@@ -2,9 +2,9 @@ import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cubeArts } from '../data/cubeArts';
 import type { CubeArt } from '../data/cubeArts';
-import { ArtPlayer } from '../components/cube/ArtPlayer';
+import { ArtPlayer } from '../components/puzzleArts/ArtPlayer';
 
-import { PuzzleArtsFilterBar, CUBE_TYPES, DIFFICULTIES } from '../components/cube/PuzzleArtsFilterBar';
+import { PuzzleArtsFilterBar, CUBE_TYPES, DIFFICULTIES } from '../components/puzzleArts/PuzzleArtsFilterBar';
 
 function getDifficulty(moveCount: number) {
   if (moveCount <= 10) return 'Easy';

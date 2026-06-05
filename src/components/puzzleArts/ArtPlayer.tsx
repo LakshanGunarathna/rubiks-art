@@ -4,7 +4,7 @@ import { ChevronRight, ChevronLeft, X, Loader2 } from 'lucide-react';
 import { MOVES_2X2, MOVES_3X3, MOVES_4X4, MOVES_5X5 } from '../../utils/cubeConstants';
 import type { CubeArt } from '../../data/cubeArts';
 
-const Cube3DWrapper = lazy(() => import('./Cube3DWrapper'));
+const Cube3DWrapper = lazy(() => import('../cube/Cube3DWrapper'));
 
 interface ArtPlayerProps {
   art: CubeArt;

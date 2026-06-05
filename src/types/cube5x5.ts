@@ -1,4 +1,4 @@
-import { MOVES_5X5 } from './cubeConstants';
+import { MOVES_5X5 } from '../utils/cubeConstants';
 import { useSiteConfig } from '../config/siteConfig';
 
 export async function solve(cubeString: string, abortController: AbortController): Promise<any[]> {

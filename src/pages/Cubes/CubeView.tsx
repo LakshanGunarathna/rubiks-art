@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
 import { MOVES_2X2, MOVES_3X3, MOVES_4X4, MOVES_5X5 } from '../../utils/cubeConstants';
 import { CubeControlPanel } from '../../components/cube/CubeControlPanel';
-import * as Rubiks2x2Solver from '../../utils/solver2x2';
-import * as Rubiks3x3Solver from '../../utils/solver3x3';
-import * as Rubiks4x4Solver from '../../utils/solver4x4';
-import * as Rubiks5x5Solver from '../../utils/solver5x5';
+import * as Rubiks2x2Solver from '../../types/cube2x2';
+import * as Rubiks3x3Solver from '../../types/cube3x3';
+import * as Rubiks4x4Solver from '../../types/cube4x4';
+import * as Rubiks5x5Solver from '../../types/cube5x5';
 import { CubeFactsSection } from '../../components/cube/CubeFactsSection';
 
 const Cube3DWrapper = lazy(() => import('../../components/cube/Cube3DWrapper'));
