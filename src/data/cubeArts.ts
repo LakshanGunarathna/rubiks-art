@@ -1,0 +1,596 @@
+export interface CubeArt {
+  id: string;
+  name: string;
+  moves: string;
+  imageUrl: string;
+  type: string;
+}
+
+export const rawArtsData: Record<string, Omit<CubeArt, 'type'>[]> = {
+  "2x2x2": [
+    {
+      "id": "2x2_1",
+      "name": "4 Side Checkerboard",
+      "moves": "R2 F2 R2 U2",
+      "imageUrl": "/assets/cube-arts/2x2_1.png"
+    },
+    {
+      "id": "2x2_2",
+      "name": "Checkerboard",
+      "moves": "U R F2 U R F2 R U F' R",
+      "imageUrl": "/assets/cube-arts/2x2_2.png"
+    },
+    {
+      "id": "2x2_3",
+      "name": "Zig Zag",
+      "moves": "U2 R2 F2",
+      "imageUrl": "/assets/cube-arts/2x2_3.png"
+    },
+    {
+      "id": "2x2_4",
+      "name": "Cube in a Cube",
+      "moves": "R F U' R2 U F' R U F2 R2",
+      "imageUrl": "/assets/cube-arts/2x2_4.png"
+    }
+  ],
+  "3x3x3": [
+    {
+      "id": "3x3_1",
+      "name": "Wire",
+      "moves": "R L F B R L F B R L F B R2 B2 L2 R2 B2 L2",
+      "imageUrl": "/assets/cube-arts/3x3_1.png"
+    },
+    {
+      "id": "3x3_2",
+      "name": "Superflip",
+      "moves": "U R2 F B R B2 R U2 L B2 R U' D' R2 F R' L B2 U2 F2",
+      "imageUrl": "/assets/cube-arts/3x3_2.png"
+    },
+    {
+      "id": "3x3_3",
+      "name": "Vertical Stripes",
+      "moves": "F U F R L2 B D' R D2 L D' B R2 L F U F",
+      "imageUrl": "/assets/cube-arts/3x3_3.png"
+    },
+    {
+      "id": "3x3_4",
+      "name": "Twister",
+      "moves": "F R' U L F' L' F U' R U L' U' L F'",
+      "imageUrl": "/assets/cube-arts/3x3_4.png"
+    },
+    {
+      "id": "3x3_5",
+      "name": "Fruit Bowl",
+      "moves": "B2 L2 F2 R2 F2 R2 D U B2 U2 B' F' L' R' D' U'",
+      "imageUrl": "/assets/cube-arts/3x3_5.png"
+    },
+    {
+      "id": "3x3_6",
+      "name": "Order in Chaos",
+      "moves": "B L2 B' U2 B F2 U L U B U' R U' B F U' R D R B' U'",
+      "imageUrl": "/assets/cube-arts/3x3_6.png"
+    },
+    {
+      "id": "3x3_7",
+      "name": "Are You High",
+      "moves": "L R' U2 D2 L' R U2 D2 R2 L2",
+      "imageUrl": "/assets/cube-arts/3x3_7.png"
+    },
+    {
+      "id": "3x3_8",
+      "name": "Displaced Motif",
+      "moves": "L2 B2 D' B2 D L2 U R2 D R2 B U R' F2 R U' B' U'",
+      "imageUrl": "/assets/cube-arts/3x3_8.png"
+    },
+    {
+      "id": "3x3_9",
+      "name": "Perfect Scramble",
+      "moves": "U F' L' U' R2 F' R2 B' U' R F' U F D' L2 F2 L2 U'",
+      "imageUrl": "/assets/cube-arts/3x3_9.png"
+    },
+    {
+      "id": "3x3_10",
+      "name": "Perpendicular Lines",
+      "moves": "R2 U2 L2 R2 U2 L2 M2",
+      "imageUrl": "/assets/cube-arts/3x3_10.png"
+    },
+    {
+      "id": "3x3_11",
+      "name": "The Hole",
+      "moves": "R L' F' B D U'",
+      "imageUrl": "/assets/cube-arts/3x3_11.png"
+    },
+    {
+      "id": "3x3_12",
+      "name": "Flower",
+      "moves": "R2 D2 R2 U2 R2 F2 U2 D2 F2 U2",
+      "imageUrl": "/assets/cube-arts/3x3_12.png"
+    },
+    {
+      "id": "3x3_13",
+      "name": "3C3W",
+      "moves": "D L B' L2 F L' B' U D' R L' F B D L'",
+      "imageUrl": "/assets/cube-arts/3x3_13.png"
+    },
+    {
+      "id": "3x3_14",
+      "name": "Flipped Tips",
+      "moves": "U B D' F2 D B' U' R2 D F2 D' R2 D F2 D' R2",
+      "imageUrl": "/assets/cube-arts/3x3_14.png"
+    },
+    {
+      "id": "3x3_15",
+      "name": "Hi All Around",
+      "moves": "U2 R2 F2 U2 D2 F2 L2 U2",
+      "imageUrl": "/assets/cube-arts/3x3_15.png"
+    },
+    {
+      "id": "3x3_16",
+      "name": "Tangled",
+      "moves": "F B U D F B U D F B U D F2 B2",
+      "imageUrl": "/assets/cube-arts/3x3_16.png"
+    },
+    {
+      "id": "3x3_17",
+      "name": "Minority Cross",
+      "moves": "L2 D' B2 L2 B2 D' F2 D U' B2 L B2 F' L B' F U' F' U L2",
+      "imageUrl": "/assets/cube-arts/3x3_17.png"
+    },
+    {
+      "id": "3x3_18",
+      "name": "Python",
+      "moves": "F2 R' B' U R' L F' L F' B D' R B L2",
+      "imageUrl": "/assets/cube-arts/3x3_18.png"
+    },
+    {
+      "id": "3x3_19",
+      "name": "Cross",
+      "moves": "R2 L' D F2 R' D' R' L U' D R D B2 R' U D2",
+      "imageUrl": "/assets/cube-arts/3x3_19.png"
+    },
+    {
+      "id": "3x3_20",
+      "name": "Checkerboard in the Cube",
+      "moves": "B D F' B' D L2 U L U' B D' R B R D' R L' F U2 D",
+      "imageUrl": "/assets/cube-arts/3x3_20.png"
+    },
+    {
+      "id": "3x3_21",
+      "name": "Black Mamba",
+      "moves": "R D L F' R L' D R' U D' B U' R' D'",
+      "imageUrl": "/assets/cube-arts/3x3_21.png"
+    },
+    {
+      "id": "3x3_22",
+      "name": "Deckerboard",
+      "moves": "U D R L' F' B U D' R2 U R2 L2 D2 F2 B2 D",
+      "imageUrl": "/assets/cube-arts/3x3_22.png"
+    },
+    {
+      "id": "3x3_23",
+      "name": "4 Crosses",
+      "moves": "U2 R2 L2 F2 B2 D2 L2 R2 F2 B2",
+      "imageUrl": "/assets/cube-arts/3x3_23.png"
+    },
+    {
+      "id": "3x3_24",
+      "name": "Green Mamba",
+      "moves": "R D R F R' F' B D R' U' B' U D2",
+      "imageUrl": "/assets/cube-arts/3x3_24.png"
+    },
+    {
+      "id": "3x3_25",
+      "name": "Cube in a Cube in a Cube",
+      "moves": "U' L' U' F' R2 B' R F U B2 U B' L U' F U R F'",
+      "imageUrl": "/assets/cube-arts/3x3_25.png"
+    },
+    {
+      "id": "3x3_26",
+      "name": "Plus Minus",
+      "moves": "U2 R2 L2 U2 R2 L2",
+      "imageUrl": "/assets/cube-arts/3x3_26.png"
+    },
+    {
+      "id": "3x3_27",
+      "name": "Kilt - Scottish Skirt",
+      "moves": "U' R2 L2 F2 B2 U' R L F B' U F2 D2 R2 L2 F2 U2 F2 U' F2",
+      "imageUrl": "/assets/cube-arts/3x3_27.png"
+    },
+    {
+      "id": "3x3_28",
+      "name": "Pong",
+      "moves": "U R2 F2 B2 L2 U2 D R2 F2 B2 L2",
+      "imageUrl": "/assets/cube-arts/3x3_28.png"
+    },
+    {
+      "id": "3x3_29",
+      "name": "3 Sides Solved",
+      "moves": "U2 D R' D B' L2 B D' R L2 U2 B2 L2 B2 D R2 L2 D R2",
+      "imageUrl": "/assets/cube-arts/3x3_29.png"
+    },
+    {
+      "id": "3x3_30",
+      "name": "C U Around",
+      "moves": "U' B2 U L2 D L2 R2 D' B' R D' L R' B2 U2 F' L' U'",
+      "imageUrl": "/assets/cube-arts/3x3_30.png"
+    },
+    {
+      "id": "3x3_31",
+      "name": "Evenly Distributed",
+      "moves": "D' B2 D' L2 R2 D B2 L2 D' B2 L R' F' L2 D U' F2 R' D' U'",
+      "imageUrl": "/assets/cube-arts/3x3_31.png"
+    },
+    {
+      "id": "3x3_32",
+      "name": "Tablecloth",
+      "moves": "R L U2 F' U2 D2 R2 L2 F' D2 F2 D R2 L2 F2 B2 D B2 L2",
+      "imageUrl": "/assets/cube-arts/3x3_32.png"
+    },
+    {
+      "id": "3x3_33",
+      "name": "Hi",
+      "moves": "M2 U2 M2 U2",
+      "imageUrl": "/assets/cube-arts/3x3_33.png"
+    },
+    {
+      "id": "3x3_34",
+      "name": "Dont Cross Line",
+      "moves": "F2 L2 R2 B2 E2",
+      "imageUrl": "/assets/cube-arts/3x3_34.png"
+    },
+    {
+      "id": "3x3_35",
+      "name": "Anaconda",
+      "moves": "L U B' U' R L' B R' F B' D R D' F'",
+      "imageUrl": "/assets/cube-arts/3x3_35.png"
+    },
+    {
+      "id": "3x3_36",
+      "name": "Tetris",
+      "moves": "L R F B U' D' L' R'",
+      "imageUrl": "/assets/cube-arts/3x3_36.png"
+    },
+    {
+      "id": "3x3_37",
+      "name": "No Entry",
+      "moves": "U' L' B R L' D' L B' U F2 R2 B2 D2 B2 R2 B2 D B2",
+      "imageUrl": "/assets/cube-arts/3x3_37.png"
+    },
+    {
+      "id": "3x3_38",
+      "name": "Easy Checkerboard",
+      "moves": "M2 E2 S2",
+      "imageUrl": "/assets/cube-arts/3x3_38.png"
+    },
+    {
+      "id": "3x3_39",
+      "name": "Opposite Corners",
+      "moves": "R L U2 F2 D2 F2 R L F2 D2 B2 D2",
+      "imageUrl": "/assets/cube-arts/3x3_39.png"
+    },
+    {
+      "id": "3x3_40",
+      "name": "Union Jack",
+      "moves": "U F B' L2 U2 L2 F' B U2 L2 U",
+      "imageUrl": "/assets/cube-arts/3x3_40.png"
+    },
+    {
+      "id": "3x3_41",
+      "name": "Six Spots",
+      "moves": "U D' R L' F B' U D'",
+      "imageUrl": "/assets/cube-arts/3x3_41.png"
+    },
+    {
+      "id": "3x3_42",
+      "name": "Cube in the Cube",
+      "moves": "F L F U' R U F2 L2 U' L' B D' B' L2 U",
+      "imageUrl": "/assets/cube-arts/3x3_42.png"
+    },
+    {
+      "id": "3x3_43",
+      "name": "Gift Box",
+      "moves": "U B2 R2 B2 L2 F2 R2 D' F2 L2 B F' L F2 D U' R2 F' L' R'",
+      "imageUrl": "/assets/cube-arts/3x3_43.png"
+    },
+    {
+      "id": "3x3_44",
+      "name": "Plus",
+      "moves": "B2 F2 R2 U2 B2 F2 R2 U2 R2 U2",
+      "imageUrl": "/assets/cube-arts/3x3_44.png"
+    },
+    {
+      "id": "3x3_45",
+      "name": "Spiral Pattern",
+      "moves": "L' B' D U R U' R' D2 R2 D L D' L' R' F U",
+      "imageUrl": "/assets/cube-arts/3x3_45.png"
+    },
+    {
+      "id": "3x3_46",
+      "name": "SpeedSolving",
+      "moves": "R' L' U2 F2 D2 F2 R L B2 U2 B2 U2",
+      "imageUrl": "/assets/cube-arts/3x3_46.png"
+    },
+    {
+      "id": "3x3_47",
+      "name": "Four Spots",
+      "moves": "F2 B2 U D' R2 L2 U D'",
+      "imageUrl": "/assets/cube-arts/3x3_47.png"
+    },
+    {
+      "id": "3x3_48",
+      "name": "All Flags & Crests",
+      "moves": "B2 U' B2 L2 U B2 U R2 B2 U' L' R' B D U' L2 F2 R'",
+      "imageUrl": "/assets/cube-arts/3x3_48.png"
+    }
+  ],
+  "4x4x4": [
+    {
+      "id": "4x4_1",
+      "name": "Checkerboard v1",
+      "moves": "R2 Rw2 L2 y R2 Rw2 L2 y R2 Rw2 L2 U2 Uw2 D2",
+      "imageUrl": "/assets/cube-arts/4x4_1.png"
+    },
+    {
+      "id": "4x4_2",
+      "name": "Stripes",
+      "moves": "F R2 E' R2 B E R D2 B M' E' F' R2 U' B2 Uw2 Rw2 U2 R2 Fw2 Rw2 u2",
+      "imageUrl": "/assets/cube-arts/4x4_2.png"
+    },
+    {
+      "id": "4x4_3",
+      "name": "Lines",
+      "moves": "R2 Rw2 L2 y R2 Rw2 L2 y U2 Uw2 D2 R2 Rw2 L2",
+      "imageUrl": "/assets/cube-arts/4x4_3.png"
+    },
+    {
+      "id": "4x4_4",
+      "name": "Dots",
+      "moves": "U D' R L' F B' U D'",
+      "imageUrl": "/assets/cube-arts/4x4_4.png"
+    },
+    {
+      "id": "4x4_5",
+      "name": "Cube in a Cube",
+      "moves": "F L F U' R U F2 L2 U' L' B D' B' L2 U",
+      "imageUrl": "/assets/cube-arts/4x4_5.png"
+    },
+    {
+      "id": "4x4_6",
+      "name": "Cube in a Cube in a Cube",
+      "moves": "F L F U' R U F2 L2 U' L' B D' B' L2 U Fw Lw Fw Uw' Rw Uw Fw2 Lw2 Uw' Lw' Bw Dw' Bw' Lw2 Uw",
+      "imageUrl": "/assets/cube-arts/4x4_6.png"
+    },
+    {
+      "id": "4x4_7",
+      "name": "3 Cubes in a Cube",
+      "moves": "F L F U' R U F2 L2 U' L' B D' B' L2 U Fw Lw Fw Uw' Rw Uw Fw2 Lw2 Uw' Lw' Bw Dw' Bw' Lw2 Uw B2 R' D R D' R' D R U R' D' R D R' D' R U' B2",
+      "imageUrl": "/assets/cube-arts/4x4_7.png"
+    },
+    {
+      "id": "4x4_8",
+      "name": "Checkerboard v2",
+      "moves": "M2 S2 E2 Rw'2 Fw2 Rw2 Uw2",
+      "imageUrl": "/assets/cube-arts/4x4_8.png"
+    },
+    {
+      "id": "4x4_9",
+      "name": "Checkerboard in Dots",
+      "moves": "M E' M' E r' d' r d l u l' u'",
+      "imageUrl": "/assets/cube-arts/4x4_9.png"
+    },
+    {
+      "id": "4x4_10",
+      "name": "6 Colour Cube In A Cube",
+      "moves": "B' M2 U2 M2 B F2 R U' R U R2 U R2 F' U F' Uw Lw Uw' Fw2 Dw Rw' Uw Fw Dw2 Rw2",
+      "imageUrl": "/assets/cube-arts/4x4_10.png"
+    },
+    {
+      "id": "4x4_11",
+      "name": "6 Colour Peak",
+      "moves": "F U2 L F L' B L U B' R' L' U R' D' F' B R2",
+      "imageUrl": "/assets/cube-arts/4x4_11.png"
+    },
+    {
+      "id": "4x4_12",
+      "name": "2x2 Peak",
+      "moves": "b2 d2 Lw2 U F2 L2 D' L' D L' F U' F Lw2 d2 b2",
+      "imageUrl": "/assets/cube-arts/4x4_12.png"
+    },
+    {
+      "id": "4x4_13",
+      "name": "Easy Checkerboard",
+      "moves": "M2 S2 E2",
+      "imageUrl": "/assets/cube-arts/4x4_13.png"
+    },
+    {
+      "id": "4x4_14",
+      "name": "Anaconda",
+      "moves": "L U B' U' R L' B R' F B' D R D' F'",
+      "imageUrl": "/assets/cube-arts/4x4_14.png"
+    },
+    {
+      "id": "4x4_15",
+      "name": "Diagonal Lines",
+      "moves": "R2 L' D F2 R' D' R' L U' D R D B2 R' U D2 l u l' u' r' d' r d x M E M' U M E' M' U' x2 M E M' U M E' M' U' x",
+      "imageUrl": "/assets/cube-arts/4x4_15.png"
+    },
+    {
+      "id": "4x4_16",
+      "name": "Cross",
+      "moves": "R2 L' D F2 R' D' R' L U' D R D B2 R' U D2",
+      "imageUrl": "/assets/cube-arts/4x4_16.png"
+    },
+    {
+      "id": "4x4_17",
+      "name": "Displaced Motif",
+      "moves": "L2 B2 D' B2 D L2 U R2 D R2 B U R' F2 R U' B' U'",
+      "imageUrl": "/assets/cube-arts/4x4_17.png"
+    },
+    {
+      "id": "4x4_18",
+      "name": "Checkerboard in a Cube",
+      "moves": "R2 F2 D' R' D F' D2 F D' R' r2 F2 r2 F2 f2 r2 f2 L' R E b u b' f' d' f B2 L2 B' F D' f2 D B F' D' f2 D L2 B2 L R' y2",
+      "imageUrl": "/assets/cube-arts/4x4_18.png"
+    },
+    {
+      "id": "4x4_19",
+      "name": "Twisted Cube",
+      "moves": "F R' U L F'L'F U' R U L' U' L F'",
+      "imageUrl": "/assets/cube-arts/4x4_19.png"
+    },
+    {
+      "id": "4x4_20",
+      "name": "Cube in a Checkerboard",
+      "moves": "L2 D' B R D R' D B R' B R D B' L2",
+      "imageUrl": "/assets/cube-arts/4x4_20.png"
+    },
+    {
+      "id": "4x4_21",
+      "name": "Ron's Cube in a Cube",
+      "moves": "F D' F' R D F' R' D R D L' F L D R' F D' Fw Dw' Fw' Rw Dw Fw' Rw' Dw Rw Dw Lw' Fw Lw Dw Rw' Fw Dw'",
+      "imageUrl": "/assets/cube-arts/4x4_21.png"
+    }
+  ],
+  "5x5x5": [
+    {
+      "id": "5x5_1",
+      "name": "Full Checkerboard",
+      "moves": "U2 D2 R2 L2 F2 B2 Uw2 Dw2 Rw2 Lw2 Fw2 Bw2",
+      "imageUrl": "/assets/cube-arts/5x5_1.png"
+    },
+    {
+      "id": "5x5_2",
+      "name": "Cube in a Cube in a Cube",
+      "moves": "F L F U' R U F2 L2 U' L' B D' B' L2 U Fw Lw Fw Uw' Rw Uw Fw2 Lw2 Uw' Lw' Bw Dw' Bw' Lw2 Uw",
+      "imageUrl": "/assets/cube-arts/5x5_2.png"
+    },
+    {
+      "id": "5x5_3",
+      "name": "Half Superflip",
+      "moves": "x m' U m' U m' U m' U x' y' m' U m' U m' U m' U x' y' m' U m' U m' U m' U x' y' M' Uw M' Uw M' Uw M' Uw x' y' M' Uw M' Uw M' Uw M' Uw x' y' M' Uw M' Uw M' Uw M' Uw y",
+      "imageUrl": "/assets/cube-arts/5x5_3.png"
+    },
+    {
+      "id": "5x5_4",
+      "name": "Tri-Checkerboard",
+      "moves": "F B2 R' D2 B R U D' R L' D' F' R2 D F2 B' Fw Bw2 Rw' Dw2 Bw Rw Uw Dw' Rw Lw' Dw' Fw' Rw2 Dw Fw2 Bw'",
+      "imageUrl": "/assets/cube-arts/5x5_4.png"
+    },
+    {
+      "id": "5x5_5",
+      "name": "4 Cubes in a Cube",
+      "moves": "x' y' F U' B L U' F2 U2 F U F' U2 D' B D L2 B2 U Fw Uw' Bw Lw Uw' Fw2 Uw2 Fw Uw Fw' Uw2 Dw' Bw Dw Lw2 Bw2 Uw y x",
+      "imageUrl": "/assets/cube-arts/5x5_5.png"
+    },
+    {
+      "id": "5x5_6",
+      "name": "Superflip",
+      "moves": "m' U m' U m' U m' U x y' m' U m' U m' U m' U x y' m' U m' U m' U m' U x y' M' Uw M' Uw M' Uw M' Uw x y' M' Uw M' Uw M' Uw M' Uw x y' M' Uw M' Uw M' Uw M' Uw x y'",
+      "imageUrl": "/assets/cube-arts/5x5_6.png"
+    },
+    {
+      "id": "5x5_7",
+      "name": "Flipped Edges",
+      "moves": "F B2 R' D2 B R U D' R L' D' F' R2 D F2 B'",
+      "imageUrl": "/assets/cube-arts/5x5_7.png"
+    },
+    {
+      "id": "5x5_8",
+      "name": "Dot In A Dot",
+      "moves": "U D' R L' F B' U D' Uw Dw' Rw Lw' Fw Bw' Uw Dw'",
+      "imageUrl": "/assets/cube-arts/5x5_8.png"
+    },
+    {
+      "id": "5x5_9",
+      "name": "Square in a Cube",
+      "moves": "U D' R L' F B' U D'",
+      "imageUrl": "/assets/cube-arts/5x5_9.png"
+    },
+    {
+      "id": "5x5_10",
+      "name": "Flipped Edge Checkerboard",
+      "moves": "F B2 R' D2 B R U D' R L' D' F' R2 D F2 B' Lw2 Rw2 Uw2 Dw2 Bw2 Fw2",
+      "imageUrl": "/assets/cube-arts/5x5_10.png"
+    },
+    {
+      "id": "5x5_11",
+      "name": "Dot in a Crosshair",
+      "moves": "U D' R L' F B' U D' Uw Dw' Rw Lw' Fw Bw' Uw Dw' Lw2 Rw2 Uw2 Dw2 Bw2 Fw2",
+      "imageUrl": "/assets/cube-arts/5x5_11.png"
+    },
+    {
+      "id": "5x5_12",
+      "name": "Double Checkerboard",
+      "moves": "U D' R L' F B' U D' Lw2 Rw2 Uw2 Dw2 Bw2 Fw2 L2 R2 F2 B2 D2 U2",
+      "imageUrl": "/assets/cube-arts/5x5_12.png"
+    },
+    {
+      "id": "5x5_13",
+      "name": "Alternate Checkerboard",
+      "moves": "U D' R L' F B' U D' Lw2 Rw2 Uw2 Dw2 Bw2 Fw2",
+      "imageUrl": "/assets/cube-arts/5x5_13.png"
+    },
+    {
+      "id": "5x5_14",
+      "name": "Easy Checkerboard",
+      "moves": "U2 D2 R2 L2 F2 B2",
+      "imageUrl": "/assets/cube-arts/5x5_14.png"
+    },
+    {
+      "id": "5x5_15",
+      "name": "Four Dots",
+      "moves": "l r' u d' l' r u' d",
+      "imageUrl": "/assets/cube-arts/5x5_15.png"
+    },
+    {
+      "id": "5x5_16",
+      "name": "Cross",
+      "moves": "U2 u2 M2 U2 u2 M2 F2 f2 E2 F2 f2 E2 U2 u2 S2 U2 u2 S2 R2 r2 E2 R2 r2 E2 M2 E M2 E'",
+      "imageUrl": "/assets/cube-arts/5x5_16.png"
+    },
+    {
+      "id": "5x5_17",
+      "name": "3x3 Peak",
+      "moves": "F' l2 F R2 b U' b' Dw' b U b' Dw R2 F' l2 F2 R U' M2 U R' U' M2 U F'",
+      "imageUrl": "/assets/cube-arts/5x5_17.png"
+    },
+    {
+      "id": "5x5_18",
+      "name": "I Love U",
+      "moves": "s' m2 f2 m2 e2 f2 S2 e S2 e f S L b' r2 b L' b' Rw2 S' l2 S R2 S' l2 S",
+      "imageUrl": "/assets/cube-arts/5x5_18.png"
+    },
+    {
+      "id": "5x5_19",
+      "name": "Clown",
+      "moves": "u r' l u' r l' d' m d m' S' M S M'",
+      "imageUrl": "/assets/cube-arts/5x5_19.png"
+    },
+    {
+      "id": "5x5_20",
+      "name": "Hearts",
+      "moves": "M2 m2 S2 D s2 D2 s2 D S2 m' M2 d m' e2 m d m'",
+      "imageUrl": "/assets/cube-arts/5x5_20.png"
+    },
+    {
+      "id": "5x5_21",
+      "name": "Cube in a Checkerboard",
+      "moves": "U D' R2 D2 L' R B' F L' R B m2 B' F l2 F' L R' F l2 B F' l2 r2 F' L R' F M2 F' D2 R2 U' D Lw Dw Lw2 Dw' Rw Bw' Lw2 Fw Dw' Rw2 Uw Lw' Fw Rw2 Fw' Rw'",
+      "imageUrl": "/assets/cube-arts/5x5_21.png"
+    },
+    {
+      "id": "5x5_22",
+      "name": "Cube in a Cube",
+      "moves": "F L F U' R U F2 L2 U' L' B D' B' L2 U",
+      "imageUrl": "/assets/cube-arts/5x5_22.png"
+    }
+  ]
+};
+
+export const cubeArts: CubeArt[] = Object.entries(rawArtsData).flatMap(([type, arts]) =>
+  arts.map(art => ({
+    ...art,
+    type,
+    imageUrl: art.imageUrl.startsWith('/src') ? art.imageUrl : `/src${art.imageUrl}`
+  }))
+);

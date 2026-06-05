@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: 'Outfit', 'Inter', system-ui, sans-serif;
   --font-heading: 'Outfit', system-ui, sans-serif;

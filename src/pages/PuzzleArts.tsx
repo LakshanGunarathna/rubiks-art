@@ -1,23 +1,153 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useMemo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { cubeArts } from '../data/cubeArts';
+import type { CubeArt } from '../data/cubeArts';
+import { ArtPlayer } from '../components/cube/ArtPlayer';
+
+import { PuzzleArtsFilterBar, CUBE_TYPES, DIFFICULTIES } from '../components/cube/PuzzleArtsFilterBar';
+
+function getDifficulty(moveCount: number) {
+  if (moveCount <= 10) return 'Easy';
+  if (moveCount <= 20) return 'Medium';
+  if (moveCount <= 35) return 'Hard';
+  if (moveCount <= 50) return 'Extreme';
+  return 'Ultra';
+}
 
 export const PuzzleArts: React.FC = () => {
+  const [typeFilter, setTypeFilter] = useState<string>('All');
+  const [diffFilter, setDiffFilter] = useState<string>('All');
+  const [activeArt, setActiveArt] = useState<CubeArt | null>(null);
+
+  const artsWithMetadata = useMemo(() => {
+    return cubeArts.map(art => {
+      const moveCount = art.moves.trim().split(/\s+/).filter(m => m).length;
+      const difficulty = getDifficulty(moveCount);
+      return { ...art, moveCount, difficulty };
+    });
+  }, []);
+
+  const filteredArts = useMemo(() => {
+    return artsWithMetadata.filter(art => {
+      if (typeFilter !== 'All' && art.type !== typeFilter) return false;
+      if (diffFilter !== 'All' && art.difficulty !== diffFilter) return false;
+      return true;
+    });
+  }, [artsWithMetadata, typeFilter, diffFilter]);
+
+  // Counts
+  const totalCount = artsWithMetadata.length;
+
+  const typeCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    CUBE_TYPES.forEach(t => counts[t.id] = 0);
+    artsWithMetadata.forEach(art => {
+      if (diffFilter === 'All' || art.difficulty === diffFilter) {
+        if (counts[art.type] !== undefined) counts[art.type]++;
+      }
+    });
+    return counts;
+  }, [artsWithMetadata, diffFilter]);
+
+  const diffCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    DIFFICULTIES.forEach(d => counts[d] = 0);
+    artsWithMetadata.forEach(art => {
+      if (typeFilter === 'All' || art.type === typeFilter) {
+        if (counts[art.difficulty] !== undefined) counts[art.difficulty]++;
+      }
+    });
+    return counts;
+  }, [artsWithMetadata, typeFilter]);
+
+  const currentCount = filteredArts.length;
+
+  if (activeArt) {
+    return (
+      <AnimatePresence mode="wait">
+        <motion.div
+          key="player"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.95 }}
+          className="w-full min-h-[calc(100vh-6rem)]"
+        >
+          <ArtPlayer art={activeArt} onExit={() => setActiveArt(null)} />
+        </motion.div>
+      </AnimatePresence>
+    );
+  }
+
   return (
     <motion.div
+      key="gallery"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      className="w-full h-full text-center"
+      className="w-full max-w-7xl mx-auto flex flex-col gap-6 pt-4 pb-12"
     >
-      <h1 className="text-4xl font-bold font-heading mb-6" style={{ color: 'var(--text-primary)' }}>
-        Puzzle Arts Gallery
-      </h1>
-      <div 
-        className="backdrop-blur-sm border rounded-2xl h-[600px] flex items-center justify-center shadow-sm"
-        style={{ backgroundColor: 'var(--nav-bg)', borderColor: 'var(--nav-border)' }}
-      >
-        <p style={{ color: 'var(--text-secondary)' }}>Puzzle Arts Gallery and Filter Sidebar Placeholder</p>
-      </div>
+      {/* Top Filter Bar */}
+      <PuzzleArtsFilterBar
+        typeFilter={typeFilter}
+        setTypeFilter={setTypeFilter}
+        diffFilter={diffFilter}
+        setDiffFilter={setDiffFilter}
+        totalCount={totalCount}
+        currentCount={currentCount}
+        typeCounts={typeCounts}
+        diffCounts={diffCounts}
+      />
+
+      {/* Gallery Grid */}
+      <main className="flex-1">
+        {filteredArts.length === 0 ? (
+          <div className="w-full py-20 flex flex-col items-center justify-center text-center bg-white rounded-3xl shadow-sm">
+            <h3 className="text-xl font-bold mb-2 text-gray-800">No patterns found</h3>
+            <p className="text-gray-500">Try adjusting your filters.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredArts.map(art => (
+              <motion.div
+                key={art.id}
+                onClick={() => setActiveArt(art)}
+                className="group cursor-pointer bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800/80 rounded-[32px] overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] flex flex-col p-5 shadow-[0_4px_25px_rgba(0,0,0,0.03)] hover:-translate-y-[10px] hover:scale-[1.02] hover:border-blue-500/40 dark:hover:border-blue-500/50 hover:shadow-[0_20px_40px_rgba(59,130,246,0.08)]"
+              >
+                {/* Image Container */}
+                <div className="w-full aspect-[4/3] rounded-[24px] bg-[#eef6fc] dark:bg-slate-800/50 overflow-hidden relative mb-4">
+                  <img
+                    src={art.imageUrl}
+                    alt={art.name}
+                    className="w-full h-full object-cover filter drop-shadow-sm transition-transform duration-400 ease-in-out group-hover:scale-[1.35]"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = `https://via.placeholder.com/300x225.png?text=${art.id}`;
+                    }}
+                  />
+                </div>
+
+                {/* Card Info */}
+                <div className="px-1">
+                  <h3 className="text-[1.1rem] font-bold text-[#1e293b] dark:text-white mb-1 truncate">{art.name}</h3>
+                  <div className="text-sm text-[#64748b] dark:text-slate-400 font-medium mb-4">#{art.id}</div>
+
+                  {/* Badges */}
+                  <div className="flex flex-wrap gap-2">
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#f1f5f9] dark:bg-slate-800 text-[#475569] dark:text-slate-300 transition-all duration-300 group-hover:bg-blue-50 dark:group-hover:bg-blue-950/40 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                      {art.type}
+                    </span>
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#f1f5f9] dark:bg-slate-800 text-[#475569] dark:text-slate-300 transition-all duration-300 group-hover:bg-blue-50 dark:group-hover:bg-blue-950/40 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                      {art.difficulty}
+                    </span>
+                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-[#f1f5f9] dark:bg-slate-800 text-[#475569] dark:text-slate-300 transition-all duration-300 group-hover:bg-blue-50 dark:group-hover:bg-blue-950/40 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                      {art.moveCount} Moves
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
+      </main>
     </motion.div>
   );
 };

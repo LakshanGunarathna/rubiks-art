@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
 import { MOVES_2X2, MOVES_3X3, MOVES_4X4, MOVES_5X5 } from '../../utils/cubeConstants';
 import { CubeControlPanel } from '../../components/cube/CubeControlPanel';
-import type { Axis } from '../../types/cube';
 
 const Cube3DWrapper = lazy(() => import('../../components/cube/Cube3DWrapper'));
 
