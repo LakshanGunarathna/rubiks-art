@@ -227,3 +227,89 @@ export function solve(posit: number[]): string[] | string {
 
   return moveList;
 }
+
+export const GUIDE_DATA = {
+  title: "How to Use the 2×2 Solver",
+  subtitle: "Paint your Pocket Cube's current state onto the 3D model, press Solve, and follow the step-by-step moves.",
+  steps: [
+    {
+      title: "Pick a Color from the Palette",
+      desc: "Use the color palette in the panel. The 6 standard colors are available: **White, Yellow, Red, Orange, Blue,** and **Green**.",
+      color: "#f97316",
+      bg: "rgba(249,115,22,0.1)",
+      border: "rgba(249,115,22,0.2)"
+    },
+    {
+      title: "Paint All Cube Faces",
+      desc: "Click on any tile to paint it. Use the rotation buttons to access all 6 faces. The 2×2 has only **4 tiles per face** — match each one to your physical cube.",
+      color: "#3b82f6",
+      bg: "rgba(59,130,246,0.1)",
+      border: "rgba(59,130,246,0.2)"
+    },
+    {
+      title: "Verify Your Colors",
+      desc: "Each color must appear exactly **4 times** across all faces. The 2×2 has no fixed centers, so pay close attention to which color goes where.",
+      color: "#10b981",
+      bg: "rgba(16,185,129,0.1)",
+      border: "rgba(16,185,129,0.2)"
+    },
+    {
+      title: "Hit \"Solve!\" and Follow Along",
+      desc: "Press **Solve!** to validate and compute a solution. Follow each move in **playback mode**, pressing **Next** to advance and **Back** to review.",
+      color: "#a855f7",
+      bg: "rgba(168,85,247,0.1)",
+      border: "rgba(168,85,247,0.2)"
+    }
+  ],
+  colorLayoutSub: "The standard color scheme used for the 2×2 Pocket Cube.",
+  cards: [
+    {
+      title: "About the Solver",
+      desc: "Our 2×2 solver uses an optimized **breadth-first search algorithm**. With only **3.67 million** possible states, the solver computes optimal solutions — typically **11 moves or fewer** — almost instantly.",
+      icon: "sliders",
+      accent: "#3b82f6",
+      iconBg: "rgba(59,130,246,0.1)",
+      iconBorder: "rgba(59,130,246,0.2)",
+      iconColor: "#3b82f6"
+    },
+    {
+      title: "Understanding Move Notation",
+      desc: [
+        "**R** — Rotate the right face 90° clockwise",
+        "**R'** — Rotate the right face 90° counter-clockwise",
+        "**R2** — Rotate the right face 180°",
+        "**U, D, L, F, B** — Up, Down, Left, Front, Back faces"
+      ],
+      icon: "cubes",
+      accent: "#a855f7",
+      iconBg: "rgba(168,85,247,0.1)",
+      iconBorder: "rgba(168,85,247,0.2)",
+      iconColor: "#a855f7"
+    },
+    {
+      title: "Tips for Accurate Painting",
+      desc: [
+        "The 2×2 has **no center pieces**, so there's no fixed reference — paint carefully.",
+        "Hold your physical cube in one fixed position while painting to avoid confusion.",
+        "If you get an error, a color likely appears more or fewer than **4 times**.",
+        "The solver auto-assigns one corner as the reference orientation — just paint what you see."
+      ],
+      icon: "check",
+      accent: "#10b981",
+      iconBg: "rgba(16,185,129,0.1)",
+      iconBorder: "rgba(16,185,129,0.2)",
+      iconColor: "#10b981",
+      wide: true
+    },
+    {
+      title: "About the 2×2×2 Pocket Cube",
+      desc: "The Pocket Cube was released in **1981** with only **8 corner cubies**. Despite its small size, it has **3,674,160** possible permutations. God's Number is **11**, and the world record is **0.47 seconds**.",
+      icon: "trophy",
+      accent: "#f97316",
+      iconBg: "rgba(249,115,22,0.1)",
+      iconBorder: "rgba(249,115,22,0.2)",
+      iconColor: "#f97316",
+      wide: true
+    }
+  ]
+};

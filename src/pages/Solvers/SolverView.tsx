@@ -13,10 +13,10 @@ import { RUBIKS_CUBE_COLORS } from '../../types/cube';
 import type { PaintedPiece } from '../../types/cube';
 import { getStickerMat } from '../../utils/cubeUtils';
 import { Loader2 } from 'lucide-react';
-
 import { CubePainterPanel } from '../../components/solver/CubePainterPanel';
 import { SolutionGuidePanel } from '../../components/solver/SolutionGuidePanel';
 import { ErrorModal, SolvedModal, ResetConfirmation, LoadingOverlay } from '../../components/solver/SolverOverlays';
+import { SolverGuideSection } from '../../components/solver/SolverGuideSection';
 
 import { getHumanReadableMove } from '../../utils/cubeFormatters';
 import { OPPOSITE_COLORS, MOVES_2X2, MOVES_3X3 } from '../../utils/cubeConstants';
@@ -40,6 +40,11 @@ export const SolverView: React.FC = () => {
   if (type === '2x2') size = 2;
   else if (type === '4x4') size = 4;
   else if (type === '5x5') size = 5;
+
+  let guide = Rubiks3x3Solver.GUIDE_DATA;
+  if (size === 2) guide = Rubiks2x2Solver.GUIDE_DATA;
+  else if (size === 4) guide = Rubiks4x4Solver.GUIDE_DATA;
+  else if (size === 5) guide = Rubiks5x5Solver.GUIDE_DATA;
 
   const [engine, setEngine] = useState<any>(null);
   const cubiesRef = engine?.cubiesRef;
@@ -368,6 +373,8 @@ export const SolverView: React.FC = () => {
           </AnimatePresence>
         </div>
       </div>
+
+      <SolverGuideSection guide={guide} />
 
       {/* Modals */}
       <LoadingOverlay isOpen={isLoadingOverlayOpen} onCancel={handleCancelSolve} />

@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRotateLeft, faSlidersH, faCubes, faTrophy } from '@fortawesome/free-solid-svg-icons';
+import { faRotateLeft, faSlidersH, faCubes, faTrophy, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 
 export const CUBE_TYPES = [
   { id: '2x2x2', label: 'Mini Cube (2x2x2)' },
@@ -33,6 +33,7 @@ export const PuzzleArtsFilterBar: React.FC<PuzzleArtsFilterBarProps> = ({
   diffCounts,
 }) => {
   const isFiltered = typeFilter !== 'All' || diffFilter !== 'All';
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleReset = () => {
     setTypeFilter('All');
@@ -46,34 +47,44 @@ export const PuzzleArtsFilterBar: React.FC<PuzzleArtsFilterBarProps> = ({
     >
       {/* Header Info + Reset */}
       <div 
-        className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-dashed mb-4" 
+        className="flex items-center justify-between gap-4 pb-4 border-b border-dashed mb-4" 
         style={{ borderColor: 'var(--nav-border)' }}
       >
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-500">
-            <FontAwesomeIcon icon={faSlidersH} size="lg" />
+        <div 
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="flex items-center justify-between flex-1 lg:flex-initial cursor-pointer lg:cursor-default select-none"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-500">
+              <FontAwesomeIcon icon={faSlidersH} size="lg" />
+            </div>
+            <div>
+              <h2 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>Filters</h2>
+              <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
+                Showing <span className="font-semibold text-blue-500">{currentCount}</span> of {totalCount} patterns
+              </p>
+            </div>
           </div>
-          <div>
-            <h2 className="text-lg font-bold" style={{ color: 'var(--text-primary)' }}>Filters</h2>
-            <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>
-              Showing <span className="font-semibold text-blue-500">{currentCount}</span> of {totalCount} patterns
-            </p>
-          </div>
+          
+          <button className="lg:hidden ml-4 p-2 text-slate-400 hover:text-slate-600 transition-colors">
+            <FontAwesomeIcon icon={mobileOpen ? faChevronUp : faChevronDown} className="w-4 h-4" />
+          </button>
         </div>
 
         {isFiltered && (
           <button
             onClick={handleReset}
-            className="flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold rounded-2xl bg-red-500/10 hover:bg-red-500/20 text-red-500 hover:text-red-600 dark:hover:text-red-400 transition-all duration-200 cursor-pointer self-start sm:self-auto"
+            className="flex items-center justify-center gap-2 px-4 py-2 text-sm font-semibold rounded-2xl bg-red-500/10 hover:bg-red-500/20 text-red-500 hover:text-red-600 dark:hover:text-red-400 transition-all duration-200 cursor-pointer"
           >
             <FontAwesomeIcon icon={faRotateLeft} className="w-3.5 h-3.5" />
-            Reset Filters
+            <span className="hidden sm:inline">Reset Filters</span>
+            <span className="sm:hidden">Reset</span>
           </button>
         )}
       </div>
 
       {/* Filter Rows */}
-      <div className="flex flex-col gap-5">
+      <div className={`${mobileOpen ? 'flex' : 'hidden lg:flex'} flex-col gap-5`}>
         {/* Cubes Selection */}
         <div className="flex flex-col lg:flex-row lg:items-center gap-3">
           <span className="text-sm font-bold min-w-[120px] flex items-center gap-2" style={{ color: 'var(--text-secondary)' }}>
