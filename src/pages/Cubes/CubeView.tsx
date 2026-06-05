@@ -4,6 +4,11 @@ import { motion } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
 import { MOVES_2X2, MOVES_3X3, MOVES_4X4, MOVES_5X5 } from '../../utils/cubeConstants';
 import { CubeControlPanel } from '../../components/cube/CubeControlPanel';
+import * as Rubiks2x2Solver from '../../utils/solver2x2';
+import * as Rubiks3x3Solver from '../../utils/solver3x3';
+import * as Rubiks4x4Solver from '../../utils/solver4x4';
+import * as Rubiks5x5Solver from '../../utils/solver5x5';
+import { CubeFactsSection } from '../../components/cube/CubeFactsSection';
 
 const Cube3DWrapper = lazy(() => import('../../components/cube/Cube3DWrapper'));
 
@@ -22,6 +27,11 @@ export const CubeView: React.FC = () => {
   else if (type === '3x3' || type === '3x3x3-cube') size = 3;
   else if (type === '4x4') size = 4;
   else if (type === '5x5') size = 5;
+
+  let facts = Rubiks3x3Solver.FACTS_DATA;
+  if (size === 2) facts = Rubiks2x2Solver.FACTS_DATA;
+  else if (size === 4) facts = Rubiks4x4Solver.FACTS_DATA;
+  else if (size === 5) facts = Rubiks5x5Solver.FACTS_DATA;
 
   const [engine, setEngine] = useState<any>(null);
   const rotateLayer = engine?.rotateLayer;
@@ -80,6 +90,9 @@ export const CubeView: React.FC = () => {
           engineReady={!!engine}
         />
       </motion.div>
+
+      {/* Facts & Information Section */}
+      <CubeFactsSection facts={facts} />
     </div>
   );
 };

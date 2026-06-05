@@ -93,3 +93,92 @@ export const GUIDE_DATA = {
     }
   ]
 };
+
+export const FACTS_DATA = {
+  subtitle: "The iconic 3×3×3 Rubik's Cube — a deceptively simple puzzle hiding mind-blowing mathematical complexity and decades of history.",
+  stats: [
+    {
+      icon: "calendar",
+      number: "1974",
+      label: "Year Invented",
+      color: "#f97316",
+      bg: "rgba(249,115,22,0.1)",
+      border: "rgba(249,115,22,0.2)",
+      accent: "linear-gradient(to right, #f97316, #ef4444)"
+    },
+    {
+      icon: "cubes",
+      number: "43.25 Quintillion",
+      label: "Possible States",
+      color: "#3b82f6",
+      bg: "rgba(59,130,246,0.1)",
+      border: "rgba(59,130,246,0.2)",
+      accent: "linear-gradient(to right, #3b82f6, #6366f1)"
+    },
+    {
+      icon: "bolt",
+      number: "20 Moves",
+      label: "God's Number",
+      color: "#10b981",
+      bg: "rgba(16,185,129,0.1)",
+      border: "rgba(16,185,129,0.2)",
+      accent: "linear-gradient(to right, #10b981, #06b6d4)"
+    },
+    {
+      icon: "stopwatch",
+      number: "2.76s",
+      label: "World Record",
+      color: "#a855f7",
+      bg: "rgba(168,85,247,0.1)",
+      border: "rgba(168,85,247,0.2)",
+      accent: "linear-gradient(to right, #a855f7, #ec4899)"
+    }
+  ],
+  cards: [
+    {
+      title: "The Origin Story",
+      desc: "Invented in **1974** by **Ernő Rubik**, a professor of architecture in Budapest, Hungary. He originally designed it as a teaching tool to demonstrate three-dimensional movement. What began as a simple educational model quickly evolved into a global phenomenon, challenging millions of people with its mix of logic, memory, and spatial reasoning.",
+      icon: "history",
+      accent: "#f97316",
+      iconBg: "rgba(249,115,22,0.1)",
+      iconBorder: "rgba(249,115,22,0.2)",
+      iconColor: "#f97316"
+    },
+    {
+      title: "Anatomy of the Cube",
+      desc: "The cube is made up of **26 visible pieces** — including **8 corners**, **12 edges**, and **6 fixed center pieces** that determine the color of each face. These center pieces act as reference points, helping solvers orient the cube correctly. The objective is to align all pieces so that each face shows a single solid color — a task requiring patterns, algorithms, and spatial reasoning.",
+      icon: "puzzle",
+      accent: "#3b82f6",
+      iconBg: "rgba(59,130,246,0.1)",
+      iconBorder: "rgba(59,130,246,0.2)",
+      iconColor: "#3b82f6"
+    },
+    {
+      title: "Mind-Blowing Complexity",
+      desc: "One of the most fascinating aspects of the 3×3 cube is its staggering number of possible configurations. It has approximately **43,252,003,274,489,856,000** different states — that's 43 quintillion! To put that into perspective, this number is so massive that it far exceeds the number of seconds that have passed since the beginning of the universe. Despite this immense complexity, mathematicians have proven that any scrambled cube can be solved in **20 moves or fewer**, a limit known as **God's Number**.",
+      icon: "brain",
+      accent: "#10b981",
+      iconBg: "rgba(16,185,129,0.1)",
+      iconBorder: "rgba(16,185,129,0.2)",
+      iconColor: "#10b981",
+      wide: true
+    },
+    {
+      title: "Competitive Speedcubing",
+      desc: "The 3×3 cube is the centerpiece of competitive speedcubing, officially governed by the **World Cube Association**. Competitions are held worldwide, where participants aim to solve the cube as fast as possible under strict conditions. As of 2026, the world record stands at an incredible **2.76 seconds**, achieved by **Teodor Zajder** from Poland at the GLS Big Cubes Gdańsk 2026 competition. This remarkable achievement highlights just how far human skill and speed have progressed with this timeless puzzle.",
+      icon: "trophy",
+      accent: "#a855f7",
+      iconBg: "rgba(168,85,247,0.1)",
+      iconBorder: "rgba(168,85,247,0.2)",
+      iconColor: "#a855f7",
+      wide: true
+    }
+  ],
+  timeline: [
+    { year: "1974", label: "Invented by Ernő Rubik", color: "#f97316" },
+    { year: "1980", label: "Global Commercial Release", color: "#3b82f6" },
+    { year: "2003", label: "WCA Founded & First Competition", color: "#10b981" },
+    { year: "2010", label: "God's Number Proven to be 20", color: "#a855f7" },
+    { year: "2026", label: "World Record 2.76 seconds", color: "#ec4899" }
+  ]
+};

@@ -313,3 +313,92 @@ export const GUIDE_DATA = {
     }
   ]
 };
+
+export const FACTS_DATA = {
+  subtitle: "The 2×2×2 Mini Cube — small in size, but packed with more combinations than you'd ever expect. The perfect entry point into the world of twisty puzzles.",
+  stats: [
+    {
+      icon: "calendar",
+      number: "1981",
+      label: "Year Released",
+      color: "#f97316",
+      bg: "rgba(249,115,22,0.1)",
+      border: "rgba(249,115,22,0.2)",
+      accent: "linear-gradient(to right, #f97316, #ef4444)"
+    },
+    {
+      icon: "cubes",
+      number: "3.67 Million",
+      label: "Possible States",
+      color: "#3b82f6",
+      bg: "rgba(59,130,246,0.1)",
+      border: "rgba(59,130,246,0.2)",
+      accent: "linear-gradient(to right, #3b82f6, #6366f1)"
+    },
+    {
+      icon: "bolt",
+      number: "11 Moves",
+      label: "God's Number",
+      color: "#10b981",
+      bg: "rgba(16,185,129,0.1)",
+      border: "rgba(16,185,129,0.2)",
+      accent: "linear-gradient(to right, #10b981, #06b6d4)"
+    },
+    {
+      icon: "stopwatch",
+      number: "0.47s",
+      label: "World Record",
+      color: "#a855f7",
+      bg: "rgba(168,85,247,0.1)",
+      border: "rgba(168,85,247,0.2)",
+      accent: "linear-gradient(to right, #a855f7, #ec4899)"
+    }
+  ],
+  cards: [
+    {
+      title: "The Origin Story",
+      desc: "The Pocket Cube was invented in **1981** by **Larry D. Nichols**, who actually patented a similar 2×2 puzzle before Ernő Rubik patented the 3×3. It was commercially released as an official Rubik's product and quickly became popular as a gateway puzzle, introducing millions of solvers to the fundamentals of face-turning twisty puzzles.",
+      icon: "history",
+      accent: "#3b82f6",
+      iconBg: "rgba(59,130,246,0.1)",
+      iconBorder: "rgba(59,130,246,0.2)",
+      iconColor: "#3b82f6"
+    },
+    {
+      title: "Anatomy of the Cube",
+      desc: "The cube is the smallest standard Rubik's puzzle. It consists of **8 corner cubies** with no edge or center pieces, making it appear deceptively simple. Despite its compact size, it still requires logical thinking and pattern recognition to solve. It's often recommended as the perfect starting point for anyone new to the world of twisty puzzles.",
+      icon: "info",
+      accent: "#f97316",
+      iconBg: "rgba(249,115,22,0.1)",
+      iconBorder: "rgba(249,115,22,0.2)",
+      iconColor: "#f97316"
+    },
+    {
+      title: "Surprisingly Complex",
+      desc: "Don't let the small size fool you — the 2×2 cube has **3,674,160** possible permutations. While that's far fewer than the 3×3's 43 quintillion states, it's still a staggering number for such a tiny puzzle. Mathematicians have determined that any scrambled position can be solved in at most **11 moves** (in half-turn metric), which is the cube's **God's Number**. This means no scramble is ever more than 11 moves away from being solved!",
+      icon: "brain",
+      accent: "#10b981",
+      iconBg: "rgba(16,185,129,0.1)",
+      iconBorder: "rgba(16,185,129,0.2)",
+      iconColor: "#10b981",
+      wide: true
+    },
+    {
+      title: "Speedcubing & World Records",
+      desc: "The 2×2 is one of the most exciting speedcubing events due to its blazing fast solve times. Officially governed by the **World Cube Association**, the current world record for a single solve stands at an astonishing **0.47 seconds**, achieved by **Teodor Zajder** from Poland. Because solves are so short, luck and reaction time play a bigger role than in larger cubes. The most popular methods include the **Ortega Method** and the advanced **CLL** (Corners of Last Layer) method.",
+      icon: "trophy",
+      accent: "#a855f7",
+      iconBg: "rgba(168,85,247,0.1)",
+      iconBorder: "rgba(168,85,247,0.2)",
+      iconColor: "#a855f7",
+      wide: true
+    }
+  ],
+  timeline: [
+    { year: "1981", label: "Pocket Cube Released", color: "#f97316" },
+    { year: "2003", label: "WCA Adds 2×2 as Official Event", color: "#3b82f6" },
+    { year: "2005", label: "God's Number Proven to be 11", color: "#10b981" },
+    { year: "2016", label: "Sub-1 Second Records Begin", color: "#a855f7" },
+    { year: "2024", label: "World Record 0.47 seconds", color: "#ec4899" }
+  ]
+};

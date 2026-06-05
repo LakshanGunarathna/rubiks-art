@@ -152,3 +152,92 @@ export const GUIDE_DATA = {
     }
   ]
 };
+
+export const FACTS_DATA = {
+  subtitle: "The 5×5×5 Professor's Cube — the ultimate test of patience, strategy, and mastery. A puzzle so complex it earned the title reserved for scholars.",
+  stats: [
+    {
+      icon: "calendar",
+      number: "1981",
+      label: "Year Invented",
+      color: "#f97316",
+      bg: "rgba(249,115,22,0.1)",
+      border: "rgba(249,115,22,0.2)",
+      accent: "linear-gradient(to right, #f97316, #ef4444)"
+    },
+    {
+      icon: "cubes",
+      number: "2.83 × 10⁷⁴",
+      label: "Possible States",
+      color: "#3b82f6",
+      bg: "rgba(59,130,246,0.1)",
+      border: "rgba(59,130,246,0.2)",
+      accent: "linear-gradient(to right, #3b82f6, #6366f1)"
+    },
+    {
+      icon: "layerGroup",
+      number: "98 Pieces",
+      label: "Visible Cubies",
+      color: "#10b981",
+      bg: "rgba(16,185,129,0.1)",
+      border: "rgba(16,185,129,0.2)",
+      accent: "linear-gradient(to right, #10b981, #06b6d4)"
+    },
+    {
+      icon: "stopwatch",
+      number: "32.14s",
+      label: "World Record",
+      color: "#a855f7",
+      bg: "rgba(168,85,247,0.1)",
+      border: "rgba(168,85,247,0.2)",
+      accent: "linear-gradient(to right, #a855f7, #ec4899)"
+    }
+  ],
+  cards: [
+    {
+      title: "The Origin Story",
+      desc: "The 5×5×5 cube was invented in **1981** by **Udo Krell**, a German inventor. It was marketed as the **\"Professor's Cube\"**, signifying that it required a professor-level intellect to solve. The name stuck, and it remains one of the most respected challenges in the twisty puzzle community. Its internal mechanism is a marvel of engineering, with over 120 individual parts working in harmony.",
+      icon: "history",
+      accent: "#f97316",
+      iconBg: "rgba(249,115,22,0.1)",
+      iconBorder: "rgba(249,115,22,0.2)",
+      iconColor: "#f97316"
+    },
+    {
+      title: "Anatomy of the Cube",
+      desc: "The 5×5 has **98 visible pieces**: 8 corners, 36 edge pieces (including wing edges), and 54 center pieces. Each face has **9 center pieces** (compared to 4 on a 4×4 and 1 on a 3×3). The cube features fixed center pieces (like the 3×3), along with inner slice layers that add multiple new move types. This creates a puzzle with both familiar and entirely new challenges layered on top.",
+      icon: "puzzle",
+      accent: "#3b82f6",
+      iconBg: "rgba(59,130,246,0.1)",
+      iconBorder: "rgba(59,130,246,0.2)",
+      iconColor: "#3b82f6"
+    },
+    {
+      title: "Astronomical Complexity",
+      desc: "The 5×5 cube has approximately **2.83 × 10⁷⁴** possible permutations — a number so vast it's nearly incomprehensible. To illustrate: if every atom in the observable universe represented a unique scramble, you'd still need more universes worth of atoms to represent all possible states. Unlike the 4×4, the 5×5 does **not suffer from parity errors** (since it has odd-numbered layers like the 3×3), but the sheer volume of pieces makes it a marathon of concentration and strategy.",
+      icon: "brain",
+      accent: "#10b981",
+      iconBg: "rgba(16,185,129,0.1)",
+      iconBorder: "rgba(16,185,129,0.2)",
+      iconColor: "#10b981",
+      wide: true
+    },
+    {
+      title: "Solving Methods & Competition",
+      desc: "The most popular method for solving the 5×5 is the **Reduction Method**, where solvers first pair up the center pieces, then the edge pieces, and finally solve it like a 3×3. Advanced speedcubers use the **Yau5 Method** — an optimized variant that reduces pauses and look-ahead breaks. As of 2025, the world record for a single solve stands at **32.14 seconds**, achieved by **Max Park** from the USA. The 5×5 event is considered one of the most prestigious in WCA competitions, requiring both speed and endurance.",
+      icon: "trophy",
+      accent: "#a855f7",
+      iconBg: "rgba(168,85,247,0.1)",
+      iconBorder: "rgba(168,85,247,0.2)",
+      iconColor: "#a855f7",
+      wide: true
+    }
+  ],
+  timeline: [
+    { year: "1981", label: "Invented by Udo Krell", color: "#f97316" },
+    { year: "1982", label: "Released as \"Professor's Cube\"", color: "#3b82f6" },
+    { year: "2003", label: "WCA Adds 5×5 as Official Event", color: "#10b981" },
+    { year: "2017", label: "Sub-40 Second Records Broken", color: "#a855f7" },
+    { year: "2025", label: "World Record 32.14 seconds", color: "#ec4899" }
+  ]
+};
