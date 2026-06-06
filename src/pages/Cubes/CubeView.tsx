@@ -1,5 +1,6 @@
 import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
+import { updateMetaTags } from '../../utils/seo';
 import { motion } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
 import { CubeControlPanel } from '../../components/cube/CubeControlPanel';
@@ -44,11 +45,20 @@ export const CubeView: React.FC = () => {
 
   useEffect(() => {
     let name = "Rubik's Cube (3x3)";
-    if (size === 2) name = "Mini Cube (2x2)";
-    else if (size === 4) name = "Rubik's Revenge (4x4)";
-    else if (size === 5) name = "Professor's Cube (5x5)";
+    let desc = "Interact with the classic 3x3 Rubik's Cube in high-fidelity 3D. Play, shuffle, practice algorithms, and explore cube history.";
     
-    document.title = `${name} | Rubiks' Art`;
+    if (size === 2) {
+      name = "Mini Cube (2x2)";
+      desc = "Play with our interactive 3D 2x2 Mini Cube. Rotate layers, shuffle, and explore permutations in real time with high-fidelity WebGL graphics.";
+    } else if (size === 4) {
+      name = "Rubik's Revenge (4x4)";
+      desc = "Test your skills on the 4x4 Rubik's Revenge in 3D. Rotate, shuffle, and learn facts about center parities and permutations.";
+    } else if (size === 5) {
+      name = "Professor's Cube (5x5)";
+      desc = "Practice on the 5x5 Professor's Cube simulator. Experience high-fidelity 3D layer turns, camera rotations, and master complex algorithms.";
+    }
+    
+    updateMetaTags(`${name} | Rubiks' Art`, desc);
   }, [size]);
 
   return (

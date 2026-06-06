@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCube, faCubes, faPuzzlePiece, faMagic, faArrowRight, faCompass, faAward } from '@fortawesome/free-solid-svg-icons';
 import logoImg from '../assets/Logo.png';
 
+import { updateMetaTags } from '../utils/seo';
+
 // Motion animation configurations
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -109,7 +111,10 @@ const CubeSolverCard: React.FC<CubeCardProps> = ({ title, subtitle, tag, path, a
 
 export const Home: React.FC = () => {
   useEffect(() => {
-    document.title = "Rubiks' Art";
+    updateMetaTags(
+      "Rubiks' Art - Interactive Rubik's Cube Experience",
+      "Rubiks' Art combines the timeless logic of Rubik's Cubes with modern 3D technology, offering an immersive platform for enthusiasts of all skill levels."
+    );
   }, []);
 
   const cubesData = [

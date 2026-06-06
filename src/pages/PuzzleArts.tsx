@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { updateMetaTags } from '../utils/seo';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cubeArts } from '../data/cubeArts';
 import type { CubeArt } from '../data/cubeArts';
@@ -16,7 +17,10 @@ function getDifficulty(moveCount: number) {
 
 export const PuzzleArts: React.FC = () => {
   React.useEffect(() => {
-    document.title = "Puzzle Arts | Rubiks' Art";
+    updateMetaTags(
+      "Puzzle Arts & Mosaic Gallery | Rubiks' Art",
+      "Create premium pixel-art mosaics using Rubik's Cubes. Select patterns, filter by difficulty, and follow animated 3D guides to build stunning puzzle art."
+    );
   }, []);
 
   const [typeFilter, setTypeFilter] = useState<string>('All');

@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useEffect, useRef, lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
+import { updateMetaTags } from '../../utils/seo';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as THREE from 'three';
 import * as Rubiks2x2Solver from '../../types/cube2x2';
@@ -115,11 +116,20 @@ export const SolverView: React.FC = () => {
 
   useEffect(() => {
     let name = "Rubik's Cube Solver (3x3)";
-    if (size === 2) name = "Mini Cube Solver (2x2)";
-    else if (size === 4) name = "Rubik's Revenge Solver (4x4)";
-    else if (size === 5) name = "Professor's Cube Solver (5x5)";
+    let desc = "Solve your 3x3 Rubik's Cube with our step-by-step interactive 3D solver guide. Paint your cube's layout and get optimal CFOP/layer-by-layer solutions.";
     
-    document.title = `${name} | Rubiks' Art`;
+    if (size === 2) {
+      name = "Mini Cube Solver (2x2)";
+      desc = "Solve the 2x2 Mini Cube step-by-step with our interactive 3D solver. Enter your cube's colors and follow guided layer-by-layer instructions.";
+    } else if (size === 4) {
+      name = "Rubik's Revenge Solver (4x4)";
+      desc = "Learn to solve the 4x4 Rubik's Revenge. Our interactive 3D solver helps you resolve center parities and edge-pairing step-by-step.";
+    } else if (size === 5) {
+      name = "Professor's Cube Solver (5x5)";
+      desc = "Solve the 5x5 Professor's Cube. Step-by-step interactive 3D reduction and parity solver guide to mastering the 5x5 cube.";
+    }
+    
+    updateMetaTags(`${name} | Rubiks' Art`, desc);
   }, [size]);
 
 
