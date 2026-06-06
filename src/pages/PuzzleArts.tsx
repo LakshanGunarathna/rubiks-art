@@ -15,6 +15,10 @@ function getDifficulty(moveCount: number) {
 }
 
 export const PuzzleArts: React.FC = () => {
+  React.useEffect(() => {
+    document.title = "Puzzle Arts | Rubiks' Art";
+  }, []);
+
   const [typeFilter, setTypeFilter] = useState<string>('All');
   const [diffFilter, setDiffFilter] = useState<string>('All');
   const [activeArt, setActiveArt] = useState<CubeArt | null>(null);

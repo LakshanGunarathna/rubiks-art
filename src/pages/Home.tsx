@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, type Variants } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -108,6 +108,10 @@ const CubeSolverCard: React.FC<CubeCardProps> = ({ title, subtitle, tag, path, a
 );
 
 export const Home: React.FC = () => {
+  useEffect(() => {
+    document.title = "Rubiks' Art";
+  }, []);
+
   const cubesData = [
     {
       title: "Pocket Cube (2x2x2)",

@@ -42,6 +42,15 @@ export const CubeView: React.FC = () => {
     if (snapReset) snapReset();
   }, [type, snapReset]);
 
+  useEffect(() => {
+    let name = "Rubik's Cube (3x3)";
+    if (size === 2) name = "Mini Cube (2x2)";
+    else if (size === 4) name = "Rubik's Revenge (4x4)";
+    else if (size === 5) name = "Professor's Cube (5x5)";
+    
+    document.title = `${name} | Rubiks' Art`;
+  }, [size]);
+
   return (
     <div className="w-full max-w-6xl mx-auto flex flex-col items-center gap-6 pt-2 pb-12">
       {/* Title Header */}

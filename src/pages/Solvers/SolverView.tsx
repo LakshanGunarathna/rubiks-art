@@ -113,6 +113,15 @@ export const SolverView: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    let name = "Rubik's Cube Solver (3x3)";
+    if (size === 2) name = "Mini Cube Solver (2x2)";
+    else if (size === 4) name = "Rubik's Revenge Solver (4x4)";
+    else if (size === 5) name = "Professor's Cube Solver (5x5)";
+    
+    document.title = `${name} | Rubiks' Art`;
+  }, [size]);
+
 
 
   const handleStickerClick = useCallback((cubie: any, sticker: any) => {
