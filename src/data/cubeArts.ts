@@ -591,6 +591,6 @@ export const cubeArts: CubeArt[] = Object.entries(rawArtsData).flatMap(([type, a
   arts.map(art => ({
     ...art,
     type,
-    imageUrl: art.imageUrl.startsWith('/src') ? art.imageUrl : `/src${art.imageUrl}`
+    imageUrl: art.imageUrl
   }))
 );

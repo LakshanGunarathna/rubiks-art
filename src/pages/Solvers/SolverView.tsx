@@ -6,6 +6,7 @@ import * as Rubiks2x2Solver from '../../types/cube2x2';
 import * as Rubiks3x3Solver from '../../types/cube3x3';
 import * as Rubiks4x4Solver from '../../types/cube4x4';
 import * as Rubiks5x5Solver from '../../types/cube5x5';
+import { useSiteConfig } from '../../config/siteConfig';
 
 const Solver3DWrapper = lazy(() => import('../../components/solver/Solver3DWrapper'));
 
@@ -22,9 +23,9 @@ import { getHumanReadableMove } from '../../utils/cubeFormatters';
 import { OPPOSITE_COLORS, MOVES_2X2, MOVES_3X3 } from '../../utils/cubeConstants';
 import { getCubeArray2x2, getCubeString3x3, getCubeString4x4, getCubeString5x5 } from '../../utils/cubeStateUtils';
 import { autoDeducePieces, autoFillCenters } from '../../utils/cubeAutoPainter';
-import { 
-  validate2x2, validate3x3, validate4x4, validate5x5, 
-  checkIfSolved2x2, checkIfSolved3x3, checkIfSolved4x4, checkIfSolved5x5 
+import {
+  validate2x2, validate3x3, validate4x4, validate5x5,
+  checkIfSolved2x2, checkIfSolved3x3, checkIfSolved4x4, checkIfSolved5x5
 } from '../../utils/cubeValidation';
 
 const LoadingCube = () => (
@@ -62,6 +63,8 @@ export const SolverView: React.FC = () => {
 
   const solveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const solveAbortControllerRef = useRef<AbortController | null>(null);
+  const warmupTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const warmupSentRef = useRef<boolean>(false);
   const [lastActionDir, setLastActionDir] = useState<1 | -1>(1);
 
   // Overlay states
@@ -85,6 +88,12 @@ export const SolverView: React.FC = () => {
     setErrors([]);
     setSolutionSteps([]);
     setCurrentStepIndex(0);
+
+    if (warmupTimeoutRef.current) {
+      clearTimeout(warmupTimeoutRef.current);
+      warmupTimeoutRef.current = null;
+    }
+    warmupSentRef.current = false;
   }, [cubiesRef, engine]);
 
   const initializedRef = useRef<string | null>(null);
@@ -95,6 +104,14 @@ export const SolverView: React.FC = () => {
       initializedRef.current = type || '3x3';
     }
   }, [engine, type, snapReset, resetToGray]);
+
+  useEffect(() => {
+    return () => {
+      if (warmupTimeoutRef.current) {
+        clearTimeout(warmupTimeoutRef.current);
+      }
+    };
+  }, []);
 
 
 
@@ -130,10 +147,54 @@ export const SolverView: React.FC = () => {
 
     autoFillCenters(cubiesRef, engine, size);
     setTimeout(() => autoDeducePieces(cubiesRef, engine, size), 0);
+
+    // Wakeup API optimization for 4x4 and 5x5
+    if (size === 4 || size === 5) {
+      if (!warmupSentRef.current && !warmupTimeoutRef.current) {
+        let paintedCount = 0;
+        if (cubiesRef?.current) {
+          cubiesRef.current.forEach((c: any) => {
+            const stickers = c.children.filter((child: any) => child.userData?.isSticker);
+            stickers.forEach((s: any) => {
+              if (s.material.color.getHex() !== RUBIKS_CUBE_COLORS.gray) {
+                paintedCount++;
+              }
+            });
+          });
+        }
+
+        if (paintedCount >= 10) {
+          const apiBaseUrl = useSiteConfig.getState().apiBaseUrl;
+          const dummyState = size === 4
+            ? "UDDUDUUDDUUDUDDUBFFBFBBFFBBFBFFBRLLRLRRLLRRLRLLRDUUDUDDUUDDUDUUDFBBFBFFBBFFBFBBFLRRLRLLRRLLRLRRL"
+            : "UDUDUDUDUDUDUDUDUDUDUDUDURLRLRLRLRLRLRLRLRLRLRLRLRFBFBFBFBFBFBFBFBFBFBFBFBFDUDUDUDUDUDUDUDUDUDUDUDUDLRLRLRLRLRLRLRLRLRLRLRLRLBFBFBFBFBFBFBFBFBFBFBFBFB";
+
+          warmupTimeoutRef.current = setTimeout(() => {
+            fetch(`${apiBaseUrl}/solve`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ state: dummyState })
+            })
+              .then(() => {
+                warmupSentRef.current = true;
+              })
+              .catch(() => { })
+              .finally(() => {
+                warmupTimeoutRef.current = null;
+              });
+          }, 10000);
+        }
+      }
+    }
   }, [phase, selectedColor, engine, cubiesRef, size]);
 
   const handleStartSolve = async () => {
     setErrors([]);
+
+    if (warmupTimeoutRef.current) {
+      clearTimeout(warmupTimeoutRef.current);
+      warmupTimeoutRef.current = null;
+    }
 
     try {
       if (solveAbortControllerRef.current) {

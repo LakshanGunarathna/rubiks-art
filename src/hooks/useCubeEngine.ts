@@ -2,6 +2,8 @@ import { useState, useRef, useCallback, useMemo } from 'react';
 
 import * as THREE from 'three';
 import type { Axis, AnimationState, HistoryItem } from '../types/cube';
+import { MOVES_2X2, MOVES_3X3, MOVES_4X4, MOVES_5X5 } from '../utils/cubeConstants';
+
 
 
 export const useCubeEngine = () => {
@@ -117,25 +119,27 @@ export const useCubeEngine = () => {
   const shuffle = useCallback(async (count = 20) => {
     if (isAnimating) return;
     
-    // Base moves for 3x3
-    const moves: Record<string, [Axis, number, number]> = {
-        L: ['x', -1, Math.PI / 2], M: ['x', 0, Math.PI / 2], R: ['x', 1, -Math.PI / 2],
-        U: ['y', 1, -Math.PI / 2], E: ['y', 0, Math.PI / 2], D: ['y', -1, Math.PI / 2],
-        F: ['z', 1, -Math.PI / 2], S: ['z', 0, -Math.PI / 2], B: ['z', -1, Math.PI / 2]
-    };
-    
-    const keys = Object.keys(moves);
-    let lastMove = { axis: '', layer: 0, dir: 0 };
+    const size = Math.round(Math.cbrt(cubiesRef.current.length)) || 3;
+    let movesDict: Record<string, [Axis, any, number]> = MOVES_3X3;
+    if (size === 2) movesDict = MOVES_2X2;
+    else if (size === 4) movesDict = MOVES_4X4;
+    else if (size === 5) movesDict = MOVES_5X5;
+
+    // Filter out whole-cube rotations (x, y, z) if present in the moveset
+    const keys = Object.keys(movesDict).filter(key => key !== 'x' && key !== 'y' && key !== 'z');
+    let lastKey = '';
+    let lastDir = 0;
 
     for (let i = 0; i < count; i++) {
         let key, m, dir;
         do {
             key = keys[Math.floor(Math.random() * keys.length)];
-            m = moves[key];
+            m = movesDict[key];
             dir = Math.random() > 0.5 ? 1 : -1;
-        } while (m[0] === lastMove.axis && m[1] === lastMove.layer && dir === -lastMove.dir);
+        } while (key === lastKey && dir === -lastDir);
 
-        lastMove = { axis: m[0], layer: m[1], dir };
+        lastKey = key;
+        lastDir = dir;
         await rotateLayer(m[0], m[1], m[2] * dir, 200);
     }
   }, [isAnimating, rotateLayer]);

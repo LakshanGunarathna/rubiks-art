@@ -2,7 +2,6 @@ import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
-import { MOVES_2X2, MOVES_3X3, MOVES_4X4, MOVES_5X5 } from '../../utils/cubeConstants';
 import { CubeControlPanel } from '../../components/cube/CubeControlPanel';
 import * as Rubiks2x2Solver from '../../types/cube2x2';
 import * as Rubiks3x3Solver from '../../types/cube3x3';
@@ -34,7 +33,6 @@ export const CubeView: React.FC = () => {
   else if (size === 5) facts = Rubiks5x5Solver.FACTS_DATA;
 
   const [engine, setEngine] = useState<any>(null);
-  const rotateLayer = engine?.rotateLayer;
   const snapReset = engine?.snapReset;
   const shuffle = engine?.shuffle;
   const reset = engine?.reset;
@@ -43,8 +41,6 @@ export const CubeView: React.FC = () => {
   useEffect(() => {
     if (snapReset) snapReset();
   }, [type, snapReset]);
-
-  const moves = size === 2 ? MOVES_2X2 : size === 3 ? MOVES_3X3 : size === 4 ? MOVES_4X4 : MOVES_5X5;
 
   return (
     <div className="w-full max-w-6xl mx-auto flex flex-col items-center gap-6 pt-2 pb-12">
@@ -80,10 +76,7 @@ export const CubeView: React.FC = () => {
 
         {/* Controls Panel & Shortcuts */}
         <CubeControlPanel
-          size={size}
-          moves={moves}
           isAnimating={isAnimating}
-          rotateLayer={rotateLayer}
           shuffle={shuffle}
           reset={reset}
           resetCamera={engine?.resetCamera}
