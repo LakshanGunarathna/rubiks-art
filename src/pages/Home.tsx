@@ -198,15 +198,15 @@ export const Home: React.FC = () => {
       className="w-full flex flex-col gap-16"
     >
       {/* 🚀 Hero Section */}
-      <motion.div variants={itemVariants} className="text-center relative py-8 lg:py-16 flex flex-col items-center">
+      <motion.div variants={itemVariants} className="relative py-8 lg:py-16 flex flex-col lg:flex-row items-center justify-center gap-12 lg:gap-20 max-w-6xl mx-auto w-full">
         {/* Glow Ring Behind Logo */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full blur-3xl opacity-20 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 pointer-events-none" />
+        <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full blur-3xl opacity-20 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 pointer-events-none" />
 
         {/* Animated Brand Logo */}
         <motion.div 
           variants={floatAnimation}
           animate="animate"
-          className="relative z-10 w-40 h-40 lg:w-48 lg:h-48 mb-8 cursor-pointer group"
+          className="relative z-10 w-44 h-44 lg:w-64 lg:h-64 cursor-pointer group flex-shrink-0"
         >
           <img 
             src={logoImg} 
@@ -215,33 +215,42 @@ export const Home: React.FC = () => {
           />
         </motion.div>
 
-        {/* Gradient Headline */}
-        <h1 className="relative z-10 text-5xl md:text-7xl font-extrabold font-heading tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-500">
-          Rubik's Art
-        </h1>
-        
-        {/* Subheading Description */}
-        <p 
-          className="relative z-10 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-8 px-4"
-          style={{ color: 'var(--text-secondary)' }}
-        >
-          Experience beautiful high-fidelity 3D cube simulations, learn detailed algorithm solver guides, and transform simple Rubik's cubes into premium pixel-art canvas mosaics.
-        </p>
+        {/* Text and Actions */}
+        <div className="flex-1 text-center lg:text-left flex flex-col items-center lg:items-start relative z-10">
+          {/* Gradient Headline */}
+          <h1 className="text-5xl md:text-7xl font-extrabold font-heading tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-500">
+            Rubik's Art
+          </h1>
+          
+          {/* Subheading Description */}
+          <p 
+            className="text-lg md:text-xl leading-relaxed mb-8 max-w-2xl"
+            style={{ color: 'var(--text-secondary)' }}
+          >
+            Experience beautiful high-fidelity 3D cube simulations, learn detailed algorithm solver guides, and transform simple Rubik's cubes into premium pixel-art canvas mosaics.
+          </p>
 
-        {/* Action Buttons */}
-        <div className="relative z-10 flex flex-wrap gap-4 justify-center">
-          <Link 
-            to="/arts" 
-            className="px-8 py-3.5 rounded-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 transition-all hover:-translate-y-0.5"
-          >
-            Create Puzzle Art
-          </Link>
-          <a 
-            href="#playgrounds" 
-            className="px-8 py-3.5 rounded-2xl font-bold border border-[var(--glass-border)] bg-[var(--glass-bg)] text-[var(--text-primary)] hover:bg-[var(--glass-border)] hover:border-[var(--text-secondary)]/20 transition-all hover:-translate-y-0.5 shadow"
-          >
-            Explore Cubes
-          </a>
+          {/* Action Buttons */}
+          <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
+            <Link 
+              to="/arts" 
+              className="px-8 py-3.5 rounded-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 transition-all hover:-translate-y-0.5"
+            >
+              Create Puzzle Art
+            </Link>
+            <a 
+              href="#playgrounds" 
+              className="px-8 py-3.5 rounded-2xl font-bold border border-[var(--glass-border)] bg-[var(--glass-bg)] text-[var(--text-primary)] hover:bg-[var(--glass-border)] hover:border-[var(--text-secondary)]/20 transition-all hover:-translate-y-0.5 shadow"
+            >
+              Explore Cubes
+            </a>
+            <a 
+              href="#solvers" 
+              className="px-8 py-3.5 rounded-2xl font-bold border border-[var(--glass-border)] bg-[var(--glass-bg)] text-[var(--text-primary)] hover:bg-[var(--glass-border)] hover:border-[var(--text-secondary)]/20 transition-all hover:-translate-y-0.5 shadow"
+            >
+              Solve a Cube
+            </a>
+          </div>
         </div>
       </motion.div>
 
@@ -330,7 +339,7 @@ export const Home: React.FC = () => {
       </div>
 
       {/* 🪄 3D Guided Solvers Section */}
-      <div className="flex flex-col gap-6">
+      <div id="solvers" className="flex flex-col gap-6 scroll-mt-24">
         <motion.div variants={itemVariants} className="flex flex-col md:flex-row justify-between items-start md:items-end gap-2 px-2">
           <div>
             <h2 className="text-3xl font-extrabold font-heading text-[var(--text-primary)]">
