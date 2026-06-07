@@ -1,63 +1,1121 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Static Pages -->
   <url>
     <loc>https://www.rubiks-art.com/</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/src/assets/Logo.png</image:loc>
+      <image:title>Rubiks' Art Brand Logo</image:title>
+      <image:caption>Interactive 3D Rubik's Cube Simulators, Solvers, and Puzzle Art Mosaics</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+  
+  <!-- Cube Playgrounds -->
   <url>
     <loc>https://www.rubiks-art.com/cubes/2x2</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.rubiks-art.com/cubes/3x3</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.rubiks-art.com/cubes/4x4</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.rubiks-art.com/cubes/5x5</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <!-- Solvers -->
   <url>
     <loc>https://www.rubiks-art.com/solvers/2x2</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.rubiks-art.com/solvers/3x3</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.rubiks-art.com/solvers/4x4</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.rubiks-art.com/solvers/5x5</loc>
-    <lastmod>2026-06-06</lastmod>
+    <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+
+  <!-- Dynamic Art Detail Pages with Image SEO -->
+  <url>
+    <loc>https://www.rubiks-art.com/arts/4-side-checkerboard-2x2_1</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/2x2_1.png</image:loc>
+      <image:title>4 Side Checkerboard - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the 4 Side Checkerboard pattern on a 2x2 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/checkerboard-2x2_2</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/2x2_2.png</image:loc>
+      <image:title>Checkerboard - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Checkerboard pattern on a 2x2 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/zig-zag-2x2_3</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/2x2_3.png</image:loc>
+      <image:title>Zig Zag - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Zig Zag pattern on a 2x2 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/cube-in-a-cube-2x2_4</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/2x2_4.png</image:loc>
+      <image:title>Cube in a Cube - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Cube in a Cube pattern on a 2x2 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/wire-3x3_1</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_1.png</image:loc>
+      <image:title>Wire - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Wire pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/superflip-3x3_2</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_2.png</image:loc>
+      <image:title>Superflip - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Superflip pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/vertical-stripes-3x3_3</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_3.png</image:loc>
+      <image:title>Vertical Stripes - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Vertical Stripes pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/twister-3x3_4</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_4.png</image:loc>
+      <image:title>Twister - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Twister pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/fruit-bowl-3x3_5</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_5.png</image:loc>
+      <image:title>Fruit Bowl - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Fruit Bowl pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/order-in-chaos-3x3_6</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_6.png</image:loc>
+      <image:title>Order in Chaos - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Order in Chaos pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/are-you-high-3x3_7</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_7.png</image:loc>
+      <image:title>Are You High - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Are You High pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/displaced-motif-3x3_8</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_8.png</image:loc>
+      <image:title>Displaced Motif - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Displaced Motif pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/perfect-scramble-3x3_9</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_9.png</image:loc>
+      <image:title>Perfect Scramble - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Perfect Scramble pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/perpendicular-lines-3x3_10</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_10.png</image:loc>
+      <image:title>Perpendicular Lines - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Perpendicular Lines pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/the-hole-3x3_11</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_11.png</image:loc>
+      <image:title>The Hole - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the The Hole pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/flower-3x3_12</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_12.png</image:loc>
+      <image:title>Flower - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Flower pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/3c3w-3x3_13</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_13.png</image:loc>
+      <image:title>3C3W - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the 3C3W pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/flipped-tips-3x3_14</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_14.png</image:loc>
+      <image:title>Flipped Tips - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Flipped Tips pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/hi-all-around-3x3_15</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_15.png</image:loc>
+      <image:title>Hi All Around - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Hi All Around pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/tangled-3x3_16</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_16.png</image:loc>
+      <image:title>Tangled - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Tangled pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/minority-cross-3x3_17</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_17.png</image:loc>
+      <image:title>Minority Cross - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Minority Cross pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/python-3x3_18</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_18.png</image:loc>
+      <image:title>Python - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Python pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/cross-3x3_19</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_19.png</image:loc>
+      <image:title>Cross - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Cross pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/checkerboard-in-the-cube-3x3_20</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_20.png</image:loc>
+      <image:title>Checkerboard in the Cube - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Checkerboard in the Cube pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/black-mamba-3x3_21</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_21.png</image:loc>
+      <image:title>Black Mamba - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Black Mamba pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/deckerboard-3x3_22</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_22.png</image:loc>
+      <image:title>Deckerboard - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Deckerboard pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/4-crosses-3x3_23</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_23.png</image:loc>
+      <image:title>4 Crosses - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the 4 Crosses pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/green-mamba-3x3_24</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_24.png</image:loc>
+      <image:title>Green Mamba - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Green Mamba pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/cube-in-a-cube-in-a-cube-3x3_25</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_25.png</image:loc>
+      <image:title>Cube in a Cube in a Cube - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Cube in a Cube in a Cube pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/plus-minus-3x3_26</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_26.png</image:loc>
+      <image:title>Plus Minus - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Plus Minus pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/kilt-scottish-skirt-3x3_27</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_27.png</image:loc>
+      <image:title>Kilt - Scottish Skirt - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Kilt - Scottish Skirt pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/pong-3x3_28</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_28.png</image:loc>
+      <image:title>Pong - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Pong pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/3-sides-solved-3x3_29</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_29.png</image:loc>
+      <image:title>3 Sides Solved - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the 3 Sides Solved pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/c-u-around-3x3_30</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_30.png</image:loc>
+      <image:title>C U Around - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the C U Around pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/evenly-distributed-3x3_31</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_31.png</image:loc>
+      <image:title>Evenly Distributed - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Evenly Distributed pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/tablecloth-3x3_32</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_32.png</image:loc>
+      <image:title>Tablecloth - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Tablecloth pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/hi-3x3_33</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_33.png</image:loc>
+      <image:title>Hi - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Hi pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/dont-cross-line-3x3_34</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_34.png</image:loc>
+      <image:title>Dont Cross Line - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Dont Cross Line pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/anaconda-3x3_35</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_35.png</image:loc>
+      <image:title>Anaconda - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Anaconda pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/tetris-3x3_36</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_36.png</image:loc>
+      <image:title>Tetris - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Tetris pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/no-entry-3x3_37</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_37.png</image:loc>
+      <image:title>No Entry - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the No Entry pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/easy-checkerboard-3x3_38</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_38.png</image:loc>
+      <image:title>Easy Checkerboard - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Easy Checkerboard pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/opposite-corners-3x3_39</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_39.png</image:loc>
+      <image:title>Opposite Corners - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Opposite Corners pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/union-jack-3x3_40</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_40.png</image:loc>
+      <image:title>Union Jack - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Union Jack pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/six-spots-3x3_41</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_41.png</image:loc>
+      <image:title>Six Spots - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Six Spots pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/cube-in-the-cube-3x3_42</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_42.png</image:loc>
+      <image:title>Cube in the Cube - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Cube in the Cube pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/gift-box-3x3_43</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_43.png</image:loc>
+      <image:title>Gift Box - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Gift Box pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/plus-3x3_44</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_44.png</image:loc>
+      <image:title>Plus - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Plus pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/spiral-pattern-3x3_45</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_45.png</image:loc>
+      <image:title>Spiral Pattern - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Spiral Pattern pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/speedsolving-3x3_46</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_46.png</image:loc>
+      <image:title>SpeedSolving - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the SpeedSolving pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/four-spots-3x3_47</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_47.png</image:loc>
+      <image:title>Four Spots - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Four Spots pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/all-flags-crests-3x3_48</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/3x3_48.png</image:loc>
+      <image:title>All Flags & Crests - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the All Flags & Crests pattern on a 3x3 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/checkerboard-v1-4x4_1</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_1.png</image:loc>
+      <image:title>Checkerboard v1 - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Checkerboard v1 pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/stripes-4x4_2</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_2.png</image:loc>
+      <image:title>Stripes - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Stripes pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/lines-4x4_3</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_3.png</image:loc>
+      <image:title>Lines - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Lines pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/dots-4x4_4</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_4.png</image:loc>
+      <image:title>Dots - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Dots pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/cube-in-a-cube-4x4_5</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_5.png</image:loc>
+      <image:title>Cube in a Cube - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Cube in a Cube pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/cube-in-a-cube-in-a-cube-4x4_6</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_6.png</image:loc>
+      <image:title>Cube in a Cube in a Cube - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Cube in a Cube in a Cube pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/3-cubes-in-a-cube-4x4_7</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_7.png</image:loc>
+      <image:title>3 Cubes in a Cube - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the 3 Cubes in a Cube pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/checkerboard-v2-4x4_8</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_8.png</image:loc>
+      <image:title>Checkerboard v2 - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Checkerboard v2 pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/checkerboard-in-dots-4x4_9</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_9.png</image:loc>
+      <image:title>Checkerboard in Dots - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Checkerboard in Dots pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/6-colour-cube-in-a-cube-4x4_10</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_10.png</image:loc>
+      <image:title>6 Colour Cube In A Cube - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the 6 Colour Cube In A Cube pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/6-colour-peak-4x4_11</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_11.png</image:loc>
+      <image:title>6 Colour Peak - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the 6 Colour Peak pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/2x2-peak-4x4_12</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_12.png</image:loc>
+      <image:title>2x2 Peak - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the 2x2 Peak pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/easy-checkerboard-4x4_13</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_13.png</image:loc>
+      <image:title>Easy Checkerboard - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Easy Checkerboard pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/anaconda-4x4_14</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_14.png</image:loc>
+      <image:title>Anaconda - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Anaconda pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/diagonal-lines-4x4_15</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_15.png</image:loc>
+      <image:title>Diagonal Lines - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Diagonal Lines pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/cross-4x4_16</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_16.png</image:loc>
+      <image:title>Cross - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Cross pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/displaced-motif-4x4_17</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_17.png</image:loc>
+      <image:title>Displaced Motif - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Displaced Motif pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/checkerboard-in-a-cube-4x4_18</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_18.png</image:loc>
+      <image:title>Checkerboard in a Cube - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Checkerboard in a Cube pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/twisted-cube-4x4_19</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_19.png</image:loc>
+      <image:title>Twisted Cube - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Twisted Cube pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/cube-in-a-checkerboard-4x4_20</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_20.png</image:loc>
+      <image:title>Cube in a Checkerboard - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Cube in a Checkerboard pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/ron-s-cube-in-a-cube-4x4_21</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/4x4_21.png</image:loc>
+      <image:title>Ron's Cube in a Cube - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Ron's Cube in a Cube pattern on a 4x4 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/full-checkerboard-5x5_1</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_1.png</image:loc>
+      <image:title>Full Checkerboard - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Full Checkerboard pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/cube-in-a-cube-in-a-cube-5x5_2</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_2.png</image:loc>
+      <image:title>Cube in a Cube in a Cube - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Cube in a Cube in a Cube pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/half-superflip-5x5_3</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_3.png</image:loc>
+      <image:title>Half Superflip - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Half Superflip pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/tri-checkerboard-5x5_4</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_4.png</image:loc>
+      <image:title>Tri-Checkerboard - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Tri-Checkerboard pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/4-cubes-in-a-cube-5x5_5</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_5.png</image:loc>
+      <image:title>4 Cubes in a Cube - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the 4 Cubes in a Cube pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/superflip-5x5_6</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_6.png</image:loc>
+      <image:title>Superflip - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Superflip pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/flipped-edges-5x5_7</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_7.png</image:loc>
+      <image:title>Flipped Edges - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Flipped Edges pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/dot-in-a-dot-5x5_8</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_8.png</image:loc>
+      <image:title>Dot In A Dot - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Dot In A Dot pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/square-in-a-cube-5x5_9</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_9.png</image:loc>
+      <image:title>Square in a Cube - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Square in a Cube pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/flipped-edge-checkerboard-5x5_10</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_10.png</image:loc>
+      <image:title>Flipped Edge Checkerboard - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Flipped Edge Checkerboard pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/dot-in-a-crosshair-5x5_11</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_11.png</image:loc>
+      <image:title>Dot in a Crosshair - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Dot in a Crosshair pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/double-checkerboard-5x5_12</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_12.png</image:loc>
+      <image:title>Double Checkerboard - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Double Checkerboard pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/alternate-checkerboard-5x5_13</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_13.png</image:loc>
+      <image:title>Alternate Checkerboard - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Alternate Checkerboard pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/easy-checkerboard-5x5_14</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_14.png</image:loc>
+      <image:title>Easy Checkerboard - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Easy Checkerboard pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/four-dots-5x5_15</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_15.png</image:loc>
+      <image:title>Four Dots - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Four Dots pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/cross-5x5_16</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_16.png</image:loc>
+      <image:title>Cross - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Cross pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/3x3-peak-5x5_17</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_17.png</image:loc>
+      <image:title>3x3 Peak - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the 3x3 Peak pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/i-love-u-5x5_18</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_18.png</image:loc>
+      <image:title>I Love U - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the I Love U pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/clown-5x5_19</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_19.png</image:loc>
+      <image:title>Clown - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Clown pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/hearts-5x5_20</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_20.png</image:loc>
+      <image:title>Hearts - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Hearts pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/cube-in-a-checkerboard-5x5_21</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_21.png</image:loc>
+      <image:title>Cube in a Checkerboard - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Cube in a Checkerboard pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/arts/cube-in-a-cube-5x5_22</loc>
+    <lastmod>2026-06-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/assets/cube-arts/5x5_22.png</image:loc>
+      <image:title>Cube in a Cube - Rubik's Cube Art Pattern</image:title>
+      <image:caption>Step-by-step 3D guide to create the Cube in a Cube pattern on a 5x5 Rubik's Cube</image:caption>
+    </image:image>
   </url>
 </urlset>

@@ -219,7 +219,8 @@ export const Home: React.FC = () => {
         >
           <img 
             src={logoImg} 
-            alt="Rubik's Art Logo" 
+            alt="Rubik's Art - Interactive 3D Rubik's Cube Simulators, Solvers, and Puzzle Art Mosaics" 
+            title="Rubik's Art - Interactive 3D Rubik's Cube Simulators, Solvers, and Puzzle Art Mosaics"
             className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(59,130,246,0.3)] group-hover:scale-105 transition-transform duration-300" 
           />
         </motion.div>

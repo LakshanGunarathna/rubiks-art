@@ -139,7 +139,8 @@ export const PuzzleArts: React.FC = () => {
                 <div className="w-full aspect-[4/3] rounded-[24px] bg-[#eef6fc] dark:bg-slate-800/50 overflow-hidden relative mb-4">
                   <img
                     src={art.imageUrl}
-                    alt={art.name}
+                    alt={`${art.name} - Rubik's Cube Art Pattern (${art.type})`}
+                    title={`${art.name} - Rubik's Cube Art Pattern (${art.type})`}
                     className="w-full h-full object-cover filter drop-shadow-sm transition-transform duration-400 ease-in-out group-hover:scale-[1.35]"
                     onError={(e) => {
                       (e.target as HTMLImageElement).src = `https://via.placeholder.com/300x225.png?text=${art.id}`;
