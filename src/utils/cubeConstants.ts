@@ -133,6 +133,10 @@ export const MOVES_5X5: Record<string, [Axis, number[], number]> = {
   'S': ['z', [0], -Math.PI / 2], '3F': ['z', [0], -Math.PI / 2],
   '3B': ['z', [0], Math.PI / 2],
 
+  'm': ['x', [-1, 0, 1], Math.PI / 2],
+  'e': ['y', [-1, 0, 1], Math.PI / 2],
+  's': ['z', [-1, 0, 1], -Math.PI / 2],
+
   'x': ['x', [-2, -1, 0, 1, 2], -Math.PI / 2],
   'y': ['y', [-2, -1, 0, 1, 2], -Math.PI / 2],
   'z': ['z', [-2, -1, 0, 1, 2], -Math.PI / 2]
