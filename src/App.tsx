@@ -29,6 +29,7 @@ const AnimatedRoutes = () => {
           <Route path="/cubes/:type" element={<CubeView />} />
           <Route path="/solvers/:type" element={<SolverView />} />
           <Route path="/arts" element={<PuzzleArts />} />
+          <Route path="/arts/:artSlug" element={<PuzzleArts />} />
         </Routes>
       </AnimatePresence>
     </Suspense>

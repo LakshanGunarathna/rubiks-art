@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { updateMetaTags } from '../utils/seo';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cubeArts } from '../data/cubeArts';
-import type { CubeArt } from '../data/cubeArts';
 import { ArtPlayer } from '../components/puzzleArts/ArtPlayer';
 
 import { PuzzleArtsFilterBar, CUBE_TYPES, DIFFICULTIES } from '../components/puzzleArts/PuzzleArtsFilterBar';
@@ -16,16 +16,30 @@ function getDifficulty(moveCount: number) {
 }
 
 export const PuzzleArts: React.FC = () => {
-  React.useEffect(() => {
-    updateMetaTags(
-      "Puzzle Arts & Mosaic Gallery | Rubiks' Art",
-      "Create premium pixel-art mosaics using Rubik's Cubes. Select patterns, filter by difficulty, and follow animated 3D guides to build stunning puzzle art."
-    );
-  }, []);
+  const { artSlug } = useParams<{ artSlug: string }>();
+  const navigate = useNavigate();
 
   const [typeFilter, setTypeFilter] = useState<string>('All');
   const [diffFilter, setDiffFilter] = useState<string>('All');
-  const [activeArt, setActiveArt] = useState<CubeArt | null>(null);
+
+  const activeArt = useMemo(() => {
+    if (!artSlug) return null;
+    return cubeArts.find(art => art.slug === artSlug) || null;
+  }, [artSlug]);
+
+  React.useEffect(() => {
+    if (activeArt) {
+      updateMetaTags(
+        `${activeArt.name} | Puzzle Arts | Rubiks' Art`,
+        `Follow this interactive 3D guide to build the "${activeArt.name}" mosaic pattern on a ${activeArt.type} cube. Moves: ${activeArt.moves}`
+      );
+    } else {
+      updateMetaTags(
+        "Puzzle Arts | Rubiks' Art",
+        "Create premium pixel-art mosaics using Rubik's Cubes. Select patterns, filter by difficulty, and follow animated 3D guides to build stunning puzzle art."
+      );
+    }
+  }, [activeArt]);
 
   const artsWithMetadata = useMemo(() => {
     return cubeArts.map(art => {
@@ -80,7 +94,7 @@ export const PuzzleArts: React.FC = () => {
           exit={{ opacity: 0, scale: 0.95 }}
           className="w-full min-h-[calc(100vh-6rem)]"
         >
-          <ArtPlayer art={activeArt} onExit={() => setActiveArt(null)} />
+          <ArtPlayer art={activeArt} onExit={() => navigate('/arts')} />
         </motion.div>
       </AnimatePresence>
     );
@@ -118,7 +132,7 @@ export const PuzzleArts: React.FC = () => {
             {filteredArts.map(art => (
               <motion.div
                 key={art.id}
-                onClick={() => setActiveArt(art)}
+                onClick={() => navigate(`/arts/${art.slug}`)}
                 className="group cursor-pointer bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800/80 rounded-[32px] overflow-hidden transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] flex flex-col p-5 shadow-[0_4px_25px_rgba(0,0,0,0.03)] hover:-translate-y-[10px] hover:scale-[1.02] hover:border-blue-500/40 dark:hover:border-blue-500/50 hover:shadow-[0_20px_40px_rgba(59,130,246,0.08)]"
               >
                 {/* Image Container */}

@@ -4,9 +4,10 @@ export interface CubeArt {
   moves: string;
   imageUrl: string;
   type: string;
+  slug: string;
 }
 
-export const rawArtsData: Record<string, Omit<CubeArt, 'type'>[]> = {
+export const rawArtsData: Record<string, Omit<CubeArt, 'type' | 'slug'>[]> = {
   "2x2x2": [
     {
       "id": "2x2_1",
@@ -587,10 +588,22 @@ export const rawArtsData: Record<string, Omit<CubeArt, 'type'>[]> = {
   ]
 };
 
+function getSlug(name: string, id: string): string {
+  const cleanName = name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+  return `${cleanName}-${id}`;
+}
+
 export const cubeArts: CubeArt[] = Object.entries(rawArtsData).flatMap(([type, arts]) =>
-  arts.map(art => ({
-    ...art,
-    type,
-    imageUrl: art.imageUrl
-  }))
+  arts.map(art => {
+    const slug = getSlug(art.name, art.id);
+    return {
+      ...art,
+      type,
+      slug,
+      imageUrl: art.imageUrl
+    };
+  })
 );
