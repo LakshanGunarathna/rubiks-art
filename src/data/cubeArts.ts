@@ -319,7 +319,7 @@ export const rawArtsData: Record<string, Omit<CubeArt, 'type' | 'slug'>[]> = {
     },
     {
       "id": "3x3_48",
-      "name": "All Flags & Crests",
+      "name": "All Flags and Crests",
       "moves": "B2 U' B2 L2 U B2 U R2 B2 U' L' R' B D U' L2 F2 R'",
       "imageUrl": "/assets/cube-arts/3x3_48.png"
     }
