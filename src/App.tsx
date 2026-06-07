@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { MainLayout } from './components/layout/MainLayout';
+import { ScrollToTop } from './components/layout/ScrollToTop';
 import { Home } from './pages/Home';
 import { Loader2 } from 'lucide-react';
 
@@ -39,6 +40,7 @@ const AnimatedRoutes = () => {
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <MainLayout>
         <AnimatedRoutes />
       </MainLayout>
