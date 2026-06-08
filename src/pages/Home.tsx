@@ -243,10 +243,16 @@ export const Home: React.FC = () => {
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
             <Link 
-              to="/arts" 
+              to="/mosaic-generator" 
               className="px-8 py-3.5 rounded-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 transition-all hover:-translate-y-0.5"
             >
-              Create Puzzle Art
+              Create Mosaic Art ✨
+            </Link>
+            <Link 
+              to="/arts" 
+              className="px-8 py-3.5 rounded-2xl font-bold border border-[var(--glass-border)] bg-[var(--glass-bg)] text-[var(--text-primary)] hover:bg-[var(--glass-border)] hover:border-[var(--text-secondary)]/20 transition-all hover:-translate-y-0.5 shadow"
+            >
+              Art Gallery
             </Link>
             <a 
               href="#playgrounds" 
@@ -310,6 +316,77 @@ export const Home: React.FC = () => {
                   <FontAwesomeIcon icon={faPuzzlePiece} size="lg" />
                 </div>
               </div>
+            </div>
+          </div>
+        </Link>
+      </motion.div>
+
+      {/* 🔮 Featured Rubik's Cube Mosaic Generator Section */}
+      <motion.div variants={itemVariants} className="w-full">
+        <Link 
+          to="/mosaic-generator" 
+          className="group block relative w-full rounded-3xl p-8 lg:p-12 overflow-hidden backdrop-blur-md border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-xl hover:shadow-2xl transition-all duration-500"
+        >
+          {/* Radial accent hover backdrop */}
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 via-teal-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+          <div className="absolute right-0 top-0 w-96 h-96 rounded-full blur-3xl opacity-15 bg-gradient-to-br from-teal-500 to-emerald-500 pointer-events-none" />
+
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
+            {/* Visual representation of an image being converted */}
+            <div className="w-full lg:w-auto flex items-center justify-center order-2 lg:order-1">
+              <div className="relative p-8 rounded-3xl border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-inner group-hover:scale-105 transition-transform duration-500">
+                <div className="grid grid-cols-5 gap-1.5 w-40 h-40">
+                  {/* Mock grid representing color pixel mosaic conversion */}
+                  <div className="bg-red-500 rounded-md shadow-sm opacity-90" />
+                  <div className="bg-blue-500 rounded-md shadow-sm opacity-95" />
+                  <div className="bg-orange-500 rounded-md shadow-sm" />
+                  <div className="bg-yellow-500 rounded-md shadow-sm opacity-80" />
+                  <div className="bg-white rounded-md shadow-sm" />
+                  
+                  <div className="bg-blue-500 rounded-md shadow-sm" />
+                  <div className="bg-yellow-500 rounded-md shadow-sm opacity-90" />
+                  <div className="bg-red-500 rounded-md shadow-sm" />
+                  <div className="bg-green-500 rounded-md shadow-sm opacity-95" />
+                  <div className="bg-orange-500 rounded-md shadow-sm" />
+                  
+                  <div className="bg-white rounded-md shadow-sm opacity-95" />
+                  <div className="bg-orange-500 rounded-md shadow-sm opacity-90" />
+                  <div className="bg-blue-500 rounded-md shadow-sm" />
+                  <div className="bg-white rounded-md shadow-sm" />
+                  <div className="bg-green-500 rounded-md shadow-sm" />
+                  
+                  <div className="bg-green-500 rounded-md shadow-sm opacity-80" />
+                  <div className="bg-red-500 rounded-md shadow-sm" />
+                  <div className="bg-orange-500 rounded-md shadow-sm opacity-95" />
+                  <div className="bg-yellow-500 rounded-md shadow-sm" />
+                  <div className="bg-blue-500 rounded-md shadow-sm" />
+                  
+                  <div className="bg-yellow-500 rounded-md shadow-sm" />
+                  <div className="bg-white rounded-md shadow-sm opacity-90" />
+                  <div className="bg-green-500 rounded-md shadow-sm" />
+                  <div className="bg-red-500 rounded-md shadow-sm" />
+                  <div className="bg-orange-500 rounded-md shadow-sm opacity-95" />
+                </div>
+                {/* Floating overlay icon */}
+                <div className="absolute -bottom-4 -right-4 w-14 h-14 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shadow-lg group-hover:-rotate-12 transition-transform duration-300">
+                  <FontAwesomeIcon icon={faCubes} size="lg" />
+                </div>
+              </div>
+            </div>
+
+            <div className="flex-1 text-center lg:text-left order-1 lg:order-2">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-semibold mb-6">
+                <FontAwesomeIcon icon={faAward} /> Brand New Feature
+              </div>
+              <h2 className="text-3xl lg:text-4xl font-extrabold font-heading text-[var(--text-primary)] mb-4 leading-tight group-hover:text-emerald-500 transition-colors">
+                Personalized Rubik's Cube Mosaic Creator
+              </h2>
+              <p className="text-[var(--text-secondary)] leading-relaxed mb-6 max-w-xl text-base">
+                Upload your own photos, adjust crop dimensions and scales, and watch them render instantly into Rubik's Cube pixel arts. Explore color distribution lists, and follow the step-by-step assembly guide to build it physically.
+              </p>
+              <span className="inline-flex items-center gap-2 text-emerald-500 font-bold group-hover:gap-3 transition-all">
+                Launch Mosaic Generator Studio <FontAwesomeIcon icon={faArrowRight} />
+              </span>
             </div>
           </div>
         </Link>

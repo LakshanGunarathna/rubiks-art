@@ -9,6 +9,7 @@ import { Loader2 } from 'lucide-react';
 import { CubeView } from './pages/Cubes/CubeView';
 import { SolverView } from './pages/Solvers/SolverView';
 const PuzzleArts = lazy(() => import('./pages/PuzzleArts').then(m => ({ default: m.PuzzleArts })));
+const MosaicGenerator = lazy(() => import('./pages/MosaicGenerator').then(m => ({ default: m.MosaicGenerator })));
 
 
 const LoadingFallback = () => (
@@ -31,6 +32,7 @@ const AnimatedRoutes = () => {
           <Route path="/solvers/:type" element={<SolverView />} />
           <Route path="/arts" element={<PuzzleArts />} />
           <Route path="/arts/:artSlug" element={<PuzzleArts />} />
+          <Route path="/mosaic-generator" element={<MosaicGenerator />} />
         </Routes>
       </AnimatePresence>
     </Suspense>

@@ -114,7 +114,9 @@ const CubeContent: React.FC<Cube3DProps> = ({ size, engine, isActive, onStickerC
         size === 2 || size === 3 ? new THREE.Vector3(5, 5, 8) :
           size === 4 ? new THREE.Vector3(7, 7, 10) :
             size === 5 ? new THREE.Vector3(8, 8, 12) :
-              new THREE.Vector3(5, 5, 8);
+              size === 6 ? new THREE.Vector3(9, 9, 14) :
+                size === 7 ? new THREE.Vector3(10, 10, 16) :
+                  new THREE.Vector3(5, 5, 8);
 
       cameraAnimStateRef.current = {
         startCamPos: camera.position.clone(),
@@ -288,6 +290,8 @@ const CubeContent: React.FC<Cube3DProps> = ({ size, engine, isActive, onStickerC
         if (cubeSize === 3) return 1;
         if (cubeSize === 4) return 1.5;
         if (cubeSize === 5) return 2;
+        if (cubeSize === 6) return 2.5;
+        if (cubeSize === 7) return 3;
         return 1;
       };
 
@@ -322,12 +326,14 @@ const CubeContent: React.FC<Cube3DProps> = ({ size, engine, isActive, onStickerC
   }, [isActive, engine.isAnimating, rotateLayer, rotateWholeCube, size, isSolverMode]);
 
 
-  const fov = size === 2 ? 25 : size === 3 ? 30 : size === 4 ? 32 : size === 5 ? 33 : 30;
+  const fov = size === 2 ? 25 : size === 3 ? 30 : size === 4 ? 32 : size === 5 ? 33 : size === 6 ? 34 : size === 7 ? 35 : 30;
   const cameraPosition: [number, number, number] =
     size === 2 || size === 3 ? [5, 5, 8] :
       size === 4 ? [7, 7, 10] :
         size === 5 ? [8, 8, 12] :
-          [5, 5, 8];
+          size === 6 ? [9, 9, 14] :
+            size === 7 ? [10, 10, 16] :
+              [5, 5, 8];
 
   return (
     <>
