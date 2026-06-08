@@ -68,10 +68,10 @@ export const CubePainterPanel: React.FC<CubePainterPanelProps> = ({
       <div className="p-6 backdrop-blur-2xl rounded-3xl border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-xl transition-colors duration-300">
         <h2 className="font-semibold mb-4 text-[var(--text-primary)]">Rotate Cube</h2>
         <div className="flex gap-2">
-          <button onClick={() => rotateWholeCube?.('y', -Math.PI / 2)} className="flex-1 py-3 rounded-lg bg-white bg-opacity-10 text-[var(--text-primary)] hover:bg-opacity-20 transition-all disabled:opacity-50" disabled={!rotateWholeCube}><FontAwesomeIcon icon={faArrowLeft} /></button>
-          <button onClick={() => rotateWholeCube?.('x', -Math.PI / 2)} className="flex-1 py-3 rounded-lg bg-white bg-opacity-10 text-[var(--text-primary)] hover:bg-opacity-20 transition-all disabled:opacity-50" disabled={!rotateWholeCube}><FontAwesomeIcon icon={faArrowUp} /></button>
-          <button onClick={() => rotateWholeCube?.('x', Math.PI / 2)} className="flex-1 py-3 rounded-lg bg-white bg-opacity-10 text-[var(--text-primary)] hover:bg-opacity-20 transition-all disabled:opacity-50" disabled={!rotateWholeCube}><FontAwesomeIcon icon={faArrowDown} /></button>
-          <button onClick={() => rotateWholeCube?.('y', Math.PI / 2)} className="flex-1 py-3 rounded-lg bg-white bg-opacity-10 text-[var(--text-primary)] hover:bg-opacity-20 transition-all disabled:opacity-50" disabled={!rotateWholeCube}><FontAwesomeIcon icon={faArrowRight} /></button>
+          <button onClick={() => rotateWholeCube?.('y', -Math.PI / 2)} className="flex-1 py-3 rounded-lg bg-white bg-opacity-10 dark:bg-slate-900/60 text-[var(--text-primary)] hover:bg-opacity-20 dark:hover:bg-slate-900/80 transition-all disabled:opacity-50" disabled={!rotateWholeCube}><FontAwesomeIcon icon={faArrowLeft} /></button>
+          <button onClick={() => rotateWholeCube?.('x', -Math.PI / 2)} className="flex-1 py-3 rounded-lg bg-white bg-opacity-10 dark:bg-slate-900/60 text-[var(--text-primary)] hover:bg-opacity-20 dark:hover:bg-slate-900/80 transition-all disabled:opacity-50" disabled={!rotateWholeCube}><FontAwesomeIcon icon={faArrowUp} /></button>
+          <button onClick={() => rotateWholeCube?.('x', Math.PI / 2)} className="flex-1 py-3 rounded-lg bg-white bg-opacity-10 dark:bg-slate-900/60 text-[var(--text-primary)] hover:bg-opacity-20 dark:hover:bg-slate-900/80 transition-all disabled:opacity-50" disabled={!rotateWholeCube}><FontAwesomeIcon icon={faArrowDown} /></button>
+          <button onClick={() => rotateWholeCube?.('y', Math.PI / 2)} className="flex-1 py-3 rounded-lg bg-white bg-opacity-10 dark:bg-slate-900/60 text-[var(--text-primary)] hover:bg-opacity-20 dark:hover:bg-slate-900/80 transition-all disabled:opacity-50" disabled={!rotateWholeCube}><FontAwesomeIcon icon={faArrowRight} /></button>
         </div>
       </div>
 
