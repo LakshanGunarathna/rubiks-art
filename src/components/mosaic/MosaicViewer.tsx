@@ -78,7 +78,7 @@ export const MosaicViewer: React.FC<MosaicViewerProps> = ({
   const wStickers = cubesWide * cubeSize;
   const hStickers = cubesHigh * cubeSize;
 
-  // Compute final mosaic indices based on adjustments
+  // Compute final mosaic indices based on adjustments using default PALETTE
   const currentIndices = useMemo(() => {
     return generateMosaicIndices(
       initialParams.methodId,
@@ -89,9 +89,9 @@ export const MosaicViewer: React.FC<MosaicViewerProps> = ({
       brightness,
       scatter,
       position,
-      activePalette
+      PALETTE
     );
-  }, [initialParams.methodId, rawCroppedData, wStickers, hStickers, contrast, brightness, scatter, position, activePalette]);
+  }, [initialParams.methodId, rawCroppedData, wStickers, hStickers, contrast, brightness, scatter, position]);
 
   // Render mosaic on canvas
   const drawMosaic = useCallback(() => {
@@ -144,19 +144,42 @@ export const MosaicViewer: React.FC<MosaicViewerProps> = ({
     const totalStickers = wStickers * hStickers;
     const totalCubes = cubesWide * cubesHigh;
     
-    const counts = new Array(activePalette.length).fill(0);
+    // Aggregated counts for target customized colors (used in stats cards / PDF cover)
+    const aggregatedCounts: Record<string, number> = {
+      'White': 0, 'Yellow': 0, 'Orange': 0, 'Red': 0, 'Green': 0, 'Blue': 0
+    };
+    // Counts per region/slot (used in Custom Palette customizer panel)
+    const regionCounts = new Array(PALETTE.length).fill(0);
+
     for (let i = 0; i < totalStickers; i++) {
-      counts[currentIndices[i]]++;
+      const regionIdx = currentIndices[i];
+      regionCounts[regionIdx]++;
+      
+      const targetColor = activePalette[regionIdx];
+      if (aggregatedCounts[targetColor.name] !== undefined) {
+        aggregatedCounts[targetColor.name]++;
+      }
     }
     
-    const colorStats = activePalette.map((color, index) => {
-      const stickerCount = counts[index];
+    // Aggregate by standard colors
+    const colorStats = PALETTE.map((stdColor, index) => {
+      const stickerCount = aggregatedCounts[stdColor.name] || 0;
       const percentage = totalStickers > 0 ? ((stickerCount / totalStickers) * 100).toFixed(1) : '0';
       return {
-        ...color,
+        ...stdColor,
         count: stickerCount,
         percentage,
         originalIndex: index
+      };
+    });
+
+    // Region stats for customizer list (maintains distinct regions even with duplicate activePalette colors)
+    const regionStats = PALETTE.map((stdColor, index) => {
+      const count = regionCounts[index];
+      return {
+        index,
+        count,
+        color: activePalette[index]
       };
     });
 
@@ -166,6 +189,7 @@ export const MosaicViewer: React.FC<MosaicViewerProps> = ({
       totalStickers,
       totalCubes,
       colorStats,
+      regionStats,
       estimatedCost: cubeCost.toFixed(2)
     };
   }, [currentIndices, wStickers, hStickers, cubesWide, cubesHigh, activePalette]);
@@ -415,34 +439,34 @@ export const MosaicViewer: React.FC<MosaicViewerProps> = ({
                 </div>
                 
                 <div className="flex flex-col gap-2">
-                  {statistics.colorStats
-                    .filter(color => color.count > 0)
-                    .map((color) => {
-                      const paletteIdx = color.originalIndex;
-                      const originalColorDef = PALETTE[paletteIdx];
+                  {statistics.regionStats
+                    .filter(region => region.count > 0)
+                    .map((region) => {
+                      const paletteIdx = region.index;
+                      const currentColor = region.color;
                       return (
                         <div 
-                          key={color.name + '-' + paletteIdx}
+                          key={'region-' + paletteIdx}
                           className="flex items-center justify-between p-2 rounded-xl border border-slate-100 dark:border-slate-800 bg-white/40 dark:bg-slate-900/30 gap-3 hover:border-blue-500/30 transition-all text-xs"
                         >
                           <div className="flex items-center gap-2.5">
                             <div 
                               className="w-5 h-5 rounded-md border border-black/10 shadow-xs flex-shrink-0 flex items-center justify-center font-bold text-[9px]"
                               style={{ 
-                                backgroundColor: color.hex, 
-                                color: color.name === 'White' || color.name === 'Yellow' ? '#0f172a' : '#ffffff' 
+                                backgroundColor: currentColor.hex, 
+                                color: currentColor.name === 'White' || currentColor.name === 'Yellow' ? '#0f172a' : '#ffffff' 
                               }}
                             >
-                              {color.code}
+                              {currentColor.code}
                             </div>
                             <span className="font-bold text-[var(--text-primary)]">
-                              Slot {paletteIdx + 1} ({originalColorDef.name})
+                              Region {paletteIdx + 1}
                             </span>
                           </div>
                           
                           <div className="flex items-center gap-2">
                             <select
-                              value={color.name}
+                              value={currentColor.name}
                               onChange={(e) => {
                                 const selectedStdColor = PALETTE.find(c => c.name === e.target.value);
                                 if (selectedStdColor) {
@@ -461,13 +485,34 @@ export const MosaicViewer: React.FC<MosaicViewerProps> = ({
                               ))}
                             </select>
                             
-                            <span className="font-mono text-[var(--text-secondary)] font-bold min-w-[50px] text-right">
-                              {color.count} px
-                            </span>
                           </div>
                         </div>
                       );
                     })}
+                </div>
+              </div>
+
+              {/* Final color distribution summary below regions list */}
+              <div className="flex flex-col gap-2 border-t border-[var(--nav-border)] pt-4 mt-4">
+                <span className="text-xs font-bold text-[var(--text-primary)]">Total Color Counts:</span>
+                <div className="grid grid-cols-2 gap-2">
+                  {statistics.colorStats
+                    .filter(color => color.count > 0)
+                    .map((color) => (
+                      <div
+                        key={'summed-' + color.name}
+                        className="flex items-center justify-between p-2 rounded-xl border border-slate-100 dark:border-slate-800 bg-white/40 dark:bg-slate-900/30 text-xs gap-2"
+                      >
+                        <div className="flex items-center gap-1.5">
+                          <div
+                            className="w-3.5 h-3.5 rounded border border-black/10 flex-shrink-0"
+                            style={{ backgroundColor: color.hex }}
+                          />
+                          <span className="font-semibold text-[var(--text-secondary)]">{color.name}</span>
+                        </div>
+                        <span className="font-mono font-bold text-[var(--text-primary)]">{color.count} px</span>
+                      </div>
+                    ))}
                 </div>
               </div>
             </div>

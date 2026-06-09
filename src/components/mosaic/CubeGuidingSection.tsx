@@ -192,9 +192,9 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
                     <div className="text-[9px] text-[var(--text-secondary)]">({cubesWide}W × {cubesHigh}H)</div>
                   </div>
                   <div className="p-4 rounded-2xl border border-[var(--nav-border)] bg-slate-50 dark:bg-slate-900/40 text-center">
-                    <div className="text-[10px] font-semibold text-[var(--text-secondary)] uppercase">Est. Cost</div>
-                    <div className="text-xl font-extrabold text-emerald-500 mt-0.5">${statistics.estimatedCost}</div>
-                    <div className="text-[9px] text-[var(--text-secondary)]">($1.50/cube average)</div>
+                    <div className="text-[10px] font-semibold text-[var(--text-secondary)] uppercase">Total Pixels</div>
+                    <div className="text-xl font-extrabold text-emerald-500 mt-0.5">{statistics.totalStickers}</div>
+                    <div className="text-[9px] text-[var(--text-secondary)]">({cubesWide * cubeSize}W × {cubesHigh * cubeSize}H stickers)</div>
                   </div>
                 </div>
 

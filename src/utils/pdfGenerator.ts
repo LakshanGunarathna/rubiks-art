@@ -212,7 +212,7 @@ export const generatePDFGuide = async ({
   doc.setTextColor(100, 116, 139);
   doc.text(`(${cubesWide}W x ${cubesHigh}H)`, 15 + 29, 148, { align: 'center' });
 
-  // EST. COST Card
+  // TOTAL PIXELS Card
   doc.setFillColor(248, 250, 252);
   doc.setDrawColor(226, 232, 240);
   doc.setLineWidth(0.3);
@@ -221,17 +221,17 @@ export const generatePDFGuide = async ({
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(7.5);
   doc.setTextColor(100, 116, 139);
-  doc.text("EST. COST", 77 + 29, 132, { align: 'center' });
+  doc.text("TOTAL PIXELS", 77 + 29, 132, { align: 'center' });
 
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(18);
   doc.setTextColor(22, 163, 74); // green-600
-  doc.text(`$${statistics.estimatedCost}`, 77 + 29, 142, { align: 'center' });
+  doc.text(statistics.totalStickers.toString(), 77 + 29, 142, { align: 'center' });
 
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(7.5);
   doc.setTextColor(100, 116, 139);
-  doc.text("($1.50 / cube average)", 77 + 29, 148, { align: 'center' });
+  doc.text(`(${wStickers}W x ${hStickers}H stickers)`, 77 + 29, 148, { align: 'center' });
 
   // CONFIGURATION Card
   doc.setFillColor(248, 250, 252);

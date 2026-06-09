@@ -102,49 +102,7 @@ export const MosaicGenerator: React.FC = () => {
     }
   };
 
-  // Generate and load a beautiful canvas-based default image
-  const handleLoadSample = () => {
-    const canvas = document.createElement('canvas');
-    canvas.width = 600;
-    canvas.height = 600;
-    const ctx = canvas.getContext('2d');
-    if (ctx) {
-      const grad = ctx.createRadialGradient(300, 300, 50, 300, 300, 300);
-      grad.addColorStop(0, '#f43f5e');
-      grad.addColorStop(0.2, '#ec4899');
-      grad.addColorStop(0.4, '#3b82f6');
-      grad.addColorStop(0.6, '#eab308');
-      grad.addColorStop(0.8, '#10b981');
-      grad.addColorStop(1, '#6366f1');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, 600, 600);
 
-      ctx.strokeStyle = '#ffffff';
-      ctx.lineWidth = 12;
-      ctx.beginPath();
-      ctx.arc(300, 300, 180, 0, Math.PI * 2);
-      ctx.stroke();
-
-      ctx.fillStyle = '#ffffff';
-      ctx.beginPath();
-      ctx.moveTo(300, 190);
-      ctx.lineTo(395, 355);
-      ctx.lineTo(205, 355);
-      ctx.closePath();
-      ctx.fill();
-
-      ctx.fillStyle = '#0f172a';
-      ctx.beginPath();
-      ctx.arc(300, 300, 50, 0, Math.PI * 2);
-      ctx.fill();
-
-      setImageSrc(canvas.toDataURL());
-      setZoom(1.2);
-      setPanX(0);
-      setPanY(0);
-      setStep(2); // Go to adjustment step
-    }
-  };
 
   // Callback when first-choice style is finalized in fine-tuning
   const handleSelectMethod = (methodName: string, _indices: Uint8Array, params: any) => {
