@@ -174,7 +174,7 @@ export const MosaicViewer: React.FC<MosaicViewerProps> = ({
     });
 
     // Region stats for customizer list (maintains distinct regions even with duplicate activePalette colors)
-    const regionStats = PALETTE.map((stdColor, index) => {
+    const regionStats = PALETTE.map((_, index) => {
       const count = regionCounts[index];
       return {
         index,

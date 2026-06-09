@@ -1,6 +1,7 @@
 import { jsPDF } from 'jspdf';
 import type { PaletteColor } from './mosaicAlgorithms';
 import logoPng from '../assets/Logo_50x50.png';
+import mainLogoPng from '../assets/Logo.png';
 
 interface PDFGeneratorOptions {
   methodName: string;
@@ -45,19 +46,29 @@ export const generatePDFGuide = async ({
   const numBlocksWide = Math.ceil(cubesWide / 3);
   const numBlocksHigh = Math.ceil(cubesHigh / 3);
   const blockStickersSize = 3 * cubeSize;
-  const totalPages = 2 + numBlocksWide * numBlocksHigh;
+  const totalPages = 3 + numBlocksWide * numBlocksHigh;
 
-  // Load the logo image asynchronously
+  // Load the logo images asynchronously
   let logoImg: HTMLImageElement | null = null;
+  let mainLogoImg: HTMLImageElement | null = null;
   try {
-    logoImg = await new Promise<HTMLImageElement>((resolve, reject) => {
+    const p1 = new Promise<HTMLImageElement>((resolve, reject) => {
       const img = new Image();
       img.src = logoPng;
       img.onload = () => resolve(img);
       img.onerror = (err) => reject(err);
     });
+    const p2 = new Promise<HTMLImageElement>((resolve, reject) => {
+      const img = new Image();
+      img.src = mainLogoPng;
+      img.onload = () => resolve(img);
+      img.onerror = (err) => reject(err);
+    });
+    const results = await Promise.allSettled([p1, p2]);
+    if (results[0].status === 'fulfilled') logoImg = results[0].value;
+    if (results[1].status === 'fulfilled') mainLogoImg = results[1].value;
   } catch (e) {
-    console.warn("Failed to load footer logo image:", e);
+    console.warn("Failed to preload footer logos:", e);
   }
 
   // Helper function to draw consistent footer on every page
@@ -113,8 +124,74 @@ export const generatePDFGuide = async ({
   };
 
   // ==========================================
-  // --- Page 1: Premium Cover Page ---
+  // --- Page 1: Brand Cover Page ---
   // ==========================================
+  doc.setFillColor(255, 255, 255);
+  doc.rect(0, 0, pageWidth, pageHeight, 'F');
+
+  // Title: Rubiks' Art (Large size)
+  doc.setTextColor(15, 23, 42); // slate-900
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(38);
+  doc.text("Rubiks' Art", pageWidth / 2, 28, { align: 'center' });
+
+  // Subtitle/Tagline
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(12);
+  doc.setTextColor(71, 85, 105); // slate-600
+  doc.text("Premium Rubik's Cube Mosaic Creator", pageWidth / 2, 36, { align: 'center' });
+
+  // Large site logo in middle
+  const logoW = 75;
+  const logoH = 75;
+  const logoX = (pageWidth - logoW) / 2;
+  const logoY = 44;
+  if (mainLogoImg) {
+    try {
+      doc.addImage(mainLogoImg, 'PNG', logoX, logoY, logoW, logoH);
+    } catch (err) {
+      console.warn("Failed drawing main logo image:", err);
+    }
+  } else {
+    // Fallback outline box if logo failed loading
+    doc.setDrawColor(226, 232, 240);
+    doc.setLineWidth(0.5);
+    doc.rect(logoX, logoY, logoW, logoH, 'D');
+  }
+
+  // Link to site
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(11);
+  doc.setTextColor(37, 99, 235); // blue-600
+  doc.text("Start Designing at www.rubiks-art.com", pageWidth / 2, 136, { align: 'center' });
+  doc.link(pageWidth / 2 - 40, 132, 80, 6, { url: 'https://www.rubiks-art.com/' });
+
+  // Small description
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9.5);
+  doc.setTextColor(100, 116, 139); // slate-500
+  const descriptionText = "Rubiks' Art is an innovative online studio that transforms your favorite photos and portraits into realistic Rubik's Cube mosaic pixel art designs. This instruction booklet provides a detailed block-by-block building layout to guide you through the process of constructing your physical mosaic art step-by-step using standard Rubik's Cubes.";
+  doc.text(descriptionText, pageWidth / 2, 150, { align: 'center', maxWidth: 180 });
+
+  // Copyright and Disclaimer Section in footer
+  doc.setDrawColor(226, 232, 240); // slate-200
+  doc.setLineWidth(0.2);
+  doc.line(15, 175, 282, 175);
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8);
+  doc.setTextColor(100, 116, 139); // slate-500
+  doc.text("© 2026 Rubiks' Art. All rights reserved.  |  https://www.rubiks-art.com/", pageWidth / 2, 181, { align: 'center' });
+
+  doc.setFontSize(6.5);
+  doc.setTextColor(148, 163, 184); // slate-400
+  const disclaimerText = "Disclaimer: Rubiks' Art is an independent project and is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Rubik's Brand Ltd. or any of its subsidiaries or its affiliates. The official Rubik's Cube website can be found at https://www.rubiks.com.";
+  doc.text(disclaimerText, pageWidth / 2, 186, { align: 'center', maxWidth: 240 });
+
+  // ==========================================
+  // --- Page 2: Block Map Cover Specs Page ---
+  // ==========================================
+  doc.addPage();
   doc.setFillColor(255, 255, 255);
   doc.rect(0, 0, pageWidth, pageHeight, 'F');
 
@@ -336,10 +413,10 @@ export const generatePDFGuide = async ({
     }
   });
 
-  drawFooter(1, "Cover Page - Instructions & Specifications");
+  drawFooter(2, "Cover Page - Instructions & Specifications");
 
   // ==========================================
-  // --- Page 2: Block Map Layout Overview ---
+  // --- Page 3: Block Map Layout Overview ---
   // ==========================================
   doc.addPage();
 
@@ -448,17 +525,17 @@ export const generatePDFGuide = async ({
     doc.text(label, offsetX + renderW + 5, cy + 2, { align: 'center' });
   }
 
-  drawFooter(2, "Overview Block Grid Map - Layout Grid");
+  drawFooter(3, "Overview Block Grid Map - Layout Grid");
 
   // ==========================================
-  // --- Pages 3+: Page-per-block detailed instructions ---
+  // --- Pages 4+: Page-per-block detailed instructions ---
   // ==========================================
   for (let by = 0; by < numBlocksHigh; by++) {
     for (let bx = 0; bx < numBlocksWide; bx++) {
       doc.addPage();
 
       const blockLabel = String.fromCharCode(65 + bx) + (by + 1);
-      const pageIndex = 3 + by * numBlocksWide + bx;
+      const pageIndex = 4 + by * numBlocksWide + bx;
 
       // Page header bar
       doc.setFillColor(15, 23, 42);
