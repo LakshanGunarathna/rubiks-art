@@ -25,6 +25,7 @@ interface CubeGuidingSectionProps {
     estimatedCost: string;
     colorStats: Array<PaletteColor & { count: number; percentage: string }>;
   };
+  imageSrc: string;
 }
 
 export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
@@ -35,9 +36,10 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
   cubeSize,
   currentIndices,
   palette,
-  statistics
+  statistics,
+  imageSrc
 }) => {
-  const [activeTab, setActiveTab] = useState<'preview' | 'stats' | 'guide'>('preview');
+  const [activeTab, setActiveTab] = useState<'preview' | 'stats' | 'guide'>('guide');
   const [selectedCube, setSelectedCube] = useState<{ row: number; col: number } | null>({ row: cubesHigh - 1, col: 0 });
   const [isExportingPDF, setIsExportingPDF] = useState<boolean>(false);
 
@@ -62,28 +64,28 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
   const handlePrevCube = () => {
     if (!selectedCube) return;
     const { row, col } = selectedCube;
-    if (row < cubesHigh - 1) {
-      setSelectedCube({ row: row + 1, col });
-    } else if (col > 0) {
-      setSelectedCube({ row: 0, col: col - 1 });
+    if (col > 0) {
+      setSelectedCube({ row, col: col - 1 });
+    } else if (row < cubesHigh - 1) {
+      setSelectedCube({ row: row + 1, col: cubesWide - 1 });
     }
   };
 
   const handleNextCube = () => {
     if (!selectedCube) return;
     const { row, col } = selectedCube;
-    if (row > 0) {
-      setSelectedCube({ row: row - 1, col });
-    } else if (col < cubesWide - 1) {
-      setSelectedCube({ row: cubesHigh - 1, col: col + 1 });
+    if (col < cubesWide - 1) {
+      setSelectedCube({ row, col: col + 1 });
+    } else if (row > 0) {
+      setSelectedCube({ row: row - 1, col: 0 });
     }
   };
 
   const triggerPDFExport = () => {
     setIsExportingPDF(true);
-    setTimeout(() => {
+    setTimeout(async () => {
       try {
-        generatePDFGuide({
+        await generatePDFGuide({
           methodName,
           cubeType,
           cubesWide,
@@ -91,7 +93,8 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
           cubeSize,
           currentIndices,
           palette,
-          statistics
+          statistics,
+          imageSrc
         });
       } catch (err) {
         console.error("PDF Export failed:", err);
@@ -109,11 +112,11 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
         {/* Tab Links */}
         <div className="flex border-b border-[var(--nav-border)] bg-slate-100/50 dark:bg-slate-950/20">
           <button
-            onClick={() => setActiveTab('preview')}
-            className={`flex-1 py-4 px-3 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 border-b-2 transition-colors ${activeTab === 'preview' ? 'border-blue-500 text-blue-500 bg-white/40 dark:bg-slate-900/40' : 'border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
+            onClick={() => setActiveTab('guide')}
+            className={`flex-1 py-4 px-3 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 border-b-2 transition-colors ${activeTab === 'guide' ? 'border-blue-500 text-blue-500 bg-white/40 dark:bg-slate-900/40' : 'border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
           >
-            <Printer className="w-3.5 h-3.5" />
-            PDF & Print Guide
+            <BookOpen className="w-3.5 h-3.5" />
+            Cube Builder
           </button>
           <button
             onClick={() => setActiveTab('stats')}
@@ -123,11 +126,11 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
             Parts Stats
           </button>
           <button
-            onClick={() => setActiveTab('guide')}
-            className={`flex-1 py-4 px-3 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 border-b-2 transition-colors ${activeTab === 'guide' ? 'border-blue-500 text-blue-500 bg-white/40 dark:bg-slate-900/40' : 'border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
+            onClick={() => setActiveTab('preview')}
+            className={`flex-1 py-4 px-3 text-xs sm:text-sm font-semibold flex items-center justify-center gap-2 border-b-2 transition-colors ${activeTab === 'preview' ? 'border-blue-500 text-blue-500 bg-white/40 dark:bg-slate-900/40' : 'border-transparent text-[var(--text-secondary)] hover:text-[var(--text-primary)]'}`}
           >
-            <BookOpen className="w-3.5 h-3.5" />
-            Cube Builder
+            <Printer className="w-3.5 h-3.5" />
+            PDF & Print Guide
           </button>
         </div>
 
@@ -197,7 +200,7 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
 
                 <div className="flex flex-col gap-2">
                   <h3 className="text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider">Required Sticker count</h3>
-                  <div className="flex flex-col gap-2.5 max-h-[220px] overflow-y-auto pr-1">
+                  <div className="flex flex-col gap-2.5">
                     {statistics.colorStats.map((color) => (
                       <div 
                         key={color.name}
@@ -236,10 +239,10 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="flex flex-col gap-5"
+                className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start"
               >
-                {/* Cube selector grid */}
-                <div className="flex flex-col gap-1.5">
+                {/* Left side: Select Cube Coordinate */}
+                <div className="flex flex-col gap-3">
                   <div className="text-xs font-bold text-[var(--text-primary)] flex items-center justify-between">
                     <span>Select Cube Coordinate:</span>
                     {selectedCube && (
@@ -249,7 +252,7 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
                     )}
                   </div>
                   
-                  <div className="border border-slate-200 dark:border-slate-800 p-2 rounded-2xl bg-slate-50/50 dark:bg-slate-900/30 overflow-auto max-h-[120px] shadow-inner">
+                  <div className="border border-slate-200 dark:border-slate-800 p-3 rounded-2xl bg-slate-50/50 dark:bg-slate-900/30 overflow-auto shadow-inner flex items-center justify-center w-full">
                     <div 
                       className="grid gap-0.5 mx-auto"
                       style={{
@@ -260,7 +263,7 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
                       {Array.from({ length: cubesHigh }).map((_, r) => (
                         Array.from({ length: cubesWide }).map((_, c) => {
                           const isSelected = selectedCube && selectedCube.row === r && selectedCube.col === c;
-                          const cubeNumber = c * cubesHigh + (cubesHigh - 1 - r) + 1;
+                          const cubeNumber = (cubesHigh - 1 - r) * cubesWide + c + 1;
                           return (
                             <button
                               key={`${r}-${c}`}
@@ -276,7 +279,7 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
                   </div>
                 </div>
 
-                {/* Zoomed Selected Cube Instructions */}
+                {/* Right side: Zoomed Selected Cube Instructions / Cube Details */}
                 {selectedCube && selectedCubeStickers && (
                   <div className="flex flex-col gap-4 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/40 dark:bg-slate-900/30">
                     <div className="flex items-center justify-center">
@@ -338,7 +341,7 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
                           Prev
                         </button>
                         <span className="text-[10px] font-bold text-[var(--text-secondary)]">
-                          Cube {selectedCube.col * cubesHigh + (cubesHigh - 1 - selectedCube.row) + 1} / {cubesWide * cubesHigh}
+                          Cube {(cubesHigh - 1 - selectedCube.row) * cubesWide + selectedCube.col + 1} / {cubesWide * cubesHigh}
                         </span>
                         <button
                           type="button"

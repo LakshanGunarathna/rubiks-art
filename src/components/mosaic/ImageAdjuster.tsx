@@ -20,7 +20,7 @@ interface ImageAdjusterProps {
   setShowCubeGrid: (g: boolean) => void;
   showStickerGrid: boolean;
   setShowStickerGrid: (g: boolean) => void;
-  onGenerate: (data: Uint8ClampedArray) => void;
+  onGenerate: (data: Uint8ClampedArray, croppedImageSrc: string) => void;
   onBack: () => void;
   viewportDim: { width: number; height: number };
   cubeSize: number;
@@ -248,7 +248,46 @@ export const ImageAdjuster: React.FC<ImageAdjusterProps> = ({
                 ctx.restore();
 
                 const rawData = ctx.getImageData(0, 0, wStickers, hStickers).data;
-                onGenerate(rawData);
+
+                // High-resolution cropped image generation for PDF (original cropped section)
+                const maxStickers = Math.max(wStickers, hStickers);
+                const K = Math.max(1, Math.ceil(1500 / maxStickers));
+                const highResW = wStickers * K;
+                const highResH = hStickers * K;
+
+                const highResCanvas = document.createElement('canvas');
+                highResCanvas.width = highResW;
+                highResCanvas.height = highResH;
+                const hrCtx = highResCanvas.getContext('2d');
+                let croppedImageBase64 = '';
+
+                if (hrCtx) {
+                  let drawW_hr, drawH_hr;
+                  if (imgRatio > mosaicRatio) {
+                    drawH_hr = highResH;
+                    drawW_hr = highResH * imgRatio;
+                  } else {
+                    drawW_hr = highResW;
+                    drawH_hr = highResW / imgRatio;
+                  }
+
+                  const ratioX_hr = highResW / viewportDim.width;
+                  const ratioY_hr = highResH / viewportDim.height;
+
+                  hrCtx.clearRect(0, 0, highResW, highResH);
+                  hrCtx.save();
+                  hrCtx.translate(highResW / 2 + panX * ratioX_hr, highResH / 2 + panY * ratioY_hr);
+                  hrCtx.scale(zoom, zoom);
+                  hrCtx.imageSmoothingEnabled = true;
+                  hrCtx.imageSmoothingQuality = 'high';
+                  hrCtx.drawImage(img, -drawW_hr / 2, -drawH_hr / 2, drawW_hr, drawH_hr);
+                  hrCtx.restore();
+                  croppedImageBase64 = highResCanvas.toDataURL('image/jpeg', 0.85);
+                } else {
+                  croppedImageBase64 = offscreen.toDataURL('image/jpeg', 0.85);
+                }
+
+                onGenerate(rawData, croppedImageBase64);
               }}
               className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2 cursor-pointer"
             >

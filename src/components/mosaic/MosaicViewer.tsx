@@ -25,6 +25,7 @@ interface MosaicViewerProps {
   onBackToAdjust: () => void;
   onBackToSelect: () => void;
   PALETTE: PaletteColor[];
+  imageSrc: string;
 }
 
 export const MosaicViewer: React.FC<MosaicViewerProps> = ({
@@ -41,7 +42,8 @@ export const MosaicViewer: React.FC<MosaicViewerProps> = ({
   setShowStickerGrid,
   onBackToAdjust,
   onBackToSelect,
-  PALETTE
+  PALETTE,
+  imageSrc
 }) => {
   const [isExportingPDF, setIsExportingPDF] = useState<boolean>(false);
   const [activePalette, setActivePalette] = useState<PaletteColor[]>(PALETTE);
@@ -183,9 +185,9 @@ export const MosaicViewer: React.FC<MosaicViewerProps> = ({
   // 📄 Exporter function: Generates landscape guide PDF book
   const handleDownloadPDF = () => {
     setIsExportingPDF(true);
-    setTimeout(() => {
+    setTimeout(async () => {
       try {
-        generatePDFGuide({
+        await generatePDFGuide({
           methodName,
           cubeType,
           cubesWide,
@@ -193,7 +195,8 @@ export const MosaicViewer: React.FC<MosaicViewerProps> = ({
           cubeSize,
           currentIndices,
           palette: activePalette,
-          statistics
+          statistics,
+          imageSrc
         });
       } catch (err) {
         console.error("Failed compiling PDF:", err);
@@ -486,6 +489,7 @@ export const MosaicViewer: React.FC<MosaicViewerProps> = ({
         currentIndices={currentIndices}
         palette={activePalette}
         statistics={statistics}
+        imageSrc={imageSrc}
       />
     </motion.div>
   );

@@ -40,6 +40,7 @@ export const MosaicGenerator: React.FC = () => {
 
   // Crop & image states
   const [imageSrc, setImageSrc] = useState<string>('');
+  const [croppedImageSrc, setCroppedImageSrc] = useState<string>('');
   const [zoom, setZoom] = useState<number>(1.2);
   const [panX, setPanX] = useState<number>(0);
   const [panY, setPanY] = useState<number>(0);
@@ -229,12 +230,14 @@ export const MosaicGenerator: React.FC = () => {
               setShowCubeGrid={setShowCubeGrid}
               showStickerGrid={showStickerGrid}
               setShowStickerGrid={setShowStickerGrid}
-              onGenerate={(rawData) => {
+              onGenerate={(rawData, croppedBase64) => {
                 setRawCroppedData(rawData);
+                setCroppedImageSrc(croppedBase64);
                 setStep(3); // Go to selection step
               }}
               onBack={() => {
                 setImageSrc('');
+                setCroppedImageSrc('');
                 setStep(1);
               }}
               viewportDim={viewportDim}
@@ -272,6 +275,7 @@ export const MosaicGenerator: React.FC = () => {
               onBackToAdjust={() => setStep(2)}
               onBackToSelect={() => setStep(3)}
               PALETTE={PALETTE}
+              imageSrc={croppedImageSrc || imageSrc}
             />
           )}
         </AnimatePresence>
