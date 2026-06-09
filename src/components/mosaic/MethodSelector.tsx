@@ -248,11 +248,11 @@ const VariationCard: React.FC<VariationCardProps> = ({
   }
 
   return (
-    <div 
+    <div
       onClick={() => computedIndices && onClick(computedIndices)}
       className="flex flex-col items-center gap-2 p-2 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/30 hover:border-blue-500 hover:bg-blue-500/5 hover:shadow-md cursor-pointer transition-all flex-shrink-0"
     >
-      <div 
+      <div
         className="flex items-center justify-center overflow-hidden rounded-xl bg-transparent p-0"
         style={{ width: `${Math.round(containerWidth)}px`, height: `${Math.round(containerHeight)}px` }}
       >

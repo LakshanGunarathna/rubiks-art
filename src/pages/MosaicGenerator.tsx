@@ -206,7 +206,6 @@ export const MosaicGenerator: React.FC = () => {
             <ImageUploader
               key="uploader"
               onImageUpload={handleImageUpload}
-              onLoadSample={handleLoadSample}
             />
           )}
 

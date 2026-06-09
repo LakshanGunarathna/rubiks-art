@@ -1,13 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Upload, RotateCcw, Sparkles } from 'lucide-react';
+import { Upload, Sparkles } from 'lucide-react';
 
 interface ImageUploaderProps {
   onImageUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onLoadSample: () => void;
 }
 
-export const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUpload, onLoadSample }) => {
+export const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUpload }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
@@ -27,7 +26,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUpload, onL
           </p>
         </div>
 
-        <div className="w-full flex flex-col sm:flex-row gap-4 mt-2">
+        <div className="w-full mt-2">
           <input
             type="file"
             accept="image/*"
@@ -37,18 +36,11 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUpload, onL
           />
           <label
             htmlFor="mosaic-upload-input"
-            className="flex-1 flex items-center justify-center gap-3 border-2 border-dashed border-slate-300 dark:border-slate-800 hover:border-blue-500 rounded-2xl py-4 px-6 cursor-pointer bg-slate-50/50 dark:bg-slate-900/30 hover:bg-blue-500/5 transition-all text-base font-bold text-[var(--text-primary)]"
+            className="w-full flex items-center justify-center gap-3 border-2 border-dashed border-slate-300 dark:border-slate-800 hover:border-blue-500 rounded-2xl py-4 px-6 cursor-pointer bg-slate-50/50 dark:bg-slate-900/30 hover:bg-blue-500/5 transition-all text-base font-bold text-[var(--text-primary)]"
           >
             <Upload className="w-5 h-5 text-blue-500" />
             Choose a File
           </label>
-          <button
-            onClick={onLoadSample}
-            className="flex-1 flex items-center justify-center gap-3 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 rounded-2xl py-4 px-6 bg-slate-50/30 dark:bg-slate-950/20 hover:bg-slate-50/70 dark:hover:bg-slate-900/30 transition-all text-base font-bold text-[var(--text-primary)] cursor-pointer"
-          >
-            <RotateCcw className="w-5 h-5 text-slate-500" />
-            Use Sample Art
-          </button>
         </div>
       </div>
 

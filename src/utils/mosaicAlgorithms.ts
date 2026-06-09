@@ -10,22 +10,22 @@ export interface PaletteColor {
 export const applyContrastBrightness = (data: Uint8ClampedArray, contrast: number, brightness: number) => {
   const adjusted = new Uint8ClampedArray(data.length);
   const factor = (259 * (contrast + 255)) / (255 * (259 - contrast));
-  
+
   for (let i = 0; i < data.length; i += 4) {
     let r = data[i] + brightness;
-    let g = data[i+1] + brightness;
-    let b = data[i+2] + brightness;
-    
+    let g = data[i + 1] + brightness;
+    let b = data[i + 2] + brightness;
+
     if (contrast !== 0) {
       r = factor * (r - 128) + 128;
       g = factor * (g - 128) + 128;
       b = factor * (b - 128) + 128;
     }
-    
+
     adjusted[i] = Math.max(0, Math.min(255, r));
-    adjusted[i+1] = Math.max(0, Math.min(255, g));
-    adjusted[i+2] = Math.max(0, Math.min(255, b));
-    adjusted[i+3] = data[i+3];
+    adjusted[i + 1] = Math.max(0, Math.min(255, g));
+    adjusted[i + 2] = Math.max(0, Math.min(255, b));
+    adjusted[i + 3] = data[i + 3];
   }
   return adjusted;
 };
@@ -53,7 +53,7 @@ export const getClosestColorIndex = (
 ): number => {
   let minDistance = Infinity;
   let closestIndex = 0;
-  
+
   for (let i = 0; i < palette.length; i++) {
     if (filter && !filter(palette[i])) continue;
     const p = palette[i].rgb;
@@ -61,9 +61,9 @@ export const getClosestColorIndex = (
     const dg = g - p[1];
     const db = b - p[2];
     const rMean = (r + p[0]) / 2;
-    
+
     const dist = (2 + rMean / 256) * dr * dr + 4 * dg * dg + (2 + (255 - rMean) / 256) * db * db;
-    
+
     if (dist < minDistance) {
       minDistance = dist;
       closestIndex = i;
@@ -90,7 +90,7 @@ export function generateMosaicIndices(
   if (methodId === 'gradient') {
     const resultIndices = new Uint8Array(count);
     const ranges = createUniformRange(4, scatter, position);
-    
+
     const gradColors = [
       palette[5], // Blue
       palette[3], // Red
