@@ -51,7 +51,7 @@ const CubePlaygroundCard: React.FC<CubeCardProps> = ({ title, subtitle, perm, ta
     <Link to={path} className="group block h-full relative rounded-3xl p-6 backdrop-blur-md border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden">
       {/* Decorative colored glow on hover */}
       <div className={`absolute -right-16 -top-16 w-32 h-32 rounded-full blur-3xl opacity-0 group-hover:opacity-25 transition-opacity duration-500 bg-gradient-to-br ${accentClass}`} />
-      
+
       <div className="flex justify-between items-start mb-6">
         <div className={`w-12 h-12 rounded-2xl flex items-center justify-center bg-gradient-to-br ${accentClass} text-white shadow-md transition-transform duration-300 group-hover:scale-110`}>
           <FontAwesomeIcon icon={icon} size="lg" />
@@ -67,7 +67,7 @@ const CubePlaygroundCard: React.FC<CubeCardProps> = ({ title, subtitle, perm, ta
       <p className="text-sm mb-4 text-[var(--text-secondary)] leading-relaxed flex-grow">
         {subtitle}
       </p>
-      
+
       <div className="pt-4 border-t border-[var(--nav-border)] flex justify-between items-center text-xs mt-auto">
         <span className="text-[var(--text-secondary)] font-medium">Permutations: <span className="font-semibold text-[var(--text-primary)]">{perm}</span></span>
         <span className="text-blue-500 font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
@@ -83,7 +83,7 @@ const CubeSolverCard: React.FC<CubeCardProps> = ({ title, subtitle, tag, path, a
     <Link to={path} className="group block h-full relative rounded-3xl p-6 backdrop-blur-md border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 overflow-hidden">
       {/* Dynamic hover overlay */}
       <div className={`absolute -left-16 -bottom-16 w-32 h-32 rounded-full blur-3xl opacity-0 group-hover:opacity-25 transition-opacity duration-500 bg-gradient-to-br ${accentClass}`} />
-      
+
       <div className="flex items-center gap-4 mb-4">
         <div className={`w-10 h-10 rounded-xl flex items-center justify-center bg-gradient-to-br ${accentClass} text-white shadow-sm transition-transform duration-300 group-hover:scale-110`}>
           <FontAwesomeIcon icon={icon} />
@@ -97,7 +97,7 @@ const CubeSolverCard: React.FC<CubeCardProps> = ({ title, subtitle, tag, path, a
           </span>
         </div>
       </div>
-      
+
       <p className="text-sm text-[var(--text-secondary)] leading-relaxed mb-4">
         {subtitle}
       </p>
@@ -172,8 +172,8 @@ export const Home: React.FC = () => {
     },
     {
       title: "3x3 Solver",
-      subtitle: "Advanced step-by-step solver guide. Master the classic CFOP steps and layer-by-layer algorithms.",
-      tag: "Layer-by-Layer / CFOP",
+      subtitle: "Advanced Rubik's Cube solver based on Kociemba's algorithm. Solve cubes efficiently using two-phase state-space search and optimized move sequences.",
+      tag: "Kociemba's Algorithm",
       path: "/solvers/3x3",
       accentClass: "from-blue-500 to-indigo-600",
       tagClass: "bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400",
@@ -191,7 +191,7 @@ export const Home: React.FC = () => {
     {
       title: "5x5 Solver",
       subtitle: "Learn the full reduction method, pairing complex centers, and managing edge alignments.",
-      tag: "Reduction & Parity Handling",
+      tag: "IDA* (Iterative Deepening A*)",
       path: "/solvers/5x5",
       accentClass: "from-purple-500 to-fuchsia-600",
       tagClass: "bg-purple-50 text-purple-600 dark:bg-purple-500/10 dark:text-purple-400",
@@ -212,16 +212,16 @@ export const Home: React.FC = () => {
         <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-72 h-72 rounded-full blur-3xl opacity-20 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600 pointer-events-none" />
 
         {/* Animated Brand Logo */}
-        <motion.div 
+        <motion.div
           variants={floatAnimation}
           animate="animate"
           className="relative z-10 w-44 h-44 lg:w-64 lg:h-64 cursor-pointer group flex-shrink-0"
         >
-          <img 
-            src={logoImg} 
-            alt="Rubik's Art - Interactive 3D Rubik's Cube Simulators, Solvers, and Puzzle Art Mosaics" 
+          <img
+            src={logoImg}
+            alt="Rubik's Art - Interactive 3D Rubik's Cube Simulators, Solvers, and Puzzle Art Mosaics"
             title="Rubik's Art - Interactive 3D Rubik's Cube Simulators, Solvers, and Puzzle Art Mosaics"
-            className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(59,130,246,0.3)] group-hover:scale-105 transition-transform duration-300" 
+            className="w-full h-full object-contain filter drop-shadow-[0_10px_20px_rgba(59,130,246,0.3)] group-hover:scale-105 transition-transform duration-300"
           />
         </motion.div>
 
@@ -231,9 +231,9 @@ export const Home: React.FC = () => {
           <h1 className="text-5xl md:text-7xl font-extrabold font-heading tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-500">
             Rubik's Art
           </h1>
-          
+
           {/* Subheading Description */}
-          <p 
+          <p
             className="text-lg md:text-xl leading-relaxed mb-8 max-w-2xl"
             style={{ color: 'var(--text-secondary)' }}
           >
@@ -242,26 +242,26 @@ export const Home: React.FC = () => {
 
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-            <Link 
-              to="/mosaic-generator" 
+            <Link
+              to="/mosaic-generator"
               className="px-8 py-3.5 rounded-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg shadow-blue-500/20 hover:shadow-xl hover:shadow-blue-500/30 transition-all hover:-translate-y-0.5"
             >
               Create Mosaic Art ✨
             </Link>
-            <Link 
-              to="/arts" 
+            <Link
+              to="/arts"
               className="px-8 py-3.5 rounded-2xl font-bold border border-[var(--glass-border)] bg-[var(--glass-bg)] text-[var(--text-primary)] hover:bg-[var(--glass-border)] hover:border-[var(--text-secondary)]/20 transition-all hover:-translate-y-0.5 shadow"
             >
               Art Gallery
             </Link>
-            <a 
-              href="#playgrounds" 
+            <a
+              href="#playgrounds"
               className="px-8 py-3.5 rounded-2xl font-bold border border-[var(--glass-border)] bg-[var(--glass-bg)] text-[var(--text-primary)] hover:bg-[var(--glass-border)] hover:border-[var(--text-secondary)]/20 transition-all hover:-translate-y-0.5 shadow"
             >
               Explore Cubes
             </a>
-            <a 
-              href="#solvers" 
+            <a
+              href="#solvers"
               className="px-8 py-3.5 rounded-2xl font-bold border border-[var(--glass-border)] bg-[var(--glass-bg)] text-[var(--text-primary)] hover:bg-[var(--glass-border)] hover:border-[var(--text-secondary)]/20 transition-all hover:-translate-y-0.5 shadow"
             >
               Solve a Cube
@@ -272,8 +272,8 @@ export const Home: React.FC = () => {
 
       {/* 🎨 Featured Puzzle Arts Card Section */}
       <motion.div variants={itemVariants} className="w-full">
-        <Link 
-          to="/arts" 
+        <Link
+          to="/arts"
           className="group block relative w-full rounded-3xl p-8 lg:p-12 overflow-hidden backdrop-blur-md border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-xl hover:shadow-2xl transition-all duration-500"
         >
           {/* Radial accent hover backdrop */}
@@ -295,7 +295,7 @@ export const Home: React.FC = () => {
                 Enter Gallery and Studio <FontAwesomeIcon icon={faArrowRight} />
               </span>
             </div>
-            
+
             {/* Visual Icon Grid Representation */}
             <div className="w-full lg:w-auto flex items-center justify-center">
               <div className="relative p-8 rounded-3xl border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-inner group-hover:scale-105 transition-transform duration-500">
@@ -323,8 +323,8 @@ export const Home: React.FC = () => {
 
       {/* 🔮 Featured Rubik's Cube Mosaic Generator Section */}
       <motion.div variants={itemVariants} className="w-full">
-        <Link 
-          to="/mosaic-generator" 
+        <Link
+          to="/mosaic-generator"
           className="group block relative w-full rounded-3xl p-8 lg:p-12 overflow-hidden backdrop-blur-md border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-xl hover:shadow-2xl transition-all duration-500"
         >
           {/* Radial accent hover backdrop */}
@@ -342,25 +342,25 @@ export const Home: React.FC = () => {
                   <div className="bg-orange-500 rounded-md shadow-sm" />
                   <div className="bg-yellow-500 rounded-md shadow-sm opacity-80" />
                   <div className="bg-white rounded-md shadow-sm" />
-                  
+
                   <div className="bg-blue-500 rounded-md shadow-sm" />
                   <div className="bg-yellow-500 rounded-md shadow-sm opacity-90" />
                   <div className="bg-red-500 rounded-md shadow-sm" />
                   <div className="bg-green-500 rounded-md shadow-sm opacity-95" />
                   <div className="bg-orange-500 rounded-md shadow-sm" />
-                  
+
                   <div className="bg-white rounded-md shadow-sm opacity-95" />
                   <div className="bg-orange-500 rounded-md shadow-sm opacity-90" />
                   <div className="bg-blue-500 rounded-md shadow-sm" />
                   <div className="bg-white rounded-md shadow-sm" />
                   <div className="bg-green-500 rounded-md shadow-sm" />
-                  
+
                   <div className="bg-green-500 rounded-md shadow-sm opacity-80" />
                   <div className="bg-red-500 rounded-md shadow-sm" />
                   <div className="bg-orange-500 rounded-md shadow-sm opacity-95" />
                   <div className="bg-yellow-500 rounded-md shadow-sm" />
                   <div className="bg-blue-500 rounded-md shadow-sm" />
-                  
+
                   <div className="bg-yellow-500 rounded-md shadow-sm" />
                   <div className="bg-white rounded-md shadow-sm opacity-90" />
                   <div className="bg-green-500 rounded-md shadow-sm" />
