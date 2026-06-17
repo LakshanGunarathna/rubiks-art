@@ -154,14 +154,42 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
                 <p className="text-[var(--text-secondary)] leading-relaxed text-xs">
                   Export a high-resolution, print-ready PDF guide that breaks down the mosaic layout row-by-row.
                 </p>
-                <div className="p-4 rounded-2xl border border-[var(--nav-border)] bg-slate-50 dark:bg-slate-900/30 flex flex-col gap-2.5 text-xs text-[var(--text-secondary)] leading-relaxed">
-                  <div className="flex gap-2">
-                    <span className="text-blue-500 font-extrabold">✓ Page 1 (Cover):</span>
-                    <span>Displays statistics, estimated costs, and required sticker counts for all 6 colors.</span>
+                <div className="p-4 rounded-2xl border border-[var(--nav-border)] bg-slate-50 dark:bg-slate-900/30 flex flex-col gap-4 text-xs text-[var(--text-secondary)] leading-relaxed">
+                  <div className="flex gap-3">
+                    <div className="w-6 h-6 rounded-full bg-blue-500/10 dark:bg-blue-500/25 flex items-center justify-center text-blue-500 font-extrabold flex-shrink-0">
+                      🧩
+                    </div>
+                    <div>
+                      <strong className="text-[var(--text-primary)] block font-semibold mb-0.5">Block-by-Block Blueprint</strong>
+                      Divided into logical 3x3 cube segments so you can build and assemble your mosaic piece-by-piece with ease.
+                    </div>
                   </div>
-                  <div className="flex gap-2">
-                    <span className="text-indigo-500 font-extrabold">✓ Pages 2+ (Grid Rows):</span>
-                    <span>Shows a step-by-step layout of each row. Individual cubes are magnified with sticker color swatches and letter codes (W, Y, R, O, G, B) for accessibility.</span>
+                  <div className="flex gap-3">
+                    <div className="w-6 h-6 rounded-full bg-indigo-500/10 dark:bg-indigo-500/25 flex items-center justify-center text-indigo-500 font-extrabold flex-shrink-0">
+                      🎨
+                    </div>
+                    <div>
+                      <strong className="text-[var(--text-primary)] block font-semibold mb-0.5">Sticker-Level Precision</strong>
+                      Includes high-contrast color grids and text-labeled sticker codes (W, Y, O, R, G, B) to guarantee error-free physical builds.
+                    </div>
+                  </div>
+                  <div className="flex gap-3">
+                    <div className="w-6 h-6 rounded-full bg-purple-500/10 dark:bg-purple-500/25 flex items-center justify-center text-purple-500 font-extrabold flex-shrink-0">
+                      🗺️
+                    </div>
+                    <div>
+                      <strong className="text-[var(--text-primary)] block font-semibold mb-0.5">Smart Progress Minimaps</strong>
+                      Features an interactive locator minimap on every instruction sheet to show exactly where the active block fits in your artwork.
+                    </div>
+                  </div>
+                  <div className="flex gap-3">
+                    <div className="w-6 h-6 rounded-full bg-emerald-500/10 dark:bg-emerald-500/25 flex items-center justify-center text-emerald-500 font-extrabold flex-shrink-0">
+                      📄
+                    </div>
+                    <div>
+                      <strong className="text-[var(--text-primary)] block font-semibold mb-0.5">Premium Print-Ready Specs</strong>
+                      Includes complete component summaries, color distributions, specifications, and side-by-side previews of your custom design.
+                    </div>
                   </div>
                 </div>
 
@@ -252,12 +280,13 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
                     )}
                   </div>
                   
-                  <div className="border border-slate-200 dark:border-slate-800 p-3 rounded-2xl bg-slate-50/50 dark:bg-slate-900/30 overflow-auto shadow-inner flex items-center justify-center w-full">
+                  <div className="border border-slate-200 dark:border-slate-800 p-5 rounded-2xl bg-slate-50/50 dark:bg-slate-900/30 overflow-auto shadow-inner w-full">
                     <div 
                       className="grid gap-0.5 mx-auto"
                       style={{
                         gridTemplateColumns: `repeat(${cubesWide}, minmax(12px, 1fr))`,
-                        width: 'fit-content'
+                        width: 'fit-content',
+                        padding: '6px'
                       }}
                     >
                       {Array.from({ length: cubesHigh }).map((_, r) => (
