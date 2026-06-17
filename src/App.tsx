@@ -6,8 +6,8 @@ import { ScrollToTop } from './components/layout/ScrollToTop';
 import { Home } from './pages/Home';
 import { Loader2 } from 'lucide-react';
 
-import { CubeView } from './pages/Cubes/CubeView';
-import { SolverView } from './pages/Solvers/SolverView';
+import { CubeView } from './pages/CubeView';
+import { SolverView } from './pages/SolverView';
 const PuzzleArts = lazy(() => import('./pages/PuzzleArts').then(m => ({ default: m.PuzzleArts })));
 const MosaicGenerator = lazy(() => import('./pages/MosaicGenerator').then(m => ({ default: m.MosaicGenerator })));
 

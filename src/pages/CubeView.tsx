@@ -1,16 +1,16 @@
 import React, { useEffect, useState, lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
-import { updateMetaTags } from '../../utils/seo';
+import { updateMetaTags } from '../utils/seo';
 import { motion } from 'framer-motion';
 import { Loader2 } from 'lucide-react';
-import { CubeControlPanel } from '../../components/cube/CubeControlPanel';
-import * as Rubiks2x2Solver from '../../types/cube2x2';
-import * as Rubiks3x3Solver from '../../types/cube3x3';
-import * as Rubiks4x4Solver from '../../types/cube4x4';
-import * as Rubiks5x5Solver from '../../types/cube5x5';
-import { CubeFactsSection } from '../../components/cube/CubeFactsSection';
+import { CubeControlPanel } from '../components/cube/CubeControlPanel';
+import * as Rubiks2x2Solver from '../types/cube2x2';
+import * as Rubiks3x3Solver from '../types/cube3x3';
+import * as Rubiks4x4Solver from '../types/cube4x4';
+import * as Rubiks5x5Solver from '../types/cube5x5';
+import { CubeFactsSection } from '../components/cube/CubeFactsSection';
 
-const Cube3DWrapper = lazy(() => import('../../components/cube/Cube3DWrapper'));
+const Cube3DWrapper = lazy(() => import('../components/cube/Cube3DWrapper'));
 
 const LoadingCube = () => (
   <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-white rounded-3xl">

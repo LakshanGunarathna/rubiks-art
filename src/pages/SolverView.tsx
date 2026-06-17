@@ -1,33 +1,33 @@
 import React, { useState, useCallback, useEffect, useRef, lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
-import { updateMetaTags } from '../../utils/seo';
+import { updateMetaTags } from '../utils/seo';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as THREE from 'three';
-import * as Rubiks2x2Solver from '../../types/cube2x2';
-import * as Rubiks3x3Solver from '../../types/cube3x3';
-import * as Rubiks4x4Solver from '../../types/cube4x4';
-import * as Rubiks5x5Solver from '../../types/cube5x5';
-import { useSiteConfig } from '../../config/siteConfig';
+import * as Rubiks2x2Solver from '../types/cube2x2';
+import * as Rubiks3x3Solver from '../types/cube3x3';
+import * as Rubiks4x4Solver from '../types/cube4x4';
+import * as Rubiks5x5Solver from '../types/cube5x5';
+import { useSiteConfig } from '../config/siteConfig';
 
-const Solver3DWrapper = lazy(() => import('../../components/solver/Solver3DWrapper'));
+const Solver3DWrapper = lazy(() => import('../components/solver/Solver3DWrapper'));
 
-import { RUBIKS_CUBE_COLORS } from '../../types/cube';
-import type { PaintedPiece } from '../../types/cube';
-import { getStickerMat } from '../../utils/cubeUtils';
+import { RUBIKS_CUBE_COLORS } from '../types/cube';
+import type { PaintedPiece } from '../types/cube';
+import { getStickerMat } from '../utils/cubeUtils';
 import { Loader2 } from 'lucide-react';
-import { CubePainterPanel } from '../../components/solver/CubePainterPanel';
-import { SolutionGuidePanel } from '../../components/solver/SolutionGuidePanel';
-import { ErrorModal, SolvedModal, ResetConfirmation, LoadingOverlay } from '../../components/solver/SolverOverlays';
-import { SolverGuideSection } from '../../components/solver/SolverGuideSection';
+import { CubePainterPanel } from '../components/solver/CubePainterPanel';
+import { SolutionGuidePanel } from '../components/solver/SolutionGuidePanel';
+import { ErrorModal, SolvedModal, ResetConfirmation, LoadingOverlay } from '../components/solver/SolverOverlays';
+import { SolverGuideSection } from '../components/solver/SolverGuideSection';
 
-import { getHumanReadableMove } from '../../utils/cubeFormatters';
-import { OPPOSITE_COLORS, MOVES_2X2, MOVES_3X3 } from '../../utils/cubeConstants';
-import { getCubeArray2x2, getCubeString3x3, getCubeString4x4, getCubeString5x5 } from '../../utils/cubeStateUtils';
-import { autoDeducePieces, autoFillCenters } from '../../utils/cubeAutoPainter';
+import { getHumanReadableMove } from '../utils/cubeFormatters';
+import { OPPOSITE_COLORS, MOVES_2X2, MOVES_3X3 } from '../utils/cubeConstants';
+import { getCubeArray2x2, getCubeString3x3, getCubeString4x4, getCubeString5x5 } from '../utils/cubeStateUtils';
+import { autoDeducePieces, autoFillCenters } from '../utils/cubeAutoPainter';
 import {
   validate2x2, validate3x3, validate4x4, validate5x5,
   checkIfSolved2x2, checkIfSolved3x3, checkIfSolved4x4, checkIfSolved5x5
-} from '../../utils/cubeValidation';
+} from '../utils/cubeValidation';
 
 const LoadingCube = () => (
   <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-white rounded-3xl">
