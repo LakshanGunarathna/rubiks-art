@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, Suspense, lazy } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Loader2 } from 'lucide-react';
 import { updateMetaTags } from '../utils/seo';
 
-// Import sub-components
-import { ImageUploader } from '../components/mosaic/ImageUploader';
-import { ImageAdjuster } from '../components/mosaic/ImageAdjuster';
-import { MethodSelector } from '../components/mosaic/MethodSelector';
-import { MosaicViewer } from '../components/mosaic/MosaicViewer';
+// Import sub-components dynamically (code-splitting)
+const ImageUploader = lazy(() => import('../components/mosaic/ImageUploader').then(m => ({ default: m.ImageUploader })));
+const ImageAdjuster = lazy(() => import('../components/mosaic/ImageAdjuster').then(m => ({ default: m.ImageAdjuster })));
+const MethodSelector = lazy(() => import('../components/mosaic/MethodSelector').then(m => ({ default: m.MethodSelector })));
+const MosaicViewer = lazy(() => import('../components/mosaic/MosaicViewer').then(m => ({ default: m.MosaicViewer })));
 
 // Rubik's Cube color palette definition
 interface PaletteColor {
@@ -50,13 +50,57 @@ export const MosaicGenerator: React.FC = () => {
   const [initialParams, setInitialParams] = useState<any>(null);
   const [selectedMethod, setSelectedMethod] = useState<string>('');
 
-  // Set page meta tags for SEO
+
+
+  // Set page meta tags and inject JSON-LD structured data for SEO
   useEffect(() => {
     updateMetaTags(
       "Online Rubik's Cube Mosaic Generator | Rubiks' Art",
       "Convert your photos into stunning Rubik's Cube pixel mosaics. Upload images, adjust crop/zoom, select grid sizes and cube types (1x1 to 5x5), apply dithering, download patterns, and follow a step-by-step building guide."
     );
+
+    // Create and inject JSON-LD script for rich search results
+    const jsonLd = {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Rubik's Cube Mosaic Generator",
+      "description": "Convert any image or photo into a Rubik's Cube mosaic pattern. Features adjustable grid sizes, cube types (1x1 to 7x7), perception-based color matching, Floyd-Steinberg dithering, and step-by-step physical assembly guides with PDF export.",
+      "url": "https://www.rubiks-art.com/mosaic-generator",
+      "applicationCategory": "MultimediaApplication",
+      "operatingSystem": "All",
+      "browserRequirements": "Requires HTML5 canvas support and JavaScript.",
+      "creator": {
+        "@type": "Organization",
+        "name": "Rubiks' Art"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "USD"
+      }
+    };
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.id = 'mosaic-generator-jsonld';
+    script.innerHTML = JSON.stringify(jsonLd);
+    document.head.appendChild(script);
+
+    return () => {
+      // Clean up the injected script on unmount
+      const existingScript = document.getElementById('mosaic-generator-jsonld');
+      if (existingScript) {
+        existingScript.remove();
+      }
+    };
   }, []);
+
+  // Scroll to top when wizard step changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [step]);
+
+
 
   // Get current cube edge size in stickers
   const cubeSize = useMemo(() => {
@@ -159,84 +203,93 @@ export const MosaicGenerator: React.FC = () => {
 
       {/* Wizard Step Components */}
       <div className="w-full min-h-[400px] flex items-center justify-center">
-        <AnimatePresence mode="wait">
-          {step === 1 && (
-            <ImageUploader
-              key="uploader"
-              onImageUpload={handleImageUpload}
-            />
-          )}
+        <Suspense fallback={
+          <div className="flex flex-col items-center justify-center gap-4 py-12 text-[var(--text-secondary)]">
+            <Loader2 className="w-10 h-10 animate-spin text-blue-500" />
+            <p className="text-sm font-medium">Loading panel...</p>
+          </div>
+        }>
+          <AnimatePresence mode="wait">
+            {step === 1 && (
+              <ImageUploader
+                key="uploader"
+                onImageUpload={handleImageUpload}
+              />
+            )}
 
-          {step === 2 && (
-            <ImageAdjuster
-              key="adjuster"
-              imageSrc={imageSrc}
-              zoom={zoom}
-              setZoom={setZoom}
-              panX={panX}
-              setPanX={setPanX}
-              panY={panY}
-              setPanY={setPanY}
-              cubesWide={cubesWide}
-              setCubesWide={setCubesWide}
-              cubesHigh={cubesHigh}
-              setCubesHigh={setCubesHigh}
-              cubeType={cubeType}
-              setCubeType={setCubeType}
-              showCubeGrid={showCubeGrid}
-              setShowCubeGrid={setShowCubeGrid}
-              showStickerGrid={showStickerGrid}
-              setShowStickerGrid={setShowStickerGrid}
-              onGenerate={(rawData, croppedBase64) => {
-                setRawCroppedData(rawData);
-                setCroppedImageSrc(croppedBase64);
-                setStep(3); // Go to selection step
-              }}
-              onBack={() => {
-                setImageSrc('');
-                setCroppedImageSrc('');
-                setStep(1);
-              }}
-              viewportDim={viewportDim}
-              cubeSize={cubeSize}
-            />
-          )}
+            {step === 2 && (
+              <ImageAdjuster
+                key="adjuster"
+                imageSrc={imageSrc}
+                zoom={zoom}
+                setZoom={setZoom}
+                panX={panX}
+                setPanX={setPanX}
+                panY={panY}
+                setPanY={setPanY}
+                cubesWide={cubesWide}
+                setCubesWide={setCubesWide}
+                cubesHigh={cubesHigh}
+                setCubesHigh={setCubesHigh}
+                cubeType={cubeType}
+                setCubeType={setCubeType}
+                showCubeGrid={showCubeGrid}
+                setShowCubeGrid={setShowCubeGrid}
+                showStickerGrid={showStickerGrid}
+                setShowStickerGrid={setShowStickerGrid}
+                onGenerate={(rawData, croppedBase64) => {
+                  setRawCroppedData(rawData);
+                  setCroppedImageSrc(croppedBase64);
+                  setStep(3); // Go to selection step
+                }}
+                onBack={() => {
+                  setImageSrc('');
+                  setCroppedImageSrc('');
+                  setStep(1);
+                }}
+                viewportDim={viewportDim}
+                cubeSize={cubeSize}
+              />
+            )}
 
-          {step === 3 && rawCroppedData && (
-            <MethodSelector
-              key="selector"
-              rawCroppedData={rawCroppedData}
-              cubesWide={cubesWide}
-              cubesHigh={cubesHigh}
-              cubeSize={cubeSize}
-              onSelectMethod={handleSelectMethod}
-              onBack={() => setStep(2)}
-              PALETTE={PALETTE}
-            />
-          )}
+            {step === 3 && rawCroppedData && (
+              <MethodSelector
+                key="selector"
+                rawCroppedData={rawCroppedData}
+                cubesWide={cubesWide}
+                cubesHigh={cubesHigh}
+                cubeSize={cubeSize}
+                onSelectMethod={handleSelectMethod}
+                onBack={() => setStep(2)}
+                PALETTE={PALETTE}
+              />
+            )}
 
-          {step === 4 && rawCroppedData && initialParams && (
-            <MosaicViewer
-              key="viewer"
-              methodName={selectedMethod}
-              rawCroppedData={rawCroppedData}
-              initialParams={initialParams}
-              cubesWide={cubesWide}
-              cubesHigh={cubesHigh}
-              cubeSize={cubeSize}
-              cubeType={cubeType}
-              showCubeGrid={showCubeGrid}
-              setShowCubeGrid={setShowCubeGrid}
-              showStickerGrid={showStickerGrid}
-              setShowStickerGrid={setShowStickerGrid}
-              onBackToAdjust={() => setStep(2)}
-              onBackToSelect={() => setStep(3)}
-              PALETTE={PALETTE}
-              imageSrc={croppedImageSrc || imageSrc}
-            />
-          )}
-        </AnimatePresence>
+            {step === 4 && rawCroppedData && initialParams && (
+              <MosaicViewer
+                key="viewer"
+                methodName={selectedMethod}
+                rawCroppedData={rawCroppedData}
+                initialParams={initialParams}
+                cubesWide={cubesWide}
+                cubesHigh={cubesHigh}
+                cubeSize={cubeSize}
+                cubeType={cubeType}
+                showCubeGrid={showCubeGrid}
+                setShowCubeGrid={setShowCubeGrid}
+                showStickerGrid={showStickerGrid}
+                setShowStickerGrid={setShowStickerGrid}
+                onBackToAdjust={() => setStep(2)}
+                onBackToSelect={() => setStep(3)}
+                PALETTE={PALETTE}
+                imageSrc={croppedImageSrc || imageSrc}
+              />
+            )}
+          </AnimatePresence>
+        </Suspense>
       </div>
+
+
     </div>
   );
 };
