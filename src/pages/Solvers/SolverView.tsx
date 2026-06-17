@@ -403,7 +403,7 @@ export const SolverView: React.FC = () => {
     >
       <div className="text-center">
         <h1 className="text-3xl font-bold font-heading transition-colors" style={{ color: 'var(--text-primary)' }}>
-          {size === 2 ? "Mini Cube (2x2x2)" : size === 3 ? "Rubik's Cube (3x3x3)" : `Rubik's ${size}x${size}x${size}`}
+          {size === 2 ? "Mini Cube (2x2x2)" : size === 3 ? "Rubik's Cube (3x3x3)" : size === 4 ? "Rubik's Revenge (4x4x4)" : "Professor's Cube (5x5x5)"}
         </h1>
       </div>
 
