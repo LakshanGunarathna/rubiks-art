@@ -18,6 +18,15 @@ export const Navbar: React.FC = () => {
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
+    if (window.location.pathname === path) {
+      e.preventDefault();
+      window.location.reload();
+    } else {
+      setIsOpen(false);
+    }
+  };
+
   const navItems = [
     { name: 'Home', path: '/', icon: faHome },
     {
@@ -51,7 +60,7 @@ export const Navbar: React.FC = () => {
         style={{ backgroundColor: 'var(--nav-bg)', borderColor: 'var(--nav-border)' }}
       >
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between px-2 py-4">
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/" onClick={(e) => handleNavClick(e, '/')} className="flex items-center gap-2">
             <img src={logoImg} alt="Logo" className="w-8 h-8 md:w-9 md:h-9 object-contain" />
             <span
               className="self-center text-2xl font-semibold whitespace-nowrap font-heading tracking-tight"
@@ -111,6 +120,7 @@ export const Navbar: React.FC = () => {
                                 <li key={subItem.name}>
                                   <Link
                                     to={subItem.path}
+                                    onClick={(e) => handleNavClick(e, subItem.path)}
                                     className="block px-4 py-4 hover:bg-[var(--accent-hover)]/10 hover:text-[var(--accent-color)] transition-colors"
                                   >
                                     {subItem.name}
@@ -125,6 +135,7 @@ export const Navbar: React.FC = () => {
                   ) : (
                     <Link
                       to={item.path!}
+                      onClick={(e) => handleNavClick(e, item.path!)}
                       className="flex items-center gap-2 py-2 rounded hover:bg-transparent transition-colors text-[var(--text-secondary)] hover:text-[var(--accent-color)]"
                     >
                       <FontAwesomeIcon icon={item.icon} />
@@ -204,7 +215,7 @@ export const Navbar: React.FC = () => {
                                   <Link
                                     to={subItem.path}
                                     className="block py-2 transition-colors text-[var(--text-secondary)] hover:text-[var(--accent-color)]"
-                                    onClick={() => setIsOpen(false)}
+                                    onClick={(e) => handleNavClick(e, subItem.path)}
                                   >
                                     {subItem.name}
                                   </Link>
@@ -218,7 +229,7 @@ export const Navbar: React.FC = () => {
                       <Link
                         to={item.path!}
                         className="flex items-center gap-3 py-2 text-lg transition-colors text-[var(--text-primary)] hover:text-[var(--accent-color)]"
-                        onClick={() => setIsOpen(false)}
+                        onClick={(e) => handleNavClick(e, item.path!)}
                       >
                         <FontAwesomeIcon icon={item.icon} className="w-5" />
                         {item.name}
