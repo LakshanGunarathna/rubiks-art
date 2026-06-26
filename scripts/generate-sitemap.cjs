@@ -64,6 +64,17 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+  <url>
+    <loc>${domain}/mosaic-generator</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>${domain}/src/assets/Logo.png</image:loc>
+      <image:title>Rubik's Cube Mosaic Generator</image:title>
+      <image:caption>Upload photos, select grid size, dither colors, and convert your images into Rubik's Cube mosaics with printable building guides.</image:caption>
+    </image:image>
+  </url>
   
   <!-- Cube Playgrounds -->
   <url>

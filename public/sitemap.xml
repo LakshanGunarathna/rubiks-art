@@ -4,7 +4,7 @@
   <!-- Static Pages -->
   <url>
     <loc>https://www.rubiks-art.com/</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -15,33 +15,44 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.rubiks-art.com/mosaic-generator</loc>
+    <lastmod>2026-06-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.rubiks-art.com/src/assets/Logo.png</image:loc>
+      <image:title>Rubik's Cube Mosaic Generator</image:title>
+      <image:caption>Upload photos, select grid size, dither colors, and convert your images into Rubik's Cube mosaics with printable building guides.</image:caption>
+    </image:image>
   </url>
   
   <!-- Cube Playgrounds -->
   <url>
     <loc>https://www.rubiks-art.com/cubes/2x2</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.rubiks-art.com/cubes/3x3</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.rubiks-art.com/cubes/4x4</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.rubiks-art.com/cubes/5x5</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -49,25 +60,25 @@
   <!-- Solvers -->
   <url>
     <loc>https://www.rubiks-art.com/solvers/2x2</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.rubiks-art.com/solvers/3x3</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.rubiks-art.com/solvers/4x4</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://www.rubiks-art.com/solvers/5x5</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -75,7 +86,7 @@
   <!-- Dynamic Art Detail Pages with Image SEO -->
   <url>
     <loc>https://www.rubiks-art.com/arts/4-side-checkerboard-2x2_1</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -86,7 +97,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/checkerboard-2x2_2</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -97,7 +108,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/zig-zag-2x2_3</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -108,7 +119,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/cube-in-a-cube-2x2_4</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -119,7 +130,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/wire-3x3_1</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -130,7 +141,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/superflip-3x3_2</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -141,7 +152,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/vertical-stripes-3x3_3</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -152,7 +163,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/twister-3x3_4</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -163,7 +174,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/fruit-bowl-3x3_5</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -174,7 +185,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/order-in-chaos-3x3_6</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -185,7 +196,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/are-you-high-3x3_7</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -196,7 +207,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/displaced-motif-3x3_8</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -207,7 +218,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/perfect-scramble-3x3_9</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -218,7 +229,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/perpendicular-lines-3x3_10</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -229,7 +240,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/the-hole-3x3_11</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -240,7 +251,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/flower-3x3_12</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -251,7 +262,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/3c3w-3x3_13</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -262,7 +273,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/flipped-tips-3x3_14</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -273,7 +284,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/hi-all-around-3x3_15</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -284,7 +295,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/tangled-3x3_16</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -295,7 +306,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/minority-cross-3x3_17</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -306,7 +317,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/python-3x3_18</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -317,7 +328,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/cross-3x3_19</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -328,7 +339,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/checkerboard-in-the-cube-3x3_20</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -339,7 +350,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/black-mamba-3x3_21</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -350,7 +361,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/deckerboard-3x3_22</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -361,7 +372,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/4-crosses-3x3_23</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -372,7 +383,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/green-mamba-3x3_24</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -383,7 +394,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/cube-in-a-cube-in-a-cube-3x3_25</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -394,7 +405,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/plus-minus-3x3_26</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -405,7 +416,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/kilt-scottish-skirt-3x3_27</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -416,7 +427,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/pong-3x3_28</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -427,7 +438,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/3-sides-solved-3x3_29</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -438,7 +449,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/c-u-around-3x3_30</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -449,7 +460,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/evenly-distributed-3x3_31</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -460,7 +471,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/tablecloth-3x3_32</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -471,7 +482,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/hi-3x3_33</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -482,7 +493,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/dont-cross-line-3x3_34</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -493,7 +504,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/anaconda-3x3_35</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -504,7 +515,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/tetris-3x3_36</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -515,7 +526,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/no-entry-3x3_37</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -526,7 +537,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/easy-checkerboard-3x3_38</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -537,7 +548,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/opposite-corners-3x3_39</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -548,7 +559,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/union-jack-3x3_40</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -559,7 +570,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/six-spots-3x3_41</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -570,7 +581,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/cube-in-the-cube-3x3_42</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -581,7 +592,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/gift-box-3x3_43</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -592,7 +603,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/plus-3x3_44</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -603,7 +614,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/spiral-pattern-3x3_45</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -614,7 +625,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/speedsolving-3x3_46</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -625,7 +636,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/four-spots-3x3_47</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -636,7 +647,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/all-flags-and-crests-3x3_48</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -647,7 +658,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/checkerboard-v1-4x4_1</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -658,7 +669,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/stripes-4x4_2</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -669,7 +680,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/lines-4x4_3</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -680,7 +691,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/dots-4x4_4</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -691,7 +702,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/cube-in-a-cube-4x4_5</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -702,7 +713,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/cube-in-a-cube-in-a-cube-4x4_6</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -713,7 +724,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/3-cubes-in-a-cube-4x4_7</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -724,7 +735,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/checkerboard-v2-4x4_8</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -735,7 +746,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/checkerboard-in-dots-4x4_9</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -746,7 +757,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/6-colour-cube-in-a-cube-4x4_10</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -757,7 +768,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/6-colour-peak-4x4_11</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -768,7 +779,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/2x2-peak-4x4_12</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -779,7 +790,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/easy-checkerboard-4x4_13</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -790,7 +801,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/anaconda-4x4_14</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -801,7 +812,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/diagonal-lines-4x4_15</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -812,7 +823,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/cross-4x4_16</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -823,7 +834,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/displaced-motif-4x4_17</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -834,7 +845,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/checkerboard-in-a-cube-4x4_18</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -845,7 +856,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/twisted-cube-4x4_19</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -856,7 +867,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/cube-in-a-checkerboard-4x4_20</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -867,7 +878,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/ron-s-cube-in-a-cube-4x4_21</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -878,7 +889,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/full-checkerboard-5x5_1</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -889,7 +900,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/cube-in-a-cube-in-a-cube-5x5_2</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -900,7 +911,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/half-superflip-5x5_3</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -911,7 +922,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/tri-checkerboard-5x5_4</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -922,7 +933,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/4-cubes-in-a-cube-5x5_5</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -933,7 +944,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/superflip-5x5_6</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -944,7 +955,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/flipped-edges-5x5_7</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -955,7 +966,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/dot-in-a-dot-5x5_8</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -966,7 +977,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/square-in-a-cube-5x5_9</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -977,7 +988,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/flipped-edge-checkerboard-5x5_10</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -988,7 +999,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/dot-in-a-crosshair-5x5_11</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -999,7 +1010,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/double-checkerboard-5x5_12</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1010,7 +1021,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/alternate-checkerboard-5x5_13</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1021,7 +1032,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/easy-checkerboard-5x5_14</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1032,7 +1043,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/four-dots-5x5_15</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1043,7 +1054,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/cross-5x5_16</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1054,7 +1065,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/3x3-peak-5x5_17</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1065,7 +1076,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/i-love-u-5x5_18</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1076,7 +1087,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/clown-5x5_19</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1087,7 +1098,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/hearts-5x5_20</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1098,7 +1109,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/cube-in-a-checkerboard-5x5_21</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -1109,7 +1120,7 @@
   </url>
   <url>
     <loc>https://www.rubiks-art.com/arts/cube-in-a-cube-5x5_22</loc>
-    <lastmod>2026-06-17</lastmod>
+    <lastmod>2026-06-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <image:image>
