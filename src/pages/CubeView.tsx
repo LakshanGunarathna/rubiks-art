@@ -46,19 +46,23 @@ export const CubeView: React.FC = () => {
   useEffect(() => {
     let name = "Rubik's Cube (3x3)";
     let desc = "Interact with the classic 3x3 Rubik's Cube in high-fidelity 3D. Play, shuffle, practice algorithms, and explore cube history.";
+    let img = "/assets/og-cube-3x3.png";
     
     if (size === 2) {
       name = "Mini Cube (2x2)";
       desc = "Play with our interactive 3D 2x2 Mini Cube. Rotate layers, shuffle, and explore permutations in real time with high-fidelity WebGL graphics.";
+      img = "/assets/og-cube-2x2.png";
     } else if (size === 4) {
       name = "Rubik's Revenge (4x4)";
       desc = "Test your skills on the 4x4 Rubik's Revenge in 3D. Rotate, shuffle, and learn facts about center parities and permutations.";
+      img = "/assets/og-cube-4x4.png";
     } else if (size === 5) {
       name = "Professor's Cube (5x5)";
       desc = "Practice on the 5x5 Professor's Cube simulator. Experience high-fidelity 3D layer turns, camera rotations, and master complex algorithms.";
+      img = "/assets/og-cube-5x5.png";
     }
     
-    updateMetaTags(`${name} | Rubiks' Art`, desc);
+    updateMetaTags(`${name} | Rubiks' Art`, desc, img);
   }, [size]);
 
   return (

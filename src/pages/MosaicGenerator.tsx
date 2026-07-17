@@ -56,7 +56,8 @@ export const MosaicGenerator: React.FC = () => {
   useEffect(() => {
     updateMetaTags(
       "Online Rubik's Cube Mosaic Generator | Rubiks' Art",
-      "Convert your photos into stunning Rubik's Cube pixel mosaics. Upload images, adjust crop/zoom, select grid sizes and cube types (1x1 to 5x5), apply dithering, download patterns, and follow a step-by-step building guide."
+      "Convert your photos into stunning Rubik's Cube pixel mosaics. Upload images, adjust crop/zoom, select grid sizes and cube types (1x1 to 5x5), apply dithering, download patterns, and follow a step-by-step building guide.",
+      "/assets/og-mosaic-generator.png"
     );
 
     // Create and inject JSON-LD script for rich search results

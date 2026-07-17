@@ -31,12 +31,14 @@ export const PuzzleArts: React.FC = () => {
     if (activeArt) {
       updateMetaTags(
         `${activeArt.name} | Puzzle Arts | Rubiks' Art`,
-        `Follow this interactive 3D guide to build the "${activeArt.name}" mosaic pattern on a ${activeArt.type} cube. Moves: ${activeArt.moves}`
+        `Follow this interactive 3D guide to build the "${activeArt.name}" mosaic pattern on a ${activeArt.type} cube. Moves: ${activeArt.moves}`,
+        activeArt.imageUrl
       );
     } else {
       updateMetaTags(
         "Puzzle Arts | Rubiks' Art",
-        "Create premium pixel-art mosaics using Rubik's Cubes. Select patterns, filter by difficulty, and follow animated 3D guides to build stunning puzzle art."
+        "Create premium pixel-art mosaics using Rubik's Cubes. Select patterns, filter by difficulty, and follow animated 3D guides to build stunning puzzle art.",
+        "/assets/og-arts.png"
       );
     }
   }, [activeArt]);

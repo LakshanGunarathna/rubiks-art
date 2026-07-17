@@ -113,7 +113,8 @@ export const Home: React.FC = () => {
   useEffect(() => {
     updateMetaTags(
       "Rubiks' Art - Interactive Rubik's Cube Experience",
-      "Rubiks' Art combines the timeless logic of Rubik's Cubes with modern 3D technology, offering an immersive platform for enthusiasts of all skill levels."
+      "Rubiks' Art combines the timeless logic of Rubik's Cubes with modern 3D technology, offering an immersive platform for enthusiasts of all skill levels.",
+      "/assets/og-home.png"
     );
   }, []);
 

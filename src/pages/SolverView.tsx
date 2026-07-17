@@ -117,19 +117,23 @@ export const SolverView: React.FC = () => {
   useEffect(() => {
     let name = "Rubik's Cube Solver (3x3)";
     let desc = "Solve your 3x3 Rubik's Cube with our step-by-step interactive 3D solver guide. Paint your cube's layout and get optimal CFOP/layer-by-layer solutions.";
+    let img = "/assets/og-solver-3x3.png";
     
     if (size === 2) {
       name = "Mini Cube Solver (2x2)";
       desc = "Solve the 2x2 Mini Cube step-by-step with our interactive 3D solver. Enter your cube's colors and follow guided layer-by-layer instructions.";
+      img = "/assets/og-solver-2x2.png";
     } else if (size === 4) {
       name = "Rubik's Revenge Solver (4x4)";
       desc = "Learn to solve the 4x4 Rubik's Revenge. Our interactive 3D solver helps you resolve center parities and edge-pairing step-by-step.";
+      img = "/assets/og-solver-4x4.png";
     } else if (size === 5) {
       name = "Professor's Cube Solver (5x5)";
       desc = "Solve the 5x5 Professor's Cube. Step-by-step interactive 3D reduction and parity solver guide to mastering the 5x5 cube.";
+      img = "/assets/og-solver-5x5.png";
     }
     
-    updateMetaTags(`${name} | Rubiks' Art`, desc);
+    updateMetaTags(`${name} | Rubiks' Art`, desc, img);
   }, [size]);
 
 

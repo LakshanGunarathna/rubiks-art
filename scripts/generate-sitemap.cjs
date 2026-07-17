@@ -53,7 +53,7 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>${domain}/src/assets/Logo.png</image:loc>
+      <image:loc>${domain}/assets/og-home.png</image:loc>
       <image:title>Rubiks' Art Brand Logo</image:title>
       <image:caption>Interactive 3D Rubik's Cube Simulators, Solvers, and Puzzle Art Mosaics</image:caption>
     </image:image>
@@ -63,6 +63,11 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>${domain}/assets/og-arts.png</image:loc>
+      <image:title>Puzzle Arts Gallery</image:title>
+      <image:caption>Browse premium Rubik's Cube pixel art mosaic patterns with interactive guides</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>${domain}/mosaic-generator</loc>
@@ -70,7 +75,7 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>${domain}/src/assets/Logo.png</image:loc>
+      <image:loc>${domain}/assets/og-mosaic-generator.png</image:loc>
       <image:title>Rubik's Cube Mosaic Generator</image:title>
       <image:caption>Upload photos, select grid size, dither colors, and convert your images into Rubik's Cube mosaics with printable building guides.</image:caption>
     </image:image>
@@ -82,24 +87,44 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>${domain}/assets/og-cube-2x2.png</image:loc>
+      <image:title>Mini Cube (2x2) Playground</image:title>
+      <image:caption>Play with our interactive 3D 2x2 Mini Cube simulator</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>${domain}/cubes/3x3</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>${domain}/assets/og-cube-3x3.png</image:loc>
+      <image:title>Rubik's Cube (3x3) Playground</image:title>
+      <image:caption>Practice algorithms and turns on our high-fidelity 3D 3x3 Rubik's Cube simulator</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>${domain}/cubes/4x4</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>${domain}/assets/og-cube-4x4.png</image:loc>
+      <image:title>Rubik's Revenge (4x4) Playground</image:title>
+      <image:caption>Test your skills on our interactive 3D 4x4 Rubik's Revenge simulator</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>${domain}/cubes/5x5</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>${domain}/assets/og-cube-5x5.png</image:loc>
+      <image:title>Professor's Cube (5x5) Playground</image:title>
+      <image:caption>Practice layers and algorithms on our 3D 5x5 Professor's Cube simulator</image:caption>
+    </image:image>
   </url>
 
   <!-- Solvers -->
@@ -108,24 +133,44 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>${domain}/assets/og-solver-2x2.png</image:loc>
+      <image:title>Mini Cube Solver (2x2)</image:title>
+      <image:caption>Step-by-step interactive 3D solver for the 2x2 Pocket Cube</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>${domain}/solvers/3x3</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>${domain}/assets/og-solver-3x3.png</image:loc>
+      <image:title>Rubik's Cube Solver (3x3)</image:title>
+      <image:caption>Get step-by-step 3D solutions for your 3x3 Rubik's Cube with layer-by-layer/CFOP algorithms</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>${domain}/solvers/4x4</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>${domain}/assets/og-solver-4x4.png</image:loc>
+      <image:title>Rubik's Revenge Solver (4x4)</image:title>
+      <image:caption>Solve your 4x4 Rubik's Revenge step-by-step with parity-handling guide</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>${domain}/solvers/5x5</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>${domain}/assets/og-solver-5x5.png</image:loc>
+      <image:title>Professor's Cube Solver (5x5)</image:title>
+      <image:caption>Step-by-step 3D reduction and parity solver guide for the 5x5 Professor's Cube</image:caption>
+    </image:image>
   </url>
 
   <!-- Dynamic Art Detail Pages with Image SEO -->`;

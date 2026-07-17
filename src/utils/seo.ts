@@ -3,7 +3,7 @@
  * This ensures search crawlers (like Google) and social sharing bots
  * index each page with its relevant metadata.
  */
-export function updateMetaTags(title: string, description: string) {
+export function updateMetaTags(title: string, description: string, imageUrl?: string) {
   // Update document title
   document.title = title;
 
@@ -24,4 +24,15 @@ export function updateMetaTags(title: string, description: string) {
   // Update OpenGraph tags
   setMetaTag('property', 'og:title', title);
   setMetaTag('property', 'og:description', description);
+
+  // Update image tags for Google Search and social crawlers
+  if (imageUrl) {
+    let absoluteImageUrl = imageUrl;
+    if (imageUrl.startsWith('/')) {
+      absoluteImageUrl = `https://www.rubiks-art.com${imageUrl}`;
+    }
+    setMetaTag('property', 'og:image', absoluteImageUrl);
+    setMetaTag('name', 'twitter:image', absoluteImageUrl);
+    setMetaTag('name', 'twitter:card', 'summary_large_image');
+  }
 }
