@@ -15,9 +15,20 @@ interface Cube3DProps {
   isPaintingMode?: boolean;
   isSolverMode?: boolean;
   initialColors?: number[]; // Optional if we want to set specific colors
+  disableControls?: boolean;
+  disableSliceMoves?: boolean;
 }
 
-const CubeContent: React.FC<Cube3DProps> = ({ size, engine, isActive, onStickerClick, isPaintingMode, isSolverMode }) => {
+const CubeContent: React.FC<Cube3DProps> = ({ 
+  size, 
+  engine, 
+  isActive, 
+  onStickerClick, 
+  isPaintingMode, 
+  isSolverMode,
+  disableControls = false,
+  disableSliceMoves = false
+}) => {
   const { camera, raycaster, pointer } = useThree();
 
 
@@ -106,6 +117,10 @@ const CubeContent: React.FC<Cube3DProps> = ({ size, engine, isActive, onStickerC
     engine.cubeGroupRef.current = cubeGroupRef.current;
     engine.pivotRef.current = pivotRef.current;
     engine.noiseTexture = noiseTexture;
+
+    if (engine.onCubiesInit) {
+      engine.onCubiesInit();
+    }
   }, [size, noiseTexture, coreMat]);
 
   useEffect(() => {
@@ -172,7 +187,7 @@ const CubeContent: React.FC<Cube3DProps> = ({ size, engine, isActive, onStickerC
   const dragStateRef = useRef<any>(null);
 
   const handlePointerDown = (e: any) => {
-    if (!isActive || engine.isAnimating) return;
+    if (!isActive || engine.isAnimating || disableSliceMoves) return;
 
     // Check for hits
     raycaster.setFromCamera(pointer, camera);
@@ -307,15 +322,17 @@ const CubeContent: React.FC<Cube3DProps> = ({ size, engine, isActive, onStickerC
       };
 
       if (MOVES_DYNAMIC[key]) {
-        if (isSolverMode) return;
+        if (isSolverMode || disableSliceMoves) return;
         e.preventDefault();
         let [axis, layer, angle] = MOVES_DYNAMIC[key];
         if (shift) angle = -angle;
         rotateLayer(axis, layer, angle, 300);
       } else if (key === 'arrowleft' || key === 'arrowright') {
+        if (disableControls) return;
         e.preventDefault();
         rotateWholeCube('y', (Math.PI / 2) * (key === 'arrowleft' ? -1 : 1), 300);
       } else if (key === 'arrowup' || key === 'arrowdown') {
+        if (disableControls) return;
         e.preventDefault();
         rotateWholeCube('x', (Math.PI / 2) * (key === 'arrowup' ? -1 : 1), 300);
       }
@@ -344,7 +361,7 @@ const CubeContent: React.FC<Cube3DProps> = ({ size, engine, isActive, onStickerC
         dampingFactor={0.05}
         enablePan={false}
         enableZoom={false}
-        enableRotate={!isSolverMode}
+        enableRotate={!isSolverMode && !disableControls}
       />
 
       <ambientLight intensity={2.5} />

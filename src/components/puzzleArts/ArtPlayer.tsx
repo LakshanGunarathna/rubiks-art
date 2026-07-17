@@ -1,6 +1,6 @@
 import React, { useState, useCallback, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronRight, ChevronLeft, X, Loader2 } from 'lucide-react';
+import { ChevronRight, ChevronLeft, X, Loader2, Eye } from 'lucide-react';
 import { MOVES_2X2, MOVES_3X3, MOVES_4X4, MOVES_5X5 } from '../../utils/cubeConstants';
 import type { CubeArt } from '../../data/cubeArts';
 
@@ -59,6 +59,20 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
   const [engine, setEngine] = useState<any>(null);
   const [currentStep, setCurrentStep] = useState(0);
   const [lastActionDirection, setLastActionDirection] = useState(1);
+  const [is3DViewOpen, setIs3DViewOpen] = useState(false);
+  const [modalEngine, setModalEngine] = useState<any>(null);
+  const [modalReadyTrigger, setModalReadyTrigger] = useState(0);
+  const [isModalLoading, setIsModalLoading] = useState(true);
+
+  const handleModalEngineReady = useCallback((eng: any) => {
+    eng.onCubiesInit = () => {
+      setModalReadyTrigger(prev => prev + 1);
+    };
+    setModalEngine(eng);
+    if (eng.cubiesRef?.current?.length > 0) {
+      setModalReadyTrigger(prev => prev + 1);
+    }
+  }, []);
 
   const parsedMoves = React.useMemo(() => {
     const rawArray = art.moves.trim().split(/\s+/).filter(m => m);
@@ -95,6 +109,21 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
     await engine.rotateLayer(move.axis, move.layer, -move.angle, 600, false);
   }, [engine, currentStep, parsedMoves]);
 
+  React.useEffect(() => {
+    if (modalEngine && modalEngine.cubiesRef?.current?.length > 0 && currentStep >= 0) {
+      const initModalCube = async () => {
+        setIsModalLoading(true);
+        modalEngine.snapReset();
+        for (let i = 0; i < currentStep; i++) {
+          const move = parsedMoves[i];
+          await modalEngine.rotateLayer(move.axis, move.layer, move.angle, 0, false);
+        }
+        setIsModalLoading(false);
+      };
+      initModalCube();
+    }
+  }, [modalEngine, modalReadyTrigger, currentStep, parsedMoves]);
+
   return (
     <div className="w-full max-w-6xl mx-auto flex flex-col items-center gap-6 pt-2 pb-12">
       <div className="w-full flex justify-between items-center px-4">
@@ -103,7 +132,7 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
         </h1>
         <button 
           onClick={onExit}
-          className="p-2 rounded-xl transition-all border shadow-sm hover:shadow"
+          className="p-2 rounded-xl transition-all border shadow-sm hover:shadow cursor-pointer"
           style={{ backgroundColor: 'var(--nav-bg)', borderColor: 'var(--nav-border)', color: 'var(--text-primary)' }}
         >
           <X className="w-6 h-6" />
@@ -119,7 +148,7 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
         {/* Cube Container */}
         <div className="w-full lg:w-2/3 h-[350px] lg:h-[530px] relative rounded-3xl overflow-hidden backdrop-blur-2xl border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-2xl">
           <Suspense fallback={<LoadingCube />}>
-            <Cube3DWrapper size={size} onEngineReady={setEngine} />
+            <Cube3DWrapper size={size} onEngineReady={setEngine} disableControls={true} disableSliceMoves={true} />
           </Suspense>
         </div>
 
@@ -151,7 +180,7 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
               <button
                 onClick={handleBack}
                 disabled={currentStep === 0 || engine?.isAnimating}
-                className="flex-1 py-3 px-4 rounded-xl flex items-center justify-center gap-2 font-medium transition-all disabled:opacity-50"
+                className="flex-1 py-3 px-4 rounded-xl flex items-center justify-center gap-2 font-medium transition-all disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
                 style={{ backgroundColor: 'var(--nav-bg)', color: 'var(--text-primary)', border: '1px solid var(--nav-border)' }}
               >
                 <ChevronLeft className="w-5 h-5" />
@@ -160,15 +189,73 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
               <button
                 onClick={handleNext}
                 disabled={currentStep >= parsedMoves.length || engine?.isAnimating}
-                className="flex-1 py-3 px-4 rounded-xl flex items-center justify-center gap-2 font-medium transition-all text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:bg-gray-500"
+                className="flex-1 py-3 px-4 rounded-xl flex items-center justify-center gap-2 font-medium transition-all text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:bg-gray-500 cursor-pointer disabled:cursor-not-allowed"
               >
                 Next
                 <ChevronRight className="w-5 h-5" />
               </button>
             </div>
+
+            <button
+              onClick={() => {
+                setIsModalLoading(true);
+                setIs3DViewOpen(true);
+              }}
+              className="w-full mt-4 py-3 px-4 rounded-xl flex items-center justify-center gap-2 font-medium transition-all text-white bg-indigo-600 hover:bg-indigo-700 shadow-md hover:shadow-lg cursor-pointer"
+            >
+              <Eye className="w-5 h-5" />
+              3D View
+            </button>
           </div>
         </div>
       </motion.div>
+
+      {/* 3D View Modal */}
+      {is3DViewOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/40 backdrop-blur-sm p-4">
+          <div className="w-full max-w-3xl bg-[#e2e8f0] rounded-[2rem] p-6 flex flex-col shadow-2xl relative">
+            {/* Modal Header */}
+            <div className="flex justify-between items-center mb-4 px-1">
+              <h3 className="text-xl font-bold text-[#0e2a52] font-heading">
+                #{art.id} - {art.name}
+              </h3>
+              <button 
+                onClick={() => {
+                  setIs3DViewOpen(false);
+                  setModalEngine(null);
+                  setIsModalLoading(true);
+                }}
+                className="w-10 h-10 rounded-xl bg-white border border-slate-300/40 shadow-sm flex items-center justify-center text-slate-700 hover:text-slate-950 transition-all cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal 3D Canvas */}
+            <div className="relative w-full aspect-[1.8] bg-[#cbd5e1] rounded-2xl overflow-hidden flex items-center justify-center shadow-inner">
+              <Suspense fallback={<LoadingCube />}>
+                <Cube3DWrapper 
+                  size={size} 
+                  onEngineReady={handleModalEngineReady} 
+                  disableSliceMoves={true} 
+                />
+              </Suspense>
+
+              {isModalLoading && (
+                <div className="absolute inset-0 bg-[#cbd5e1] flex flex-col items-center justify-center z-10 text-slate-800 rounded-2xl">
+                  <Loader2 className="w-10 h-10 animate-spin text-slate-600 mb-4" />
+                  <p className="font-semibold text-sm text-slate-600 opacity-90">Synchronizing 3D View...</p>
+                </div>
+              )}
+            </div>
+
+            {/* Modal Footer/Controls Info */}
+            <div className="mt-4 text-center text-xs text-slate-600 italic font-medium">
+              You can rotate to view the pattern from all sides.
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -5,9 +5,11 @@ import { useCubeEngine } from '../../hooks/useCubeEngine';
 interface Cube3DWrapperProps {
   size: number;
   onEngineReady: (engine: any) => void;
+  disableControls?: boolean;
+  disableSliceMoves?: boolean;
 }
 
-const Cube3DWrapper: React.FC<Cube3DWrapperProps> = ({ size, onEngineReady }) => {
+const Cube3DWrapper: React.FC<Cube3DWrapperProps> = ({ size, onEngineReady, disableControls, disableSliceMoves }) => {
   const engine = useCubeEngine();
   
   React.useEffect(() => {
@@ -19,6 +21,8 @@ const Cube3DWrapper: React.FC<Cube3DWrapperProps> = ({ size, onEngineReady }) =>
       size={size}
       engine={engine}
       isActive={true}
+      disableControls={disableControls}
+      disableSliceMoves={disableSliceMoves}
     />
   );
 };
