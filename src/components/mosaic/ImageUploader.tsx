@@ -1,12 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
+import type { DragEvent } from 'react';
 import { motion } from 'framer-motion';
 import { Upload, Sparkles } from 'lucide-react';
 
 interface ImageUploaderProps {
-  onImageUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onImageFile: (file: File) => void;
 }
 
-export const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUpload }) => {
+export const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageFile }) => {
+  const [isDragActive, setIsDragActive] = useState<boolean>(false);
+
+  const handleDrag = (e: DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (e.type === "dragenter" || e.type === "dragover") {
+      setIsDragActive(true);
+    } else if (e.type === "dragleave") {
+      setIsDragActive(false);
+    }
+  };
+
+  const handleDrop = (e: DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragActive(false);
+
+    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+      onImageFile(e.dataTransfer.files[0]);
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (e.target.files && e.target.files[0]) {
+      onImageFile(e.target.files[0]);
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
@@ -14,15 +44,29 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUpload }) =
       exit={{ opacity: 0, y: -15 }}
       className="w-full max-w-xl mx-auto flex flex-col gap-6"
     >
-      <div className="rounded-3xl p-8 backdrop-blur-md border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-xl flex flex-col items-center justify-center text-center gap-6">
-        <div className="w-16 h-16 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-500 border border-blue-500/20">
+      <div 
+        onDragEnter={handleDrag}
+        onDragOver={handleDrag}
+        onDragLeave={handleDrag}
+        onDrop={handleDrop}
+        className={`rounded-3xl p-8 backdrop-blur-md border transition-all duration-350 shadow-xl flex flex-col items-center justify-center text-center gap-6 relative ${
+          isDragActive 
+            ? 'border-blue-500 bg-blue-500/5 scale-[1.02] ring-4 ring-blue-500/10' 
+            : 'border-[var(--glass-border)] bg-[var(--glass-bg)] hover:border-slate-300 dark:hover:border-slate-800'
+        }`}
+      >
+        <label 
+          htmlFor="mosaic-upload-input" 
+          className="cursor-pointer w-16 h-16 rounded-2xl bg-blue-500/10 hover:bg-blue-500/20 flex items-center justify-center text-blue-500 border border-blue-500/20 hover:border-blue-500/40 hover:scale-105 active:scale-95 transition-all duration-200"
+          title="Click to select file"
+        >
           <Upload className="w-8 h-8" />
-        </div>
+        </label>
         
         <div className="flex flex-col gap-2">
           <h2 className="text-2xl font-extrabold font-heading text-[var(--text-primary)]">Upload Your Image</h2>
           <p className="text-sm text-[var(--text-secondary)] max-w-xs mx-auto">
-            Choose a high-contrast photo or portrait for the best Rubik's Cube mosaic results.
+            Drag and drop your photo here, or click to browse. Works best with high-contrast close-ups.
           </p>
         </div>
 
@@ -30,7 +74,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageUpload }) =
           <input
             type="file"
             accept="image/*"
-            onChange={onImageUpload}
+            onChange={handleChange}
             className="hidden"
             id="mosaic-upload-input"
           />

@@ -128,22 +128,19 @@ export const MosaicGenerator: React.FC = () => {
     return { width, height };
   }, [cubesWide, cubesHigh]);
 
-  // Handle image uploaded by user
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        if (event.target?.result) {
-          setImageSrc(event.target.result as string);
-          setZoom(1.2);
-          setPanX(0);
-          setPanY(0);
-          setStep(2); // Go to adjustment step
-        }
-      };
-      reader.readAsDataURL(file);
-    }
+  // Handle image file selection/drop
+  const handleImageFile = (file: File) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      if (event.target?.result) {
+        setImageSrc(event.target.result as string);
+        setZoom(1.2);
+        setPanX(0);
+        setPanY(0);
+        setStep(2); // Go to adjustment step
+      }
+    };
+    reader.readAsDataURL(file);
   };
 
 
@@ -165,9 +162,11 @@ export const MosaicGenerator: React.FC = () => {
         <h1 className="text-4xl md:text-5xl font-extrabold font-heading tracking-tight mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-500">
           Rubik's Cube Mosaic Generator
         </h1>
-        <p className="text-base md:text-lg text-[var(--text-secondary)] leading-relaxed">
-          Upload any picture and instantly design a realistic mosaic layout built entirely from Rubik's Cubes. Tailor dimensions, choose approximation algorithms, and download printable patterns.
-        </p>
+        {step === 1 && (
+          <p className="text-base md:text-lg text-[var(--text-secondary)] leading-relaxed">
+            Upload any picture and instantly design a realistic mosaic layout built entirely from Rubik's Cubes. Tailor dimensions, choose approximation algorithms, and download printable patterns.
+          </p>
+        )}
       </div>
 
       {/* Step Indicators */}
@@ -213,7 +212,7 @@ export const MosaicGenerator: React.FC = () => {
             {step === 1 && (
               <ImageUploader
                 key="uploader"
-                onImageUpload={handleImageUpload}
+                onImageFile={handleImageFile}
               />
             )}
 
