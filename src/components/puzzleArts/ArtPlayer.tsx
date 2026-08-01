@@ -55,7 +55,7 @@ function getInverseMoveNotation(rawMove: string) {
 export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
   const size = art.type === '2x2x2' ? 2 : art.type === '4x4x4' ? 4 : art.type === '5x5x5' ? 5 : 3;
   const movesDict = size === 2 ? MOVES_2X2 : size === 4 ? MOVES_4X4 : size === 5 ? MOVES_5X5 : MOVES_3X3;
-  
+
   const [engine, setEngine] = useState<any>(null);
   const [currentStep, setCurrentStep] = useState(0);
   const [lastActionDirection, setLastActionDirection] = useState(1);
@@ -80,7 +80,7 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
       let face = m.replace(/[2']+/g, "");
       let modifier = m.replace(/^[a-zA-Z]+/g, "");
       let moveDef = movesDict[face];
-      
+
       if (!moveDef) {
         console.warn("Unknown move notation:", face, "in", m);
         return null;
@@ -97,7 +97,7 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
     const move = parsedMoves[currentStep];
     setLastActionDirection(1);
     setCurrentStep(prev => prev + 1);
-    await engine.rotateLayer(move.axis, move.layer, move.angle, 600, false);
+    await engine.rotateLayer(move.axis, move.layer, move.angle, 450, false);
   }, [engine, currentStep, parsedMoves]);
 
   const handleBack = useCallback(async () => {
@@ -106,7 +106,7 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
     setLastActionDirection(-1);
     setCurrentStep(newStep);
     const move = parsedMoves[newStep];
-    await engine.rotateLayer(move.axis, move.layer, -move.angle, 600, false);
+    await engine.rotateLayer(move.axis, move.layer, -move.angle, 450, false);
   }, [engine, currentStep, parsedMoves]);
 
   React.useEffect(() => {
@@ -130,7 +130,7 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
         <h1 className="text-3xl font-bold font-heading" style={{ color: 'var(--text-primary)' }}>
           #{art.id} - {art.name}
         </h1>
-        <button 
+        <button
           onClick={onExit}
           className="p-2 rounded-xl transition-all border shadow-sm hover:shadow cursor-pointer"
           style={{ backgroundColor: 'var(--nav-bg)', borderColor: 'var(--nav-border)', color: 'var(--text-primary)' }}
@@ -156,7 +156,7 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
         <div className="w-full lg:w-1/3 flex flex-col gap-6">
           <div className="p-6 rounded-3xl backdrop-blur-2xl border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-xl">
             <h2 className="text-xl font-bold font-heading mb-4" style={{ color: 'var(--text-primary)' }}>Playback Guide</h2>
-            
+
             <div className="mb-6">
               {currentStep === 0 && lastActionDirection === 1 ? (
                 <>
@@ -219,7 +219,7 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
               <h3 className="text-xl font-bold text-[#0e2a52] font-heading">
                 #{art.id} - {art.name}
               </h3>
-              <button 
+              <button
                 onClick={() => {
                   setIs3DViewOpen(false);
                   setModalEngine(null);
@@ -234,10 +234,10 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
             {/* Modal 3D Canvas */}
             <div className="relative w-full aspect-[1.8] bg-[#cbd5e1] rounded-2xl overflow-hidden flex items-center justify-center shadow-inner">
               <Suspense fallback={<LoadingCube />}>
-                <Cube3DWrapper 
-                  size={size} 
-                  onEngineReady={handleModalEngineReady} 
-                  disableSliceMoves={true} 
+                <Cube3DWrapper
+                  size={size}
+                  onEngineReady={handleModalEngineReady}
+                  disableSliceMoves={true}
                 />
               </Suspense>
 

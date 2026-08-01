@@ -8,6 +8,19 @@ import {
   COLOR_FROM_NORMAL
 } from './cubeConstants';
 
+export function isFixedCenter(cubie: any, size: number): boolean {
+  if (!cubie || size % 2 === 0) return false;
+  const stickers = cubie.children.filter((child: any) => child.userData?.isSticker);
+  if (stickers.length !== 1) return false;
+
+  const x = Math.abs(cubie.position.x) < 0.1 ? 0 : cubie.position.x;
+  const y = Math.abs(cubie.position.y) < 0.1 ? 0 : cubie.position.y;
+  const z = Math.abs(cubie.position.z) < 0.1 ? 0 : cubie.position.z;
+
+  const zerosCount = (x === 0 ? 1 : 0) + (y === 0 ? 1 : 0) + (z === 0 ? 1 : 0);
+  return zerosCount === 2;
+}
+
 export function autoDeducePieces(cubiesRef: any, engine: any, size: number = 3): void {
   if (!cubiesRef?.current) return;
   let madeChanges = false;
@@ -39,7 +52,7 @@ export function autoDeducePieces(cubiesRef: any, engine: any, size: number = 3):
         const possiblePairs = VALID_EDGES.filter(pair => pair.includes(c1));
         const remainingPairs = possiblePairs.filter(pair => {
           const count = fullyPaintedEdges.filter(fp => fp.includes(pair[0]) && fp.includes(pair[1])).length;
-          return count < size - 2;
+          return count < Math.max(1, size - 2);
         });
 
         if (remainingPairs.length === 1) {
@@ -76,24 +89,29 @@ export function autoDeducePieces(cubiesRef: any, engine: any, size: number = 3):
   }
 }
 
-export function autoFillCenters(cubiesRef: any, engine: any, size: number = 3): void {
+export function autoFillCenters(cubiesRef: any, engine: any, size: number = 3, targetSticker?: any): void {
   if (!cubiesRef?.current) return;
+  // Even-sized cubes (2x2, 4x4) have no fixed centers
+  if (size % 2 === 0) return;
+
   const noiseTexture = engine?.noiseTexture || null;
 
   const centerStickers: any[] = [];
-  const centerCoord = Math.floor(size / 2);
   cubiesRef.current.forEach((c: any) => {
-    const absSum = Math.abs(Math.round(c.position.x)) + Math.abs(Math.round(c.position.y)) + Math.abs(Math.round(c.position.z));
-    if (absSum === centerCoord && (Math.abs(Math.round(c.position.x)) === centerCoord || Math.abs(Math.round(c.position.y)) === centerCoord || Math.abs(Math.round(c.position.z)) === centerCoord)) {
+    if (isFixedCenter(c, size)) {
       const st = c.children.find((child: any) => child.userData?.isSticker);
       if (st) {
+        const x = Math.abs(c.position.x) < 0.1 ? 0 : c.position.x;
+        const y = Math.abs(c.position.y) < 0.1 ? 0 : c.position.y;
+        const z = Math.abs(c.position.z) < 0.1 ? 0 : c.position.z;
+        const normal = new THREE.Vector3(
+          Math.sign(x),
+          Math.sign(y),
+          Math.sign(z)
+        );
         centerStickers.push({
           sticker: st,
-          normal: new THREE.Vector3(
-            Math.round(c.position.x) / centerCoord,
-            Math.round(c.position.y) / centerCoord,
-            Math.round(c.position.z) / centerCoord
-          ),
+          normal,
           color: st.material.color.getHex()
         });
       }
@@ -101,16 +119,33 @@ export function autoFillCenters(cubiesRef: any, engine: any, size: number = 3): 
   });
 
   const painted = centerStickers.filter(s => s.color !== RUBIKS_CUBE_COLORS.gray);
-  let s1 = null, s2 = null;
-  for (let i = 0; i < painted.length; i++) {
-    for (let j = i + 1; j < painted.length; j++) {
-      if (painted[i].normal.dot(painted[j].normal) === 0) {
-        s1 = painted[i];
-        s2 = painted[j];
-        break;
-      }
+  if (painted.length < 2) return;
+
+  let s1: any = null, s2: any = null;
+
+  // Prioritize targetSticker if provided
+  if (targetSticker) {
+    const targetItem = painted.find(s => s.sticker === targetSticker);
+    if (targetItem) {
+      s1 = targetItem;
+      s2 = painted.find(s => s !== s1 && s1.normal.dot(s.normal) === 0) || null;
     }
-    if (s1) break;
+  }
+
+  // Fallback: pick any perpendicular pair of painted center stickers
+  if (!s1 || !s2) {
+    s1 = null;
+    s2 = null;
+    for (let i = 0; i < painted.length; i++) {
+      for (let j = i + 1; j < painted.length; j++) {
+        if (painted[i].normal.dot(painted[j].normal) === 0) {
+          s1 = painted[i];
+          s2 = painted[j];
+          break;
+        }
+      }
+      if (s1) break;
+    }
   }
 
   if (s1 && s2) {

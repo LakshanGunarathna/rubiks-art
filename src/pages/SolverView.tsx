@@ -23,7 +23,7 @@ import { SolverGuideSection } from '../components/solver/SolverGuideSection';
 import { getHumanReadableMove } from '../utils/cubeFormatters';
 import { OPPOSITE_COLORS, MOVES_2X2, MOVES_3X3 } from '../utils/cubeConstants';
 import { getCubeArray2x2, getCubeString3x3, getCubeString4x4, getCubeString5x5 } from '../utils/cubeStateUtils';
-import { autoDeducePieces, autoFillCenters } from '../utils/cubeAutoPainter';
+import { autoDeducePieces, autoFillCenters, isFixedCenter } from '../utils/cubeAutoPainter';
 import {
   validate2x2, validate3x3, validate4x4, validate5x5,
   checkIfSolved2x2, checkIfSolved3x3, checkIfSolved4x4, checkIfSolved5x5
@@ -144,21 +144,21 @@ export const SolverView: React.FC = () => {
     const noiseTexture = engine?.noiseTexture || null;
     sticker.material = getStickerMat(selectedColor, noiseTexture);
 
-    const absSum = Math.abs(Math.round(cubie.position.x)) +
-      Math.abs(Math.round(cubie.position.y)) +
-      Math.abs(Math.round(cubie.position.z));
-
-    if (absSum === 1) {
+    // Opposite center painting applies to fixed centers (3x3 and 5x5)
+    if (isFixedCenter(cubie, size)) {
       const oppositeColor = OPPOSITE_COLORS[selectedColor];
       if (oppositeColor !== undefined) {
-        const oppX = -Math.round(cubie.position.x);
-        const oppY = -Math.round(cubie.position.y);
-        const oppZ = -Math.round(cubie.position.z);
-        const oppCubie = cubiesRef?.current?.find((c: any) =>
-          Math.round(c.position.x) === oppX &&
-          Math.round(c.position.y) === oppY &&
-          Math.round(c.position.z) === oppZ
-        );
+        const oppX = Math.abs(cubie.position.x) < 0.1 ? 0 : -Math.round(cubie.position.x);
+        const oppY = Math.abs(cubie.position.y) < 0.1 ? 0 : -Math.round(cubie.position.y);
+        const oppZ = Math.abs(cubie.position.z) < 0.1 ? 0 : -Math.round(cubie.position.z);
+
+        const oppCubie = cubiesRef?.current?.find((c: any) => {
+          const cx = Math.abs(c.position.x) < 0.1 ? 0 : Math.round(c.position.x);
+          const cy = Math.abs(c.position.y) < 0.1 ? 0 : Math.round(c.position.y);
+          const cz = Math.abs(c.position.z) < 0.1 ? 0 : Math.round(c.position.z);
+          return cx === oppX && cy === oppY && cz === oppZ;
+        });
+
         if (oppCubie) {
           const oppSticker = oppCubie.children.find((child: any) => child.userData?.isSticker);
           if (oppSticker) {
@@ -168,9 +168,7 @@ export const SolverView: React.FC = () => {
       }
     }
 
-    if (size !== 4) {
-      autoFillCenters(cubiesRef, engine, size);
-    }
+    autoFillCenters(cubiesRef, engine, size, sticker);
     setTimeout(() => autoDeducePieces(cubiesRef, engine, size), 0);
 
     // Wakeup API optimization for 4x4 and 5x5
