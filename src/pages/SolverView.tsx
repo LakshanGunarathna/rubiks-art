@@ -168,7 +168,9 @@ export const SolverView: React.FC = () => {
       }
     }
 
-    autoFillCenters(cubiesRef, engine, size);
+    if (size !== 4) {
+      autoFillCenters(cubiesRef, engine, size);
+    }
     setTimeout(() => autoDeducePieces(cubiesRef, engine, size), 0);
 
     // Wakeup API optimization for 4x4 and 5x5
@@ -371,7 +373,7 @@ export const SolverView: React.FC = () => {
   };
 
   const handleStep = async (direction: 1 | -1, isAuto: boolean = false) => {
-    if (isAnimating) return;
+    if (isAnimating || engine?.isAnimatingRef?.current) return;
 
     const duration = isAuto ? playbackSpeed * 0.6 : 500;
 

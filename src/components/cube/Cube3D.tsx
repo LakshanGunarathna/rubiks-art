@@ -187,7 +187,7 @@ const CubeContent: React.FC<Cube3DProps> = ({
   const dragStateRef = useRef<any>(null);
 
   const handlePointerDown = (e: any) => {
-    if (!isActive || engine.isAnimating || disableSliceMoves) return;
+    if (!isActive || engine.isAnimating || engine.isAnimatingRef?.current || disableSliceMoves) return;
 
     // Check for hits
     raycaster.setFromCamera(pointer, camera);
@@ -230,7 +230,7 @@ const CubeContent: React.FC<Cube3DProps> = ({
   };
 
   const handlePointerMove = (e: any) => {
-    if (!dragStateRef.current || !isActive || engine.isAnimating) return;
+    if (!dragStateRef.current || !isActive || engine.isAnimating || engine.isAnimatingRef?.current) return;
 
     const dx = e.clientX - dragStateRef.current.screenStart.x;
     const dy = e.clientY - dragStateRef.current.screenStart.y;
@@ -295,7 +295,7 @@ const CubeContent: React.FC<Cube3DProps> = ({
   // Keyboard
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (!isActive || engine.isAnimating) return;
+      if (!isActive || engine.isAnimating || engine.isAnimatingRef?.current) return;
 
       const key = e.key.toLowerCase();
       const shift = e.shiftKey;

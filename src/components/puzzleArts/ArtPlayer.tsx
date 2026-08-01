@@ -93,7 +93,7 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
   }, [art.moves, movesDict]);
 
   const handleNext = useCallback(async () => {
-    if (!engine || engine.isAnimating || currentStep >= parsedMoves.length) return;
+    if (!engine || engine.isAnimating || engine.isAnimatingRef?.current || currentStep >= parsedMoves.length) return;
     const move = parsedMoves[currentStep];
     setLastActionDirection(1);
     setCurrentStep(prev => prev + 1);
@@ -101,7 +101,7 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
   }, [engine, currentStep, parsedMoves]);
 
   const handleBack = useCallback(async () => {
-    if (!engine || engine.isAnimating || currentStep <= 0) return;
+    if (!engine || engine.isAnimating || engine.isAnimatingRef?.current || currentStep <= 0) return;
     const newStep = currentStep - 1;
     setLastActionDirection(-1);
     setCurrentStep(newStep);
@@ -179,7 +179,7 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
             <div className="flex justify-between gap-4">
               <button
                 onClick={handleBack}
-                disabled={currentStep === 0 || engine?.isAnimating}
+                disabled={currentStep === 0 || engine?.isAnimating || engine?.isAnimatingRef?.current}
                 className="flex-1 py-3 px-4 rounded-xl flex items-center justify-center gap-2 font-medium transition-all disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
                 style={{ backgroundColor: 'var(--nav-bg)', color: 'var(--text-primary)', border: '1px solid var(--nav-border)' }}
               >
@@ -188,7 +188,7 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
               </button>
               <button
                 onClick={handleNext}
-                disabled={currentStep >= parsedMoves.length || engine?.isAnimating}
+                disabled={currentStep >= parsedMoves.length || engine?.isAnimating || engine?.isAnimatingRef?.current}
                 className="flex-1 py-3 px-4 rounded-xl flex items-center justify-center gap-2 font-medium transition-all text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:bg-gray-500 cursor-pointer disabled:cursor-not-allowed"
               >
                 Next
