@@ -1,10 +1,10 @@
-import React, { useState, useCallback, lazy, Suspense } from 'react';
+import React, { useState, useCallback, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, ChevronLeft, X, Loader2, Eye } from 'lucide-react';
 import { MOVES_2X2, MOVES_3X3, MOVES_4X4, MOVES_5X5 } from '../../utils/cubeConstants';
 import type { CubeArt } from '../../data/cubeArts';
 
-const Cube3DWrapper = lazy(() => import('../cube/Cube3DWrapper'));
+import Cube3DWrapper from '../cube/Cube3DWrapper';
 
 interface ArtPlayerProps {
   art: CubeArt;
@@ -111,18 +111,50 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
 
   React.useEffect(() => {
     if (modalEngine && modalEngine.cubiesRef?.current?.length > 0 && currentStep >= 0) {
-      const initModalCube = async () => {
+      const syncModalCube = () => {
         setIsModalLoading(true);
-        modalEngine.snapReset();
-        for (let i = 0; i < currentStep; i++) {
-          const move = parsedMoves[i];
-          await modalEngine.rotateLayer(move.axis, move.layer, move.angle, 0, false);
+
+        if (modalEngine.pivotRef?.current) {
+          modalEngine.pivotRef.current.rotation.set(0, 0, 0);
+          while (modalEngine.pivotRef.current.children.length > 0) {
+            const child = modalEngine.pivotRef.current.children[0];
+            modalEngine.cubeGroupRef?.current?.attach(child);
+            child.updateMatrixWorld(true);
+          }
         }
+
+        const mainCubies = engine?.cubiesRef?.current;
+        const modalCubies = modalEngine.cubiesRef.current;
+
+        if (mainCubies && mainCubies.length === modalCubies.length) {
+          // Instant direct 3D transform cloning (< 1ms execution time)
+          for (let i = 0; i < mainCubies.length; i++) {
+            const src = mainCubies[i];
+            const dest = modalCubies[i];
+            if (src && dest) {
+              if (dest.parent !== modalEngine.cubeGroupRef.current) {
+                modalEngine.cubeGroupRef.current.attach(dest);
+              }
+              dest.position.copy(src.position);
+              dest.quaternion.copy(src.quaternion);
+              dest.updateMatrixWorld(true);
+            }
+          }
+        } else {
+          // Fallback if main engine cubies are not available
+          modalEngine.snapReset();
+          for (let i = 0; i < currentStep; i++) {
+            const move = parsedMoves[i];
+            modalEngine.rotateLayer(move.axis, move.layer, move.angle, 0, false);
+          }
+        }
+
         setIsModalLoading(false);
       };
-      initModalCube();
+
+      syncModalCube();
     }
-  }, [modalEngine, modalReadyTrigger, currentStep, parsedMoves]);
+  }, [modalEngine, modalReadyTrigger, currentStep, parsedMoves, engine]);
 
   return (
     <div className="w-full max-w-6xl mx-auto flex flex-col items-center gap-6 pt-2 pb-12">

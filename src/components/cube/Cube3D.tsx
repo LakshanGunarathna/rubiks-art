@@ -1,7 +1,8 @@
-import React, { useRef, useMemo, useEffect } from 'react';
+import React, { useRef, useMemo, useEffect, useState } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import * as THREE from 'three';
+import { Loader2 } from 'lucide-react';
 import { RUBIKS_CUBE_COLORS } from '../../types/cube';
 import type { Axis, CameraAnimState } from '../../types/cube';
 
@@ -377,13 +378,39 @@ const CubeContent: React.FC<Cube3DProps> = ({
 };
 
 export const Cube3D: React.FC<Cube3DProps> = (props) => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(true);
+  }, [props.size]);
+
+  useEffect(() => {
+    if (props.engine) {
+      const prevCb = props.engine.onCubiesInit;
+      props.engine.onCubiesInit = () => {
+        setIsLoading(false);
+        if (prevCb) prevCb();
+      };
+    }
+  }, [props.engine]);
+
   const cursorClass = (props.isSolverMode && !props.isPaintingMode)
     ? "cursor-not-allowed"
     : "cursor-pointer active:cursor-grabbing";
 
   return (
     <div className={`w-full h-full relative ${cursorClass}`}>
-      <Canvas dpr={[1, 2]} flat gl={{ antialias: true, alpha: true }}>
+      {isLoading && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-[var(--glass-bg)] backdrop-blur-md z-10 rounded-2xl transition-opacity duration-300 pointer-events-none">
+          <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+          <span className="text-xs font-semibold tracking-wider text-[var(--text-secondary)] uppercase">Loading 3D Cube...</span>
+        </div>
+      )}
+      <Canvas
+        dpr={[1, Math.min(typeof window !== 'undefined' ? window.devicePixelRatio : 1, 2)]}
+        flat
+        gl={{ antialias: true, alpha: true, powerPreference: "high-performance", precision: "mediump" }}
+      >
         <CubeContent {...props} />
       </Canvas>
     </div>

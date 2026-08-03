@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useRef, lazy, Suspense } from 'react';
+import React, { useState, useCallback, useEffect, useRef, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { updateMetaTags } from '../utils/seo';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -9,7 +9,7 @@ import * as Rubiks4x4Solver from '../types/cube4x4';
 import * as Rubiks5x5Solver from '../types/cube5x5';
 import { useSiteConfig } from '../config/siteConfig';
 
-const Solver3DWrapper = lazy(() => import('../components/solver/Solver3DWrapper'));
+import Solver3DWrapper from '../components/solver/Solver3DWrapper';
 
 import { RUBIKS_CUBE_COLORS } from '../types/cube';
 import type { PaintedPiece } from '../types/cube';

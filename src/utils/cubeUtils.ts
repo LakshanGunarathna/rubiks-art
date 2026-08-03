@@ -59,13 +59,22 @@ let cachedGeometries: any = null;
 export const getGeometries = () => {
   if (cachedGeometries) return cachedGeometries;
   cachedGeometries = {
-    core: new RoundedBoxGeometry(0.99, 0.99, 0.99, 5, 0.10),
-    stickerX: new RoundedBoxGeometry(0.06, 0.83, 0.83, 6, 0.12),
-    stickerY: new RoundedBoxGeometry(0.83, 0.06, 0.83, 6, 0.12),
-    stickerZ: new RoundedBoxGeometry(0.83, 0.83, 0.06, 6, 0.12)
+    core: new RoundedBoxGeometry(0.99, 0.99, 0.99, 2, 0.08),
+    stickerX: new RoundedBoxGeometry(0.06, 0.83, 0.83, 2, 0.10),
+    stickerY: new RoundedBoxGeometry(0.83, 0.06, 0.83, 2, 0.10),
+    stickerZ: new RoundedBoxGeometry(0.83, 0.83, 0.06, 2, 0.10)
   };
   return cachedGeometries;
 };
+
+// Pre-initialize shared geometries and noise texture immediately in background
+if (typeof window !== 'undefined') {
+  setTimeout(() => {
+    createNoiseTexture();
+    getGeometries();
+    getCoreMat();
+  }, 0);
+}
 
 export const getCandidateAxes = (faceAxis: string) => {
   if (faceAxis === 'x') return ['y', 'z'];

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, lazy, Suspense } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { updateMetaTags } from '../utils/seo';
 import { motion } from 'framer-motion';
@@ -10,7 +10,7 @@ import * as Rubiks4x4Solver from '../types/cube4x4';
 import * as Rubiks5x5Solver from '../types/cube5x5';
 import { CubeFactsSection } from '../components/cube/CubeFactsSection';
 
-const Cube3DWrapper = lazy(() => import('../components/cube/Cube3DWrapper'));
+import Cube3DWrapper from '../components/cube/Cube3DWrapper';
 
 const LoadingCube = () => (
   <div className="absolute inset-0 flex flex-col items-center justify-center z-10 text-white rounded-3xl">
