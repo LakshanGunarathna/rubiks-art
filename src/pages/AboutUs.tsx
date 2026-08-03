@@ -2,14 +2,14 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCubes, faMagic, faPuzzlePiece, faImage, faLightbulb, faCode } from '@fortawesome/free-solid-svg-icons';
+import { faCubes, faMagic, faPuzzlePiece, faImage, faLightbulb, faExclamationTriangle, faComments, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { updateMetaTags } from '../utils/seo';
 
 export const AboutUs: React.FC = () => {
   useEffect(() => {
     updateMetaTags(
       "About Us - Rubik's Art",
-      "Learn about Rubik's Art — the ultimate online destination for 3D Rubik's Cube simulators, step-by-step solvers, puzzle art galleries, and custom mosaic generator."
+      "Learn about Rubik's Art — your online destination for 3D Rubik's Cube simulators, step-by-step solvers, puzzle art galleries, and custom mosaic generator."
     );
   }, []);
 
@@ -18,7 +18,7 @@ export const AboutUs: React.FC = () => {
       icon: faCubes,
       title: "Interactive 3D Cubes",
       color: "from-blue-500 to-cyan-500",
-      description: "Perform real-time rotations, explore 2x2, 3x3, 4x4, and 5x5 Rubik's Cubes with physics-based smooth WebGL animations and customizable controls."
+      description: "Perform real-time rotations and explore 2x2, 3x3, 4x4, and 5x5 Rubik's Cubes with physics-based smooth 3D animations and customizable controls."
     },
     {
       icon: faMagic,
@@ -36,7 +36,7 @@ export const AboutUs: React.FC = () => {
       icon: faImage,
       title: "Mosaic Generator",
       color: "from-emerald-500 to-teal-500",
-      description: "Upload any photo or graphics to generate pixel-perfect Rubik's Cube mosaic blueprint guides with detailed color palettes and build lists."
+      description: "Upload any photo or graphic to generate pixel-perfect Rubik's Cube mosaic blueprint guides with detailed color palettes and build lists."
     }
   ];
 
@@ -53,11 +53,11 @@ export const AboutUs: React.FC = () => {
           <span className="px-4 py-1.5 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-500 border border-blue-500/20">
             About Rubik's Art
           </span>
-          <h1 className="text-4xl sm:text-5xl font-extrabold font-heading tracking-tight" style={{ color: 'var(--text-primary)' }}>
+          <h1 className="text-4xl mt-5 sm:text-5xl font-extrabold font-heading tracking-tight" style={{ color: 'var(--text-primary)' }}>
             Empowering Speedcubers & Visual Artists
           </h1>
           <p className="text-lg max-w-3xl mx-auto leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-            Rubik's Art is a modern, high-performance web platform built for cube enthusiasts, puzzle solvers, and creative mosaic creators worldwide.
+            Rubik's Art is a modern web platform built for cube enthusiasts, puzzle solvers, and creative mosaic creators worldwide.
           </p>
         </div>
 
@@ -79,11 +79,27 @@ export const AboutUs: React.FC = () => {
           </p>
         </div>
 
-        {/* Core Features Grid */}
+        {/* Disclaimer Card */}
+        <div className="rounded-3xl p-6 sm:p-8 backdrop-blur-md border border-amber-500/30 bg-amber-500/5 text-left space-y-3">
+          <div className="flex items-center gap-3 text-amber-600 dark:text-amber-400">
+            <FontAwesomeIcon icon={faExclamationTriangle} className="text-xl" />
+            <h2 className="text-xl font-bold font-heading">Trademark Disclaimer</h2>
+          </div>
+          <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            This website is NOT derived from, is NOT associated with and is NOT endorsed or sponsored by the owner of the Rubik's Cube's Trademark - Spin Master Toys UK Limited.
+          </p>
+        </div>
+
+        {/* Features Section */}
         <div className="space-y-6">
-          <h2 className="text-3xl font-bold font-heading text-center" style={{ color: 'var(--text-primary)' }}>
-            What We Offer
-          </h2>
+          <div className="text-center space-y-2">
+            <h2 className="text-3xl font-bold font-heading" style={{ color: 'var(--text-primary)' }}>
+              Website Features
+            </h2>
+            <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+              Explore the core tools and visualizers available on Rubik's Art
+            </p>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {features.map((item, index) => (
               <motion.div
@@ -109,39 +125,24 @@ export const AboutUs: React.FC = () => {
           </div>
         </div>
 
-        {/* Technical Excellence */}
-        <div className="rounded-3xl p-8 backdrop-blur-md border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-xl text-left space-y-4">
-          <div className="flex items-center gap-3">
-            <FontAwesomeIcon icon={faCode} className="text-2xl text-cyan-500" />
-            <h2 className="text-2xl font-bold font-heading" style={{ color: 'var(--text-primary)' }}>
-              Built With Cutting-Edge Technology
-            </h2>
+        {/* Feedback & Contact Us Link */}
+        <div className="rounded-3xl p-8 backdrop-blur-md border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-xl text-center space-y-6">
+          <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-500 text-2xl mb-1">
+            <FontAwesomeIcon icon={faComments} />
           </div>
-          <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-            Rubik's Art is powered by modern web technologies including <strong>React, TypeScript, Three.js WebGL graphics</strong>, and high-performance serverless solver engines. We continuously optimize our 3D rendering pipeline to run smoothly on desktop computers, laptops, and mobile smartphones alike.
+          <h2 className="text-3xl font-extrabold font-heading" style={{ color: 'var(--text-primary)' }}>
+            We'd Love Your Feedback!
+          </h2>
+          <p className="max-w-xl mx-auto text-sm sm:text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+            Have suggestions, feature requests, or comments? We are constantly improving our tools and would love to hear your thoughts.
           </p>
-        </div>
-
-        {/* CTA Banner */}
-        <div className="rounded-3xl p-8 bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-xl text-center space-y-6">
-          <h2 className="text-3xl font-extrabold font-heading">Ready to Explore?</h2>
-          <p className="max-w-xl mx-auto text-blue-100 text-sm sm:text-base">
-            Try our 3D cube solvers or generate your very first Rubik's cube mosaic art today!
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 pt-2">
+          <div className="pt-2">
             <Link
-              to="/solvers/3x3"
-              className="px-6 py-3 rounded-full bg-white text-blue-600 font-bold hover:bg-blue-50 transition-colors inline-flex items-center gap-2 shadow-lg text-sm"
+              to="/contact"
+              className="px-8 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold transition-all shadow-lg hover:shadow-emerald-500/25 inline-flex items-center gap-2 text-sm"
             >
-              <FontAwesomeIcon icon={faMagic} />
-              Try 3x3 Solver
-            </Link>
-            <Link
-              to="/mosaic-generator"
-              className="px-6 py-3 rounded-full bg-blue-700/60 text-white font-bold hover:bg-blue-700 transition-colors inline-flex items-center gap-2 border border-white/20 text-sm"
-            >
-              <FontAwesomeIcon icon={faImage} />
-              Mosaic Generator
+              <FontAwesomeIcon icon={faEnvelope} />
+              Give Feedback / Contact Us
             </Link>
           </div>
         </div>

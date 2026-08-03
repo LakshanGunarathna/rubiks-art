@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSiteConfig } from '../../config/siteConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCubes, faPuzzlePiece, faMagic, faBars, faTimes, faChevronDown, faChevronUp, faHome, faSun, faMoon, faImage, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCubes, faPuzzlePiece, faMagic, faBars, faTimes, faChevronDown, faChevronUp, faHome, faSun, faMoon, faImage } from '@fortawesome/free-solid-svg-icons';
 import { motion, AnimatePresence } from 'framer-motion';
 import logoImg from '../../assets/Logo.png';
 
@@ -51,7 +51,7 @@ export const Navbar: React.FC = () => {
     },
     { name: 'Puzzle Arts', path: '/arts', icon: faPuzzlePiece },
     { name: 'Mosaic Generator', path: '/mosaic-generator', icon: faImage },
-    { name: 'About', path: '/about', icon: faInfoCircle },
+
   ];
 
   return (

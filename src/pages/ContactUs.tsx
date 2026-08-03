@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faPaperPlane, faCheckCircle, faComments, faQuestionCircle, faMapMarkerAlt, faClock } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faPaperPlane, faCheckCircle, faComments } from '@fortawesome/free-solid-svg-icons';
 import { updateMetaTags } from '../utils/seo';
 
 export const ContactUs: React.FC = () => {
@@ -78,40 +78,20 @@ export const ContactUs: React.FC = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-xs text-[var(--text-primary)]">Email Us</h3>
-                    <p><a href="mailto:support@rubiks-art.com" className="hover:text-blue-500 transition-colors">support@rubiks-art.com</a></p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <FontAwesomeIcon icon={faClock} />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-xs text-[var(--text-primary)]">Response Time</h3>
-                    <p>Usually within 24 to 48 business hours</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-purple-500/10 text-purple-500 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <FontAwesomeIcon icon={faMapMarkerAlt} />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-xs text-[var(--text-primary)]">Platform</h3>
-                    <p>Global Online Web Platform</p>
+                    <p><a href="mailto:contact@rubiks-art.com" className="hover:text-blue-500 transition-colors">contact@rubiks-art.com</a></p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Quick Support Note */}
-            <div className="rounded-3xl p-6 backdrop-blur-md border border-amber-500/20 bg-amber-500/5 text-left space-y-3">
-              <h3 className="font-bold text-amber-600 dark:text-amber-400 flex items-center gap-2 text-sm">
-                <FontAwesomeIcon icon={faQuestionCircle} />
-                Need Quick Help with Solvers?
+            {/* Feedback & Comments Note */}
+            <div className="rounded-3xl p-6 backdrop-blur-md border border-emerald-500/20 bg-emerald-500/5 text-left space-y-3">
+              <h3 className="font-bold text-emerald-600 dark:text-emerald-400 flex items-center gap-2 text-sm">
+                <FontAwesomeIcon icon={faComments} />
+                We Value Your Feedback!
               </h3>
               <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                Check out our solver guide pages for instant step-by-step instructions on solving 2x2, 3x3, 4x4, and 5x5 Rubik's cubes.
+                Feel free to share your feedback, comments, feature ideas, or suggestions to help us improve Rubik's Art for everyone.
               </p>
             </div>
 
