@@ -28,8 +28,8 @@ export const Footer: React.FC = () => {
           </p>
         </div>
 
-        {/* Quick Links - Hidden on Mobile */}
-        <div className="hidden md:flex flex-wrap gap-8">
+        {/* Quick Links */}
+        <div className="flex flex-wrap gap-8 text-left">
           <div>
             <h4 className="font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Rubik's Cubes</h4>
             <ul className="text-sm space-y-2" style={{ color: 'var(--text-secondary)' }}>
@@ -51,9 +51,20 @@ export const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Gallery</h4>
+            <h4 className="font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Tools & Gallery</h4>
             <ul className="text-sm space-y-2" style={{ color: 'var(--text-secondary)' }}>
               <li><Link to="/arts" onClick={(e) => handleLinkClick(e, '/arts')} className="transition-colors hover:text-[var(--accent-color)]">Puzzle Arts</Link></li>
+              <li><Link to="/mosaic-generator" onClick={(e) => handleLinkClick(e, '/mosaic-generator')} className="transition-colors hover:text-[var(--accent-color)]">Mosaic Generator</Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Company & Legal</h4>
+            <ul className="text-sm space-y-2" style={{ color: 'var(--text-secondary)' }}>
+              <li><Link to="/about" onClick={(e) => handleLinkClick(e, '/about')} className="transition-colors hover:text-[var(--accent-color)]">About Us</Link></li>
+              <li><Link to="/contact" onClick={(e) => handleLinkClick(e, '/contact')} className="transition-colors hover:text-[var(--accent-color)]">Contact Us</Link></li>
+              <li><Link to="/privacy-policy" onClick={(e) => handleLinkClick(e, '/privacy-policy')} className="transition-colors hover:text-[var(--accent-color)]">Privacy Policy</Link></li>
+              <li><Link to="/terms" onClick={(e) => handleLinkClick(e, '/terms')} className="transition-colors hover:text-[var(--accent-color)]">Terms of Service</Link></li>
             </ul>
           </div>
         </div>

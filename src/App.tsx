@@ -1,41 +1,33 @@
-import { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
 import { MainLayout } from './components/layout/MainLayout';
 import { ScrollToTop } from './components/layout/ScrollToTop';
 import { Home } from './pages/Home';
-import { Loader2 } from 'lucide-react';
 
 import { CubeView } from './pages/CubeView';
 import { SolverView } from './pages/SolverView';
-const PuzzleArts = lazy(() => import('./pages/PuzzleArts').then(m => ({ default: m.PuzzleArts })));
-const MosaicGenerator = lazy(() => import('./pages/MosaicGenerator').then(m => ({ default: m.MosaicGenerator })));
-
-
-const LoadingFallback = () => (
-  <div className="w-full h-[60vh] flex flex-col items-center justify-center gap-4 text-white">
-    <Loader2 className="w-12 h-12 animate-spin text-blue-500" />
-    <p className="text-xl font-medium opacity-50">Loading Page...</p>
-  </div>
-);
-
+import { PuzzleArts } from './pages/PuzzleArts';
+import { MosaicGenerator } from './pages/MosaicGenerator';
+import { PrivacyPolicy } from './pages/PrivacyPolicy';
+import { TermsOfService } from './pages/TermsOfService';
+import { AboutUs } from './pages/AboutUs';
+import { ContactUs } from './pages/ContactUs';
 
 const AnimatedRoutes = () => {
   const location = useLocation();
 
   return (
-    <Suspense fallback={<LoadingFallback />}>
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Home />} />
-          <Route path="/cubes/:type" element={<CubeView />} />
-          <Route path="/solvers/:type" element={<SolverView />} />
-          <Route path="/arts" element={<PuzzleArts />} />
-          <Route path="/arts/:artSlug" element={<PuzzleArts />} />
-          <Route path="/mosaic-generator" element={<MosaicGenerator />} />
-        </Routes>
-      </AnimatePresence>
-    </Suspense>
+    <Routes location={location} key={location.pathname}>
+      <Route path="/" element={<Home />} />
+      <Route path="/cubes/:type" element={<CubeView />} />
+      <Route path="/solvers/:type" element={<SolverView />} />
+      <Route path="/arts" element={<PuzzleArts />} />
+      <Route path="/arts/:artSlug" element={<PuzzleArts />} />
+      <Route path="/mosaic-generator" element={<MosaicGenerator />} />
+      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      <Route path="/terms" element={<TermsOfService />} />
+      <Route path="/about" element={<AboutUs />} />
+      <Route path="/contact" element={<ContactUs />} />
+    </Routes>
   );
 };
 
