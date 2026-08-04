@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faPaperPlane, faCheckCircle, faComments } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faPaperPlane, faCheckCircle, faComments, faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { updateMetaTags } from '../utils/seo';
 
 export const ContactUs: React.FC = () => {
@@ -14,6 +14,7 @@ export const ContactUs: React.FC = () => {
 
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     updateMetaTags(
@@ -27,16 +28,43 @@ export const ContactUs: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
 
     setIsSubmitting(true);
-    // Simulate contact form submission
-    setTimeout(() => {
+    setErrorMessage(null);
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/contact@rubiks-art.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          _subject: `[Rubik's Art] ${formData.subject} - from ${formData.name}`,
+          category: formData.subject,
+          message: formData.message,
+          _captcha: 'false'
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok && (data.success === 'true' || data.success === true || response.status === 200)) {
+        setSubmitted(true);
+      } else {
+        throw new Error(data.message || 'Failed to submit form.');
+      }
+    } catch (err) {
+      console.error('Form submission error:', err);
+      setErrorMessage('Could not send email automatically. Please try again or email us directly at contact@rubiks-art.com.');
+    } finally {
       setIsSubmitting(false);
-      setSubmitted(true);
-    }, 800);
+    }
   };
 
   return (
@@ -112,14 +140,14 @@ export const ContactUs: React.FC = () => {
                   Message Sent Successfully!
                 </h2>
                 <p className="text-sm max-w-md mx-auto" style={{ color: 'var(--text-secondary)' }}>
-                  Thank you for contacting us, <strong>{formData.name}</strong>. We have received your message and will reply to <strong>{formData.email}</strong> shortly.
+                  Thank you for contacting us, <strong>{formData.name}</strong>. Your message has been sent to <strong>contact@rubiks-art.com</strong>.
                 </p>
                 <button
                   onClick={() => {
                     setSubmitted(false);
                     setFormData({ name: '', email: '', subject: 'General Inquiry', message: '' });
                   }}
-                  className="mt-4 px-6 py-2.5 rounded-full bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-colors text-sm shadow-md"
+                  className="mt-4 px-6 py-2.5 rounded-full bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-colors text-sm shadow-md cursor-pointer"
                 >
                   Send Another Message
                 </button>
@@ -129,6 +157,13 @@ export const ContactUs: React.FC = () => {
                 <h2 className="text-2xl font-bold font-heading mb-4" style={{ color: 'var(--text-primary)' }}>
                   Send Us a Message
                 </h2>
+
+                {errorMessage && (
+                  <div className="p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-600 dark:text-red-400 text-xs flex items-center gap-3">
+                    <FontAwesomeIcon icon={faExclamationCircle} className="text-lg flex-shrink-0" />
+                    <span>{errorMessage}</span>
+                  </div>
+                )}
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   <div>
@@ -202,7 +237,7 @@ export const ContactUs: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold transition-all shadow-lg hover:shadow-emerald-500/25 flex items-center justify-center gap-2 text-sm disabled:opacity-50"
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold transition-all shadow-lg hover:shadow-emerald-500/25 flex items-center justify-center gap-2 text-sm disabled:opacity-50 cursor-pointer"
                 >
                   <FontAwesomeIcon icon={faPaperPlane} />
                   {isSubmitting ? 'Sending Message...' : 'Send Message'}
