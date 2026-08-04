@@ -1,5 +1,5 @@
-import React from 'react';
-import { ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
+import { ChevronLeft, ChevronRight, Play, Pause, RotateCcw } from 'lucide-react';
 
 interface PlaybackControlsProps {
   currentStep: number;
@@ -23,49 +23,46 @@ const PlaybackControls: React.FC<PlaybackControlsProps> = ({
   onTogglePlay,
 }) => {
   return (
-    <div className="flex flex-col items-center gap-6 p-6 bg-gray-100/50 backdrop-blur-md rounded-2xl border border-[var(--glass-border)] shadow-xl w-full">
-      <div className="flex flex-col items-center gap-4 w-full">
-        <div className="text-[var(--text-secondary)] font-medium text-sm">
+    <div className="shrink-0 flex flex-col items-center gap-3 p-4 bg-[var(--glass-bg)] backdrop-blur-xl rounded-2xl border border-[var(--glass-border)] shadow-lg w-full">
+      <div className="flex items-center justify-between w-full">
+        <span className="text-xs font-semibold text-[var(--text-secondary)]">
           Step {currentStep} / {totalSteps}
-        </div>
-        
-        <div className="flex items-center gap-4">
-          <button
-            onClick={onPrev}
-            disabled={currentStep === 0}
-            className="w-12 h-12 rounded-full bg-white text-black hover:bg-gray-100 flex items-center justify-center transition-all shadow-md active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
-            title="Previous Step"
-          >
-            <ChevronLeft size={24} strokeWidth={2.5} />
-          </button>
-
-          <button
-            onClick={onTogglePlay}
-            className="w-16 h-16 rounded-full bg-blue-600 text-white hover:bg-blue-500 flex items-center justify-center transition-all shadow-lg active:scale-95 scale-110"
-            title={isPlaying ? 'Pause' : 'Play'}
-          >
-            {isPlaying ? <Pause size={30} fill="currentColor" /> : <Play size={30} fill="currentColor" className="ml-1" />}
-          </button>
-
-          <button
-            onClick={onNext}
-            disabled={currentStep === totalSteps}
-            className="w-12 h-12 rounded-full bg-white text-black hover:bg-gray-100 flex items-center justify-center transition-all shadow-md active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
-            title="Next Step"
-          >
-            <ChevronRight size={24} strokeWidth={2.5} />
-          </button>
-        </div>
+        </span>
+        <span className="text-[11px] font-bold text-blue-600 dark:text-blue-400 bg-blue-500/10 px-2.5 py-0.5 rounded-full border border-blue-500/20">
+          {(playbackSpeed / 1000).toFixed(1)}s / step
+        </span>
       </div>
 
-      <div className="w-full flex flex-col gap-2">
-        <div className="flex justify-between items-center text-xs text-[var(--text-secondary)] font-bold">
-          <span>Slower</span>
-          <span className="text-blue-700 bg-blue-100 px-3 py-1 rounded-full border border-blue-300 shadow-sm">
-            {(playbackSpeed / 1000).toFixed(1)}s / step
-          </span>
-          <span>Faster</span>
-        </div>
+      <div className="flex items-center justify-center gap-5 w-full my-0.5">
+        <button
+          onClick={onPrev}
+          disabled={currentStep === 0}
+          className="w-10 h-10 rounded-full bg-white dark:bg-gray-800 text-[var(--text-primary)] hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center justify-center transition-all shadow-md active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+          title="Previous Step"
+        >
+          <ChevronLeft size={20} strokeWidth={2.5} />
+        </button>
+
+        <button
+          onClick={onTogglePlay}
+          className="w-12 h-12 rounded-full bg-blue-600 text-white hover:bg-blue-500 flex items-center justify-center transition-all shadow-lg shadow-blue-500/25 active:scale-95 cursor-pointer"
+          title={isPlaying ? 'Pause' : 'Play'}
+        >
+          {isPlaying ? <Pause size={22} fill="currentColor" /> : <Play size={22} fill="currentColor" className="ml-0.5" />}
+        </button>
+
+        <button
+          onClick={onNext}
+          disabled={currentStep === totalSteps}
+          className="w-10 h-10 rounded-full bg-white dark:bg-gray-800 text-[var(--text-primary)] hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center justify-center transition-all shadow-md active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+          title="Next Step"
+        >
+          <ChevronRight size={20} strokeWidth={2.5} />
+        </button>
+      </div>
+
+      <div className="w-full flex items-center gap-2 pt-0.5">
+        <span className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Slower</span>
         <input 
           type="range" 
           min="300" 
@@ -73,8 +70,9 @@ const PlaybackControls: React.FC<PlaybackControlsProps> = ({
           step="100"
           value={2300 - playbackSpeed} 
           onChange={(e) => setPlaybackSpeed(2300 - parseInt(e.target.value))}
-          className="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+          className="w-full h-1.5 bg-blue-200 dark:bg-blue-950 rounded-lg appearance-none cursor-pointer accent-blue-600"
         />
+        <span className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Faster</span>
       </div>
     </div>
   );
@@ -107,6 +105,8 @@ export const SolutionGuidePanel: React.FC<SolutionGuidePanelProps> = ({
   onBackToPaint,
   getInstruction,
 }) => {
+  const activeStepRef = useRef<HTMLSpanElement | null>(null);
+
   const isStart = currentStepIndex === 0 && lastActionDir === 1;
   const isEnd = currentStepIndex >= solutionSteps.length;
 
@@ -120,8 +120,15 @@ export const SolutionGuidePanel: React.FC<SolutionGuidePanelProps> = ({
       ? "Cube Solved!"
       : getInstruction(currentMove.raw, lastActionDir === -1);
 
+  // Auto-scroll active move into view
+  useEffect(() => {
+    if (activeStepRef.current) {
+      activeStepRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [currentStepIndex]);
+
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-3.5 h-full">
       <PlaybackControls
         currentStep={currentStepIndex}
         totalSteps={solutionSteps.length}
@@ -133,56 +140,68 @@ export const SolutionGuidePanel: React.FC<SolutionGuidePanelProps> = ({
         onTogglePlay={onTogglePlay}
       />
 
-      <div className="p-6 backdrop-blur-2xl rounded-3xl border border-[var(--glass-border)] bg-gray-100/50 shadow-xl transition-colors duration-300 relative overflow-hidden">
-        <h2 className="font-semibold mb-2 text-[var(--text-primary)]">Instruction</h2>
+      <div className="shrink-0 p-4 backdrop-blur-xl rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-lg relative overflow-hidden">
+        <div className="flex items-center justify-between mb-1.5">
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)]">Instruction</h2>
+          {!isStart && !isEnd && (
+            <div>
+              {lastActionDir === -1 ? (
+                <span className="px-2.5 py-0.5 bg-amber-500/20 text-amber-500 text-[10px] font-bold rounded-full border border-amber-500/30 backdrop-blur-sm">
+                  Undo Step {currentStepIndex + 1}: {currentMove.raw}'
+                </span>
+              ) : (
+                <span className="px-2.5 py-0.5 bg-blue-500/20 text-blue-500 dark:text-blue-400 text-[10px] font-bold rounded-full border border-blue-500/30 backdrop-blur-sm">
+                  Step {currentStepIndex}: {currentMove.raw}
+                </span>
+              )}
+            </div>
+          )}
+        </div>
 
-        {!isStart && !isEnd && (
-          <div className="absolute top-4 right-6">
-            {lastActionDir === -1 ? (
-              <span className="px-3 py-1 bg-yellow-500/20 text-yellow-500 text-[10px] font-bold rounded-full border border-yellow-500/30 backdrop-blur-sm">
-                Undo Step {currentStepIndex + 1}: {currentMove.raw}'
-              </span>
-            ) : (
-              <span className="px-3 py-1 bg-blue-500/20 text-blue-400 text-[10px] font-bold rounded-full border border-blue-500/30 backdrop-blur-sm">
-                Step {currentStepIndex}: {currentMove.raw}
-              </span>
-            )}
-          </div>
-        )}
-
-        <div className="min-h-[60px] flex flex-col justify-center mt-2">
-          <p className="text-[var(--text-primary)] font-medium text-lg leading-relaxed pr-16">
+        <div className="min-h-[44px] flex items-center">
+          <p className="text-[var(--text-primary)] font-semibold text-base leading-snug">
             {instructionText}
           </p>
         </div>
       </div>
 
-      <div className="p-6 backdrop-blur-2xl rounded-3xl border border-[var(--glass-border)] bg-gray-100/50 shadow-xl transition-colors duration-300">
-        <h2 className="font-semibold mb-4 text-[var(--text-primary)]">All Steps</h2>
-        <div className="flex flex-wrap gap-2 max-h-48 overflow-y-auto pr-2 custom-scrollbar">
-          {solutionSteps.map((step, i) => (
-            <span
-              key={i}
-              className={`px-3 py-1 rounded-md text-sm font-mono font-bold transition-all duration-300 ${i === currentStepIndex - 1
-                ? 'bg-blue-600 text-white shadow-md scale-110 z-10'
-                : i < currentStepIndex - 1
-                  ? 'bg-green-600 text-white shadow-sm'
-                  : 'text-[var(--text-primary)] bg-white/10 border border-white/5'
-                }`}
-            >
-              {step.raw}
-            </span>
-          ))}
+      <div className="flex-1 min-h-0 p-4 backdrop-blur-xl rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-lg flex flex-col">
+        <div className="flex items-center justify-between mb-2 shrink-0">
+          <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)]">All Steps</h2>
         </div>
-        <p className="mt-4 text-xs text-center text-[var(--text-secondary)] font-medium">
+
+        <div className="flex flex-wrap content-start items-start gap-1.5 overflow-y-auto custom-scrollbar flex-1 min-h-0 pr-1 py-1">
+          {solutionSteps.map((step, i) => {
+            const isActive = i === currentStepIndex - 1;
+            const isPassed = i < currentStepIndex - 1;
+            return (
+              <span
+                key={i}
+                ref={isActive ? activeStepRef : null}
+                className={`px-2.5 h-7 inline-flex items-center justify-center rounded-lg text-xs font-mono font-bold transition-all duration-200 ${
+                  isActive
+                    ? 'bg-blue-600 text-white shadow-md scale-105 z-10'
+                    : isPassed
+                      ? 'bg-emerald-600 text-white shadow-sm'
+                      : 'text-[var(--text-primary)] bg-black/5 dark:bg-white/10 border border-black/5 dark:border-white/10'
+                }`}
+              >
+                {step.raw}
+              </span>
+            );
+          })}
+        </div>
+
+        <p className="mt-2 text-[10px] text-center text-[var(--text-secondary)] font-medium shrink-0">
           Follow the steps to solve your cube
         </p>
       </div>
 
       <button
         onClick={onBackToPaint}
-        className="w-full py-4 rounded-2xl bg-white/5 hover:bg-white/10 text-[var(--text-primary)] font-bold border border-[var(--glass-border)] transition-all shadow-lg active:scale-95"
+        className="shrink-0 w-full py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-[var(--text-primary)] font-bold border border-[var(--glass-border)] transition-all shadow-md active:scale-95 cursor-pointer flex items-center justify-center gap-2"
       >
+        <RotateCcw size={16} />
         Back to Painting
       </button>
     </div>

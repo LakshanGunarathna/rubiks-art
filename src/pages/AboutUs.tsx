@@ -51,7 +51,7 @@ export const AboutUs: React.FC = () => {
         {/* Hero Section */}
         <div className="text-center space-y-4">
           <span className="px-4 py-1.5 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-500 border border-blue-500/20">
-            About Rubik's Art
+            About Us
           </span>
           <h1 className="text-4xl mt-5 sm:text-5xl font-extrabold font-heading tracking-tight" style={{ color: 'var(--text-primary)' }}>
             Empowering Speedcubers & Visual Artists

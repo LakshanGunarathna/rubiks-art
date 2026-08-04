@@ -1,8 +1,9 @@
-import React, { useState, useCallback, Suspense } from 'react';
+import React, { useState, useCallback, Suspense, useMemo, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ChevronRight, ChevronLeft, X, Loader2, Eye } from 'lucide-react';
+import { ChevronRight, ChevronLeft, Play, Pause, X, Loader2, Eye, BookOpen, Sparkles, Info, ArrowRight } from 'lucide-react';
 import { MOVES_2X2, MOVES_3X3, MOVES_4X4, MOVES_5X5 } from '../../utils/cubeConstants';
-import type { CubeArt } from '../../data/cubeArts';
+import { cubeArts, type CubeArt } from '../../data/cubeArts';
 
 import Cube3DWrapper from '../cube/Cube3DWrapper';
 
@@ -53,6 +54,7 @@ function getInverseMoveNotation(rawMove: string) {
 }
 
 export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
+  const navigate = useNavigate();
   const size = art.type === '2x2x2' ? 2 : art.type === '4x4x4' ? 4 : art.type === '5x5x5' ? 5 : 3;
   const movesDict = size === 2 ? MOVES_2X2 : size === 4 ? MOVES_4X4 : size === 5 ? MOVES_5X5 : MOVES_3X3;
 
@@ -64,6 +66,11 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
   const [modalReadyTrigger, setModalReadyTrigger] = useState(0);
   const [isModalLoading, setIsModalLoading] = useState(true);
 
+  // Auto playback states
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [playbackSpeed, setPlaybackSpeed] = useState(1000);
+  const activeStepRef = useRef<HTMLSpanElement | null>(null);
+
   const handleModalEngineReady = useCallback((eng: any) => {
     eng.onCubiesInit = () => {
       setModalReadyTrigger(prev => prev + 1);
@@ -74,7 +81,7 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
     }
   }, []);
 
-  const parsedMoves = React.useMemo(() => {
+  const parsedMoves = useMemo(() => {
     const rawArray = art.moves.trim().split(/\s+/).filter(m => m);
     return rawArray.map(m => {
       let face = m.replace(/[2']+/g, "");
@@ -92,12 +99,19 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
     }).filter(Boolean) as { raw: string, axis: any, layer: any, angle: number }[];
   }, [art.moves, movesDict]);
 
+  // Related Arts (same cube type, excluding current)
+  const relatedArts = useMemo(() => {
+    return cubeArts
+      .filter(item => item.type === art.type && item.id !== art.id)
+      .slice(0, 4);
+  }, [art]);
+
   const handleNext = useCallback(async () => {
     if (!engine || engine.isAnimating || engine.isAnimatingRef?.current || currentStep >= parsedMoves.length) return;
     const move = parsedMoves[currentStep];
     setLastActionDirection(1);
     setCurrentStep(prev => prev + 1);
-    await engine.rotateLayer(move.axis, move.layer, move.angle, 450, false);
+    await engine.rotateLayer(move.axis, move.layer, move.angle, 350, false);
   }, [engine, currentStep, parsedMoves]);
 
   const handleBack = useCallback(async () => {
@@ -106,8 +120,30 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
     setLastActionDirection(-1);
     setCurrentStep(newStep);
     const move = parsedMoves[newStep];
-    await engine.rotateLayer(move.axis, move.layer, -move.angle, 450, false);
+    await engine.rotateLayer(move.axis, move.layer, -move.angle, 350, false);
   }, [engine, currentStep, parsedMoves]);
+
+  // Auto-playback effect
+  useEffect(() => {
+    if (isPlaying && currentStep < parsedMoves.length && !engine?.isAnimating && !engine?.isAnimatingRef?.current) {
+      const timer = setTimeout(() => handleNext(), playbackSpeed * 0.4);
+      return () => clearTimeout(timer);
+    } else if (isPlaying && currentStep >= parsedMoves.length) {
+      setIsPlaying(false);
+    }
+  }, [isPlaying, currentStep, parsedMoves, engine, playbackSpeed, handleNext]);
+
+  // Auto-scroll active move into view
+  useEffect(() => {
+    if (activeStepRef.current) {
+      activeStepRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  }, [currentStep]);
+
+  const handleSelectRelated = (slug: string) => {
+    navigate(`/arts/${slug}`);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   React.useEffect(() => {
     if (modalEngine && modalEngine.cubiesRef?.current?.length > 0 && currentStep >= 0) {
@@ -127,7 +163,6 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
         const modalCubies = modalEngine.cubiesRef.current;
 
         if (mainCubies && mainCubies.length === modalCubies.length) {
-          // Instant direct 3D transform cloning (< 1ms execution time)
           for (let i = 0; i < mainCubies.length; i++) {
             const src = mainCubies[i];
             const dest = modalCubies[i];
@@ -141,7 +176,6 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
             }
           }
         } else {
-          // Fallback if main engine cubies are not available
           modalEngine.snapReset();
           for (let i = 0; i < currentStep; i++) {
             const move = parsedMoves[i];
@@ -157,20 +191,27 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
   }, [modalEngine, modalReadyTrigger, currentStep, parsedMoves, engine]);
 
   return (
-    <div className="w-full max-w-6xl mx-auto flex flex-col items-center gap-6 pt-2 pb-12">
-      <div className="w-full flex justify-between items-center px-4">
-        <h1 className="text-3xl font-bold font-heading" style={{ color: 'var(--text-primary)' }}>
-          #{art.id} - {art.name}
-        </h1>
+    <div className="w-full max-w-6xl mx-auto flex flex-col items-center gap-8 pt-2 pb-16">
+      
+      {/* Header Bar */}
+      <div className="w-full flex justify-between items-center px-2 sm:px-4">
+        <div>
+          <span className="text-xs font-semibold text-blue-500 uppercase tracking-wider">{art.type} Pattern</span>
+          <h1 className="text-2xl sm:text-3xl font-bold font-heading" style={{ color: 'var(--text-primary)' }}>
+            #{art.id} - {art.name}
+          </h1>
+        </div>
         <button
           onClick={onExit}
-          className="p-2 rounded-xl transition-all border shadow-sm hover:shadow cursor-pointer"
+          className="p-2.5 rounded-xl transition-all border shadow-sm hover:shadow cursor-pointer flex items-center gap-1.5 text-xs font-semibold"
           style={{ backgroundColor: 'var(--nav-bg)', borderColor: 'var(--nav-border)', color: 'var(--text-primary)' }}
         >
-          <X className="w-6 h-6" />
+          <X className="w-5 h-5" />
+          <span className="hidden sm:inline">Back to Gallery</span>
         </button>
       </div>
 
+      {/* Main 3D Canvas & Playback Guide Section */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -184,63 +225,272 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
           </Suspense>
         </div>
 
-        {/* Playback Controls */}
-        <div className="w-full lg:w-1/3 flex flex-col gap-6">
-          <div className="p-6 rounded-3xl backdrop-blur-2xl border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-xl">
-            <h2 className="text-xl font-bold font-heading mb-4" style={{ color: 'var(--text-primary)' }}>Playback Guide</h2>
+        {/* Playback Controls & Side Panel */}
+        <div className="w-full lg:w-1/3 lg:h-[530px] flex flex-col">
+          <div className="flex flex-col gap-3.5 h-full">
+            {/* Playback Controls Card */}
+            <div className="shrink-0 flex flex-col items-center gap-3 p-4 bg-[var(--glass-bg)] backdrop-blur-xl rounded-2xl border border-[var(--glass-border)] shadow-lg w-full">
+              <div className="flex items-center justify-between w-full">
+                <span className="text-xs font-semibold text-[var(--text-secondary)]">
+                  Step {currentStep} / {parsedMoves.length}
+                </span>
+                <span className="text-[11px] font-bold text-blue-600 dark:text-blue-400 bg-blue-500/10 px-2.5 py-0.5 rounded-full border border-blue-500/20">
+                  {(playbackSpeed / 1000).toFixed(1)}s / step
+                </span>
+              </div>
 
-            <div className="mb-6">
-              {currentStep === 0 && lastActionDirection === 1 ? (
-                <>
-                  <p className="text-sm font-semibold text-green-500 mb-2">READY TO MAKE</p>
-                  <p style={{ color: 'var(--text-secondary)' }}>Hold your SOLVED Cube as shown, press "Next" to start.</p>
-                </>
-              ) : lastActionDirection === -1 ? (
-                <>
-                  <p className="text-sm font-semibold text-yellow-500 mb-2">Undo Step {currentStep + 1} / {parsedMoves.length}: {getInverseMoveNotation(parsedMoves[currentStep].raw)}</p>
-                  <p style={{ color: 'var(--text-secondary)' }}>{getReverseHumanReadableMove(parsedMoves[currentStep].raw)}</p>
-                </>
-              ) : (
-                <>
-                  <p className="text-sm font-semibold text-blue-500 mb-2">Step {currentStep} / {parsedMoves.length}: {parsedMoves[currentStep - 1].raw}</p>
-                  <p style={{ color: 'var(--text-secondary)' }}>{getHumanReadableMove(parsedMoves[currentStep - 1].raw)}</p>
-                </>
-              )}
+              <div className="flex items-center justify-center gap-5 w-full my-0.5">
+                <button
+                  onClick={handleBack}
+                  disabled={currentStep === 0 || engine?.isAnimating || engine?.isAnimatingRef?.current}
+                  className="w-10 h-10 rounded-full bg-white dark:bg-gray-800 text-[var(--text-primary)] hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center justify-center transition-all shadow-md active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                  title="Previous Step"
+                >
+                  <ChevronLeft size={20} strokeWidth={2.5} />
+                </button>
+
+                <button
+                  onClick={() => setIsPlaying(!isPlaying)}
+                  className="w-12 h-12 rounded-full bg-blue-600 text-white hover:bg-blue-500 flex items-center justify-center transition-all shadow-lg shadow-blue-500/25 active:scale-95 cursor-pointer"
+                  title={isPlaying ? 'Pause' : 'Play'}
+                >
+                  {isPlaying ? <Pause size={22} fill="currentColor" /> : <Play size={22} fill="currentColor" className="ml-0.5" />}
+                </button>
+
+                <button
+                  onClick={handleNext}
+                  disabled={currentStep >= parsedMoves.length || engine?.isAnimating || engine?.isAnimatingRef?.current}
+                  className="w-10 h-10 rounded-full bg-white dark:bg-gray-800 text-[var(--text-primary)] hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center justify-center transition-all shadow-md active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                  title="Next Step"
+                >
+                  <ChevronRight size={20} strokeWidth={2.5} />
+                </button>
+              </div>
+
+              <div className="w-full flex items-center gap-2 pt-0.5">
+                <span className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Slower</span>
+                <input 
+                  type="range" 
+                  min="300" 
+                  max="2000" 
+                  step="100"
+                  value={2300 - playbackSpeed} 
+                  onChange={(e) => setPlaybackSpeed(2300 - parseInt(e.target.value))}
+                  className="w-full h-1.5 bg-blue-200 dark:bg-blue-950 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                />
+                <span className="text-[10px] font-bold text-[var(--text-secondary)] uppercase">Faster</span>
+              </div>
             </div>
 
-            <div className="flex justify-between gap-4">
-              <button
-                onClick={handleBack}
-                disabled={currentStep === 0 || engine?.isAnimating || engine?.isAnimatingRef?.current}
-                className="flex-1 py-3 px-4 rounded-xl flex items-center justify-center gap-2 font-medium transition-all disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
-                style={{ backgroundColor: 'var(--nav-bg)', color: 'var(--text-primary)', border: '1px solid var(--nav-border)' }}
-              >
-                <ChevronLeft className="w-5 h-5" />
-                Back
-              </button>
-              <button
-                onClick={handleNext}
-                disabled={currentStep >= parsedMoves.length || engine?.isAnimating || engine?.isAnimatingRef?.current}
-                className="flex-1 py-3 px-4 rounded-xl flex items-center justify-center gap-2 font-medium transition-all text-white bg-blue-600 hover:bg-blue-700 disabled:opacity-50 disabled:bg-gray-500 cursor-pointer disabled:cursor-not-allowed"
-              >
-                Next
-                <ChevronRight className="w-5 h-5" />
-              </button>
+            {/* Instruction Card */}
+            <div className="shrink-0 p-4 backdrop-blur-xl rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-lg relative overflow-hidden text-left">
+              <div className="flex items-center justify-between mb-1.5">
+                <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)]">Instruction</h2>
+                {currentStep > 0 && currentStep <= parsedMoves.length && (
+                  <div>
+                    {lastActionDirection === -1 ? (
+                      <span className="px-2.5 py-0.5 bg-amber-500/20 text-amber-500 text-[10px] font-bold rounded-full border border-amber-500/30 backdrop-blur-sm">
+                        Undo Step {currentStep + 1}: {getInverseMoveNotation(parsedMoves[currentStep].raw)}
+                      </span>
+                    ) : (
+                      <span className="px-2.5 py-0.5 bg-blue-500/20 text-blue-500 dark:text-blue-400 text-[10px] font-bold rounded-full border border-blue-500/30 backdrop-blur-sm">
+                        Step {currentStep}: {parsedMoves[currentStep - 1].raw}
+                      </span>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              <div className="min-h-[44px] flex items-center">
+                <p className="text-[var(--text-primary)] font-semibold text-base leading-snug">
+                  {currentStep === 0 && lastActionDirection === 1
+                    ? "Hold your SOLVED Cube with front face facing you, hit 'next' to start step-by-step turns."
+                    : lastActionDirection === -1
+                      ? getReverseHumanReadableMove(parsedMoves[currentStep].raw)
+                      : getHumanReadableMove(parsedMoves[currentStep - 1].raw)
+                  }
+                </p>
+              </div>
             </div>
 
+            {/* All Steps Card (Fills remaining height) */}
+            <div className="flex-1 min-h-0 p-4 backdrop-blur-xl rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-lg flex flex-col text-left">
+              <div className="flex items-center justify-between mb-2 shrink-0">
+                <h2 className="text-xs font-semibold uppercase tracking-wider text-[var(--text-secondary)]">All Steps</h2>
+              </div>
+
+              <div className="flex flex-wrap content-start items-start gap-1.5 overflow-y-auto custom-scrollbar flex-1 min-h-0 pr-1 py-1">
+                {parsedMoves.map((step, i) => {
+                  const isActive = i === currentStep - 1;
+                  const isPassed = i < currentStep - 1;
+                  return (
+                    <span
+                      key={i}
+                      ref={isActive ? activeStepRef : null}
+                      className={`px-2.5 h-7 inline-flex items-center justify-center rounded-lg text-xs font-mono font-bold transition-all duration-200 ${
+                        isActive
+                          ? 'bg-blue-600 text-white shadow-md scale-105 z-10'
+                          : isPassed
+                            ? 'bg-emerald-600 text-white shadow-sm'
+                            : 'text-[var(--text-primary)] bg-black/5 dark:bg-white/10 border border-black/5 dark:border-white/10'
+                      }`}
+                    >
+                      {step.raw}
+                    </span>
+                  );
+                })}
+              </div>
+
+              <p className="mt-2 text-[10px] text-center text-[var(--text-secondary)] font-medium shrink-0">
+                Follow the steps to build your pattern
+              </p>
+            </div>
+
+            {/* Bottom 3D View Button */}
             <button
               onClick={() => {
                 setIsModalLoading(true);
                 setIs3DViewOpen(true);
               }}
-              className="w-full mt-4 py-3 px-4 rounded-xl flex items-center justify-center gap-2 font-medium transition-all text-white bg-indigo-600 hover:bg-indigo-700 shadow-md hover:shadow-lg cursor-pointer"
+              className="shrink-0 w-full py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-[var(--text-primary)] font-bold border border-[var(--glass-border)] transition-all shadow-md active:scale-95 cursor-pointer flex items-center justify-center gap-2 text-sm"
             >
-              <Eye className="w-5 h-5" />
+              <Eye size={18} />
               3D View
             </button>
           </div>
         </div>
       </motion.div>
+
+      {/* Below Player Content & Instructions */}
+      <div className="w-full space-y-10 text-left mt-4">
+
+        {/* Move Sequence & Notation Explanation */}
+        <div className="p-6 sm:p-8 rounded-3xl backdrop-blur-2xl border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-xl space-y-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-purple-500/10 text-purple-500 flex items-center justify-center">
+              <Info className="w-5 h-5" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold font-heading" style={{ color: 'var(--text-primary)' }}>
+                Full Algorithm Notation
+              </h2>
+              <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>Total Moves: {parsedMoves.length} turns</p>
+            </div>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-slate-500/5 border border-[var(--glass-border)] font-mono text-sm tracking-wide break-words" style={{ color: 'var(--text-primary)' }}>
+            {art.moves}
+          </div>
+
+          <div className="text-xs leading-relaxed space-y-1" style={{ color: 'var(--text-secondary)' }}>
+            <p><strong>Notation Guide:</strong> <code>R</code>, <code>L</code>, <code>U</code>, <code>D</code>, <code>F</code>, <code>B</code> refer to Right, Left, Up, Down, Front, and Back faces.</p>
+            <p>A prime symbol (<code>'</code>) means turn 90° counter-clockwise. A number <code>2</code> means turn 180°.</p>
+          </div>
+        </div>
+
+        {/* Instructions Card */}
+        <div className="p-6 sm:p-8 rounded-3xl backdrop-blur-2xl border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-xl space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-2xl bg-blue-500/10 text-blue-500 flex items-center justify-center">
+              <BookOpen className="w-5 h-5" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold font-heading" style={{ color: 'var(--text-primary)' }}>
+                How to Use the Art Player
+              </h2>
+              <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>Follow these quick steps to build this pattern on your physical cube</p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="p-4 rounded-2xl bg-slate-500/5 border border-[var(--glass-border)] space-y-2">
+              <div className="w-7 h-7 rounded-lg bg-blue-500 text-white font-bold text-xs flex items-center justify-center">1</div>
+              <h3 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Start Solved</h3>
+              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                Begin with a completely solved Rubik's cube. Hold your cube with the front face facing toward you.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-slate-500/5 border border-[var(--glass-border)] space-y-2">
+              <div className="w-7 h-7 rounded-lg bg-blue-500 text-white font-bold text-xs flex items-center justify-center">2</div>
+              <h3 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Press "Next"</h3>
+              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                Click <strong>Next</strong> to execute each move one at a time. Watch the 3D model demonstrate the exact layer rotation.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-slate-500/5 border border-[var(--glass-border)] space-y-2">
+              <div className="w-7 h-7 rounded-lg bg-blue-500 text-white font-bold text-xs flex items-center justify-center">3</div>
+              <h3 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>Step Back / Undo</h3>
+              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                Made a wrong move? Press <strong>Back</strong> to see the inverse rotation required to fix your physical cube.
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-slate-500/5 border border-[var(--glass-border)] space-y-2">
+              <div className="w-7 h-7 rounded-lg bg-blue-500 text-white font-bold text-xs flex items-center justify-center">4</div>
+              <h3 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>3D Inspection</h3>
+              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+                Click <strong>Interactive 3D View</strong> to rotate the finished pattern 360° and inspect all six cube sides.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Related Art Patterns */}
+        {relatedArts.length > 0 && (
+          <div className="space-y-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-500 flex items-center justify-center">
+                  <Sparkles className="w-5 h-5" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold font-heading" style={{ color: 'var(--text-primary)' }}>
+                    Related {art.type} Patterns
+                  </h2>
+                  <p className="text-xs" style={{ color: 'var(--text-secondary)' }}>More cube art patterns for {art.type} Rubik's Cubes</p>
+                </div>
+              </div>
+
+              <button
+                onClick={onExit}
+                className="text-xs font-semibold text-blue-500 hover:text-blue-600 flex items-center gap-1 cursor-pointer"
+              >
+                <span>View All</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
+              {relatedArts.map(rel => (
+                <div
+                  key={rel.id}
+                  onClick={() => handleSelectRelated(rel.slug)}
+                  className="group cursor-pointer bg-white dark:bg-slate-900 border border-slate-100 dark:border-slate-800 rounded-3xl p-4 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:border-blue-500/40 flex flex-col justify-between"
+                >
+                  <div className="w-full aspect-[4/3] rounded-2xl bg-slate-100 dark:bg-slate-800/50 overflow-hidden relative mb-3">
+                    <img
+                      src={rel.imageUrl}
+                      alt={rel.name}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = `https://via.placeholder.com/300x225.png?text=${rel.id}`;
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-blue-500">{rel.type}</span>
+                    <h3 className="text-sm font-bold truncate text-slate-800 dark:text-white mt-0.5">{rel.name}</h3>
+                    <p className="text-xs text-slate-400 mt-1 font-medium">#{rel.id}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+      </div>
 
       {/* 3D View Modal */}
       {is3DViewOpen && (

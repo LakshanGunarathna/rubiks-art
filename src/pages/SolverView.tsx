@@ -423,7 +423,7 @@ export const SolverView: React.FC = () => {
           </Suspense>
         </div>
 
-        <div className="w-full lg:w-1/3 flex flex-col gap-6">
+        <div className="w-full lg:w-1/3 lg:h-[530px] flex flex-col">
           <AnimatePresence mode="wait">
             {phase === 'paint' ? (
               <motion.div key="paint" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
@@ -438,7 +438,7 @@ export const SolverView: React.FC = () => {
                 />
               </motion.div>
             ) : (
-              <motion.div key="playback" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}>
+              <motion.div key="playback" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="h-full">
                 <SolutionGuidePanel
                   currentStepIndex={currentStepIndex}
                   solutionSteps={solutionSteps}

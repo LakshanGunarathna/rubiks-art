@@ -110,6 +110,17 @@ export const PuzzleArts: React.FC = () => {
       exit={{ opacity: 0, y: -20 }}
       className="w-full max-w-7xl mx-auto flex flex-col gap-6 pt-4 pb-12"
     >
+      {/* Page Header */}
+      <div className="text-center space-y-3 py-2 max-w-3xl mx-auto">
+
+        <h1 className="text-4xl sm:text-5xl font-extrabold font-heading tracking-tight" style={{ color: 'var(--text-primary)' }}>
+          Puzzle Art
+        </h1>
+        <p className="text-sm sm:text-base leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
+          Explore our collection of pixel art patterns and cube mosaics for 2x2, 3x3, 4x4, and 5x5 Rubik's Cubes. Select any pattern to open an interactive 3D guide with step-by-step rotation algorithms!
+        </p>
+      </div>
+
       {/* Top Filter Bar */}
       <PuzzleArtsFilterBar
         typeFilter={typeFilter}
