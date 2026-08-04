@@ -117,7 +117,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageFile }) => 
             </span>
             <div className="w-full aspect-[4/3] rounded-xl bg-slate-200 dark:bg-slate-800 flex items-center justify-center relative overflow-hidden shadow-inner border border-slate-300 dark:border-slate-700">
               <img
-                src="public/mosaic-before.png"
+                src="/assets/mosaic-before.png"
                 alt="Original Photo Input Preview"
                 className="w-full h-full object-cover z-10"
                 onError={(e) => {
@@ -141,7 +141,7 @@ export const ImageUploader: React.FC<ImageUploaderProps> = ({ onImageFile }) => 
             </span>
             <div className="w-full aspect-[4/3] rounded-xl bg-slate-900 flex items-center justify-center relative overflow-hidden shadow-inner border border-blue-500/30">
               <img
-                src="public/mosaic-after.png"
+                src="/assets/mosaic-after.png"
                 alt="Rubik's Cube Mosaic Art Preview"
                 className="w-full h-full object-cover z-10"
                 onError={(e) => {
