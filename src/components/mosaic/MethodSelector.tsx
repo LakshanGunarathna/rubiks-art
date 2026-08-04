@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
-import { ArrowLeft, Sparkles } from 'lucide-react';
+import { ArrowLeft, Sparkles, BookOpen, Layers, Palette, Info, CheckCircle2, Cpu } from 'lucide-react';
 
 interface PaletteColor {
   name: string;
@@ -89,9 +89,7 @@ const VariationCard: React.FC<VariationCardProps> = ({
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [computedIndices, setComputedIndices] = useState<Uint8Array | null>(null);
 
-  // Compute sticker indices based on method parameters
   const indices = useMemo(() => {
-    // 1. Apply contrast & brightness first for non-gradient methods
     const isDiffusionMethod = methodId === 'diffusion' || methodId === 'diffusion_no_blue' || methodId === 'diffusion_no_green';
     const defaultBrightness = isDiffusionMethod ? 50 : 0;
 
@@ -103,7 +101,6 @@ const VariationCard: React.FC<VariationCardProps> = ({
     const count = wStickers * hStickers;
 
     if (methodId === 'gradient') {
-      // Gradient: Grayscale tone mapping
       const resultIndices = new Uint8Array(count);
       const scat = params.scatter ?? 0.65;
       const pos = params.position ?? 0.5;
@@ -123,7 +120,7 @@ const VariationCard: React.FC<VariationCardProps> = ({
         const b = rawCroppedData[i * 4 + 2];
         const tone = (r + g + b) / 3;
 
-        let matchedColor = gradColors[gradColors.length - 1]; // Default White
+        let matchedColor = gradColors[gradColors.length - 1];
         for (let j = 0; j < ranges.length; j++) {
           if (tone < ranges[j]) {
             matchedColor = gradColors[j];
@@ -134,7 +131,6 @@ const VariationCard: React.FC<VariationCardProps> = ({
       }
       return resultIndices;
     } else if (methodId === 'dithering') {
-      // Closest color (Nearest neighbor)
       const resultIndices = new Uint8Array(count);
       for (let i = 0; i < count; i++) {
         resultIndices[i] = getClosestColorIndex(
@@ -145,7 +141,6 @@ const VariationCard: React.FC<VariationCardProps> = ({
       }
       return resultIndices;
     } else {
-      // Floyd-Steinberg error diffusion methods
       const resultIndices = new Uint8Array(count);
       const buffer = new Float32Array(count * 3);
       for (let i = 0; i < count; i++) {
@@ -154,7 +149,6 @@ const VariationCard: React.FC<VariationCardProps> = ({
         buffer[i * 3 + 2] = adjustedPixels[i * 4 + 2];
       }
 
-      // Filter definition for blue/green exclusion
       let colorFilter: ((c: PaletteColor) => boolean) | undefined;
       if (methodId === 'diffusion_no_blue') {
         colorFilter = c => c.name !== 'Blue';
@@ -171,7 +165,7 @@ const VariationCard: React.FC<VariationCardProps> = ({
 
           const colorIdx = getClosestColorIndex(
             Math.max(0, Math.min(255, r)),
-            Math.max(0, Math.min(255, g)),
+            Math.max(0, Math.min(255, b)),
             Math.max(0, Math.min(255, b)),
             colorFilter
           );
@@ -201,12 +195,10 @@ const VariationCard: React.FC<VariationCardProps> = ({
     }
   }, [rawCroppedData, methodId, params, wStickers, hStickers, PALETTE, getClosestColorIndex]);
 
-  // Draw dithered/gradient image onto thumbnail canvas
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas || !indices) return;
 
-    // Dynamically calculate small sticker display size (increased targetSize to 240 for larger images)
     const targetSize = 240;
     const stickerDisplay = Math.max(2, Math.floor(targetSize / Math.max(wStickers, hStickers)));
     canvas.width = wStickers * stickerDisplay;
@@ -215,7 +207,6 @@ const VariationCard: React.FC<VariationCardProps> = ({
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Drawing solid blocks without any gaps/lines to fulfill Request 1
     for (let r = 0; r < hStickers; r++) {
       for (let c = 0; c < wStickers; c++) {
         const colorIdx = indices[r * wStickers + c];
@@ -227,7 +218,6 @@ const VariationCard: React.FC<VariationCardProps> = ({
     setComputedIndices(indices);
   }, [indices, wStickers, hStickers, PALETTE]);
 
-  // Render parameter text badge
   const paramText = useMemo(() => {
     if (methodId === 'gradient') {
       return `S: ${(params.scatter ?? 0).toFixed(2)} P: ${(params.position ?? 0).toFixed(2)}`;
@@ -236,9 +226,8 @@ const VariationCard: React.FC<VariationCardProps> = ({
     return `Contrast: ${c > 0 ? '+' : ''}${c}`;
   }, [methodId, params]);
 
-  // Dynamically calculate container dimensions based on the aspect ratio of the cropped image
   const aspect = wStickers / hStickers;
-  const targetDimension = 260; // Max target dimension bounds
+  const targetDimension = 260;
   let containerWidth = targetDimension;
   let containerHeight = targetDimension / aspect;
 
@@ -280,7 +269,6 @@ export const MethodSelector: React.FC<MethodSelectorProps> = ({
   const wStickers = useMemo(() => cubesWide * cubeSize, [cubesWide, cubeSize]);
   const hStickers = useMemo(() => cubesHigh * cubeSize, [cubesHigh, cubeSize]);
 
-  // Redmean color distance lookup
   const getClosestColorIndex = (r: number, g: number, b: number, filter?: (c: PaletteColor) => boolean): number => {
     let minDistance = Infinity;
     let closestIndex = 0;
@@ -303,7 +291,6 @@ export const MethodSelector: React.FC<MethodSelectorProps> = ({
     return closestIndex;
   };
 
-  // Define parameter ranges for the First Choice rows (matching Roman README screenshots layout)
   const firstChoiceRows = useMemo(() => {
     return [
       {
@@ -371,7 +358,7 @@ export const MethodSelector: React.FC<MethodSelectorProps> = ({
   }, []);
 
   return (
-    <div className="w-full flex flex-col gap-8">
+    <div className="w-full flex flex-col gap-8 text-left">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between border-b border-[var(--nav-border)] pb-4 gap-4">
         <button
           onClick={onBack}
@@ -426,6 +413,128 @@ export const MethodSelector: React.FC<MethodSelectorProps> = ({
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Method Explanations & Detailed Features Guide Section */}
+      <div className="mt-6 p-6 sm:p-8 rounded-3xl backdrop-blur-md border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-xl space-y-6">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 rounded-2xl bg-indigo-500/10 text-indigo-500 flex items-center justify-center">
+            <BookOpen className="w-5 h-5" />
+          </div>
+          <div>
+            <h3 className="text-xl font-bold font-heading text-[var(--text-primary)]">
+              Comprehensive Conversion Method Guide
+            </h3>
+            <p className="text-xs text-[var(--text-secondary)]">Detailed mathematical breakdown, algorithm behavior, and recommended use cases for each variation style</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+          {/* Method 1: Gradient */}
+          <div className="p-5 rounded-2xl bg-slate-500/5 border border-[var(--glass-border)] space-y-3">
+            <div className="flex items-center justify-between border-b border-[var(--glass-border)] pb-2">
+              <span className="font-bold text-sm text-[var(--text-primary)] flex items-center gap-2">
+                <Palette className="w-4 h-4 text-blue-500" /> 1. Gradient Method (Grayscale Tone Mapping)
+              </span>
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-blue-500/10 text-blue-500 border border-blue-500/20">Grayscale Mapping</span>
+            </div>
+            <p className="leading-relaxed text-[var(--text-secondary)]">
+              The <strong>Gradient Method</strong> converts pixel brightness (luminance) into a smooth 5-color ordered spectrum: <em>Blue → Red → Orange → Yellow → White</em>.
+            </p>
+            <div className="space-y-1.5 text-[var(--text-secondary)]">
+              <p><strong>• Algorithm Mechanics:</strong> Evaluates pixel lightness values (Y = 0.299R + 0.587G + 0.114B) and maps them into 4 uniform threshold intervals governed by Scatter (S) and Position (P) parameters.</p>
+              <p><strong>• Why Exclude Green?</strong> Green is intentionally excluded from the gradient scale to prevent unnatural greenish noise in shadow transitions.</p>
+            </div>
+            <div className="pt-2 flex items-start gap-2 text-[var(--text-primary)] font-medium bg-blue-500/5 p-2.5 rounded-xl border border-blue-500/10">
+              <CheckCircle2 className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
+              <span><strong>Ideal For:</strong> Monochrome portraits, high-contrast black-and-white photos, architectural shapes, silhouettes, and dramatic lighting.</span>
+            </div>
+          </div>
+
+          {/* Method 2: Floyd-Steinberg Diffusion */}
+          <div className="p-5 rounded-2xl bg-slate-500/5 border border-[var(--glass-border)] space-y-3">
+            <div className="flex items-center justify-between border-b border-[var(--glass-border)] pb-2">
+              <span className="font-bold text-sm text-[var(--text-primary)] flex items-center gap-2">
+                <Layers className="w-4 h-4 text-indigo-500" /> 2. Floyd-Steinberg Error Diffusion
+              </span>
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-indigo-500/10 text-indigo-500 border border-indigo-500/20">Full Palette Realism</span>
+            </div>
+            <p className="leading-relaxed text-[var(--text-secondary)]">
+              The <strong>Floyd-Steinberg Diffusion</strong> method distributes color quantization error from each sticker to neighboring un-rendered stickers.
+            </p>
+            <div className="space-y-1.5 text-[var(--text-secondary)]">
+              <p><strong>• Error Spreading Weights:</strong> For every sticker, the RGB difference between the original pixel and matched Rubik's color is calculated and pushed to adjacent pixels (7/16 right, 3/16 bottom-left, 5/16 bottom, 1/16 bottom-right).</p>
+              <p><strong>• Visual Effect:</strong> Eliminates harsh color banding, producing organic shading, soft textures, and subtle skin gradients.</p>
+            </div>
+            <div className="pt-2 flex items-start gap-2 text-[var(--text-primary)] font-medium bg-indigo-500/5 p-2.5 rounded-xl border border-indigo-500/10">
+              <CheckCircle2 className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />
+              <span><strong>Ideal For:</strong> Complex full-color pictures, landscapes, fine-detailed artwork, and natural lighting scenes.</span>
+            </div>
+          </div>
+
+          {/* Method 3: Dithering Nearest Neighbor */}
+          <div className="p-5 rounded-2xl bg-slate-500/5 border border-[var(--glass-border)] space-y-3">
+            <div className="flex items-center justify-between border-b border-[var(--glass-border)] pb-2">
+              <span className="font-bold text-sm text-[var(--text-primary)] flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-amber-500" /> 3. Dithering (Nearest-Neighbor Matching)
+              </span>
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500/10 text-amber-500 border border-amber-500/20">Sharp Retro Pixel Art</span>
+            </div>
+            <p className="leading-relaxed text-[var(--text-secondary)]">
+              The <strong>Nearest-Neighbor Dithering</strong> method evaluates each pixel in isolation, mapping it to the closest Rubik's color using 3D Redmean color distance.
+            </p>
+            <div className="space-y-1.5 text-[var(--text-secondary)]">
+              <p><strong>• Redmean Distance Formula:</strong> Perception-weighted distance calculation accounting for human eye sensitivity across Red, Green, and Blue color spectrums.</p>
+              <p><strong>• Visual Effect:</strong> Delivers crisp, zero-blur, high-contrast blocky pixel shapes with clean edges.</p>
+            </div>
+            <div className="pt-2 flex items-start gap-2 text-[var(--text-primary)] font-medium bg-amber-500/5 p-2.5 rounded-xl border border-amber-500/10">
+              <CheckCircle2 className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+              <span><strong>Ideal For:</strong> Company logos, vector graphics, icons, typography, retro 8-bit game art, and bold geometric shapes.</span>
+            </div>
+          </div>
+
+          {/* Method 4: Diffusion Without Blue */}
+          <div className="p-5 rounded-2xl bg-slate-500/5 border border-[var(--glass-border)] space-y-3">
+            <div className="flex items-center justify-between border-b border-[var(--glass-border)] pb-2">
+              <span className="font-bold text-sm text-[var(--text-primary)] flex items-center gap-2">
+                <Cpu className="w-4 h-4 text-purple-500" /> 4. Diffusion without Blue
+              </span>
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-purple-500/10 text-purple-500 border border-purple-500/20">Warm Skin Tones</span>
+            </div>
+            <p className="leading-relaxed text-[var(--text-secondary)]">
+              Executes Floyd-Steinberg error diffusion while strictly excluding the <strong>Blue</strong> palette color choice (using White, Yellow, Orange, Red, Green).
+            </p>
+            <div className="space-y-1.5 text-[var(--text-secondary)]">
+              <p><strong>• Why Omit Blue?</strong> Blue stickers can introduce unpleasant cold speckles on human cheeks and foreheads where light shadows occur.</p>
+              <p><strong>• Visual Effect:</strong> Preserves warm skin undertones, golden highlights, and rich reddish-yellow facial detail.</p>
+            </div>
+            <div className="pt-2 flex items-start gap-2 text-[var(--text-primary)] font-medium bg-purple-500/5 p-2.5 rounded-xl border border-purple-500/10">
+              <CheckCircle2 className="w-4 h-4 text-purple-500 shrink-0 mt-0.5" />
+              <span><strong>Ideal For:</strong> Human face portraits, warm indoor lighting, sunset photography, and family photos.</span>
+            </div>
+          </div>
+
+          {/* Method 5: Diffusion Without Green */}
+          <div className="p-5 bg-slate-500/5 border border-[var(--glass-border)] rounded-2xl space-y-3 md:col-span-2">
+            <div className="flex items-center justify-between border-b border-[var(--glass-border)] pb-2">
+              <span className="font-bold text-sm text-[var(--text-primary)] flex items-center gap-2">
+                <Info className="w-4 h-4 text-emerald-500" /> 5. Diffusion without Green
+              </span>
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">Clean Facial Highlights</span>
+            </div>
+            <p className="leading-relaxed text-[var(--text-secondary)]">
+              Executes Floyd-Steinberg error diffusion while restricting palette choices to White, Yellow, Orange, Red, and Blue (omitting Green).
+            </p>
+            <div className="space-y-1.5 text-[var(--text-secondary)]">
+              <p><strong>• Why Omit Green?</strong> Camera sensors often reflect subtle green color noise under artificial or indoor lighting. Omitting green prevents greenish or olive-tinted artifacts across facial skin highlights.</p>
+              <p><strong>• Visual Effect:</strong> Delivers clean, vibrant facial highlights, rich red lips, and deep blue background contrasts.</p>
+            </div>
+            <div className="pt-2 flex items-start gap-2 text-[var(--text-primary)] font-medium bg-emerald-500/5 p-2.5 rounded-xl border border-emerald-500/10">
+              <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
+              <span><strong>Ideal For:</strong> Studio portraits, flash photography, close-up face shots, and photos taken under fluorescent or tungsten indoor lighting.</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
