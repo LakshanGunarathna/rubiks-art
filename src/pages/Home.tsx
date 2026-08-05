@@ -287,13 +287,13 @@ export const Home: React.FC = () => {
                 <FontAwesomeIcon icon={faAward} /> Featured Canvas Feature
               </div>
               <h2 className="text-3xl lg:text-4xl font-extrabold font-heading text-[var(--text-primary)] mb-4 leading-tight group-hover:text-blue-500 transition-colors">
-                Premium Puzzle Arts & Mosaic Gallery
+                Premium Puzzle Arts Gallery
               </h2>
               <p className="text-[var(--text-secondary)] leading-relaxed mb-6 max-w-xl text-base">
-                Discover a modern studio of pixel-art designs made entirely using Rubik's cubes. Filter by cube type or difficulty, select a pattern, and follow a fully animated 3D guide to turn your actual physical cube into a work of art.
+                Discover a modern gallery of pixel-art designs made entirely using Rubik's cubes. Filter by cube type or difficulty, select a pattern, and follow a fully animated 3D guide to turn your actual physical cube into a work of art.
               </p>
               <span className="inline-flex items-center gap-2 text-blue-500 font-bold group-hover:gap-3 transition-all">
-                Enter Gallery and Studio <FontAwesomeIcon icon={faArrowRight} />
+                Enter Puzzle Arts Gallery <FontAwesomeIcon icon={faArrowRight} />
               </span>
             </div>
 
