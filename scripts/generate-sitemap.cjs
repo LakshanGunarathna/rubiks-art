@@ -81,6 +81,32 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
     </image:image>
   </url>
   
+  <!-- Company & Legal Pages -->
+  <url>
+    <loc>${domain}/about</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>${domain}/contact</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>${domain}/privacy-policy</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>${domain}/terms</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
   <!-- Cube Playgrounds -->
   <url>
     <loc>${domain}/cubes/2x2</loc>
