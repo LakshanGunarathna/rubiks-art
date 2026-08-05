@@ -72,14 +72,33 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
   const activeStepRef = useRef<HTMLSpanElement | null>(null);
 
   const handleModalEngineReady = useCallback((eng: any) => {
+    const prevCb = eng.onCubiesInit;
     eng.onCubiesInit = () => {
+      if (prevCb) prevCb();
       setModalReadyTrigger(prev => prev + 1);
     };
     setModalEngine(eng);
-    if (eng.cubiesRef?.current?.length > 0) {
+    if (eng.cubiesRef?.current?.length > 0 || eng.isReady) {
       setModalReadyTrigger(prev => prev + 1);
     }
   }, []);
+
+  // Ensure modal cubie readiness is continuously checked when modal is opened
+  useEffect(() => {
+    if (is3DViewOpen && modalEngine) {
+      let cancelled = false;
+      const checkReady = () => {
+        if (cancelled) return;
+        if (modalEngine.cubiesRef?.current?.length > 0 || modalEngine.isReady) {
+          setModalReadyTrigger(prev => prev + 1);
+        } else {
+          requestAnimationFrame(checkReady);
+        }
+      };
+      checkReady();
+      return () => { cancelled = true; };
+    }
+  }, [is3DViewOpen, modalEngine]);
 
   const parsedMoves = useMemo(() => {
     const rawArray = art.moves.trim().split(/\s+/).filter(m => m);
@@ -145,8 +164,8 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  React.useEffect(() => {
-    if (modalEngine && modalEngine.cubiesRef?.current?.length > 0 && currentStep >= 0) {
+  useEffect(() => {
+    if (is3DViewOpen && modalEngine && modalEngine.cubiesRef?.current?.length > 0 && currentStep >= 0) {
       const syncModalCube = () => {
         setIsModalLoading(true);
 
@@ -188,7 +207,7 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
 
       syncModalCube();
     }
-  }, [modalEngine, modalReadyTrigger, currentStep, parsedMoves, engine]);
+  }, [is3DViewOpen, modalEngine, modalReadyTrigger, currentStep, parsedMoves, engine]);
 
   return (
     <div className="w-full max-w-6xl mx-auto flex flex-col items-center gap-8 pt-2 pb-16">
@@ -352,7 +371,7 @@ export const ArtPlayer: React.FC<ArtPlayerProps> = ({ art, onExit }) => {
                 setIsModalLoading(true);
                 setIs3DViewOpen(true);
               }}
-              className="shrink-0 w-full py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-[var(--text-primary)] font-bold border border-[var(--glass-border)] transition-all shadow-md active:scale-95 cursor-pointer flex items-center justify-center gap-2 text-sm"
+              className="shrink-0 w-full py-3 rounded-2xl bg-purple-900 hover:bg-purple-800 text-white font-bold border border-purple-700/40 transition-all shadow-lg shadow-purple-950/30 active:scale-95 cursor-pointer flex items-center justify-center gap-2 text-sm"
             >
               <Eye size={18} />
               3D View

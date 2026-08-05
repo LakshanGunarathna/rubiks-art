@@ -118,6 +118,7 @@ const CubeContent: React.FC<Cube3DProps> = ({
     engine.cubeGroupRef.current = cubeGroupRef.current;
     engine.pivotRef.current = pivotRef.current;
     engine.noiseTexture = noiseTexture;
+    engine.isReady = true;
 
     if (engine.onCubiesInit) {
       engine.onCubiesInit();
@@ -386,6 +387,10 @@ export const Cube3D: React.FC<Cube3DProps> = (props) => {
 
   useEffect(() => {
     if (props.engine) {
+      if (props.engine.isReady || (props.engine.cubiesRef?.current && props.engine.cubiesRef.current.length > 0)) {
+        setIsLoading(false);
+      }
+
       const prevCb = props.engine.onCubiesInit;
       props.engine.onCubiesInit = () => {
         setIsLoading(false);
