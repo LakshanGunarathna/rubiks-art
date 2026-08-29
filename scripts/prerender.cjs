@@ -104,6 +104,12 @@ const routes = [
     image: "/assets/og-home.png"
   },
   {
+    path: '/support',
+    title: "Support Us | Rubiks' Art",
+    description: "Support Rubik's Art to keep our 3D Rubik's Cube simulators, step-by-step solvers, and mosaic generator free and ad-free.",
+    image: "/assets/og-home.png"
+  },
+  {
     path: '/contact',
     title: "Contact Us | Rubiks' Art",
     description: "Contact the Rubiks' Art team for feedback, inquiries, or support.",

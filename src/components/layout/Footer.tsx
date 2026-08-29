@@ -62,6 +62,7 @@ export const Footer: React.FC = () => {
             <h4 className="font-semibold mb-3" style={{ color: 'var(--text-primary)' }}>Company & Legal</h4>
             <ul className="text-sm space-y-2" style={{ color: 'var(--text-secondary)' }}>
               <li><Link to="/about" onClick={(e) => handleLinkClick(e, '/about')} className="transition-colors hover:text-[var(--accent-color)]">About Us</Link></li>
+              <li><Link to="/support" onClick={(e) => handleLinkClick(e, '/support')} className="transition-colors hover:text-rose-500 font-medium flex items-center gap-1.5"><span>Support Us</span> <span className="text-xs">❤️</span></Link></li>
               <li><Link to="/contact" onClick={(e) => handleLinkClick(e, '/contact')} className="transition-colors hover:text-[var(--accent-color)]">Contact Us</Link></li>
               <li><Link to="/privacy-policy" onClick={(e) => handleLinkClick(e, '/privacy-policy')} className="transition-colors hover:text-[var(--accent-color)]">Privacy Policy</Link></li>
               <li><Link to="/terms" onClick={(e) => handleLinkClick(e, '/terms')} className="transition-colors hover:text-[var(--accent-color)]">Terms of Service</Link></li>

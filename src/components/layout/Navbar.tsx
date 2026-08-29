@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSiteConfig } from '../../config/siteConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCubes, faPuzzlePiece, faMagic, faBars, faTimes, faChevronDown, faChevronUp, faHome, faSun, faMoon, faImage } from '@fortawesome/free-solid-svg-icons';
+import { faCubes, faPuzzlePiece, faMagic, faBars, faTimes, faChevronDown, faChevronUp, faHome, faImage, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { motion, AnimatePresence } from 'framer-motion';
 import logoImg from '../../assets/Logo.png';
 
 export const Navbar: React.FC = () => {
   const websiteName = useSiteConfig((state) => state.websiteName);
-  const isDarkMode = useSiteConfig((state) => state.isDarkMode);
-  const toggleDarkMode = useSiteConfig((state) => state.toggleDarkMode);
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
@@ -51,7 +49,6 @@ export const Navbar: React.FC = () => {
     },
     { name: 'Puzzle Arts', path: '/arts', icon: faPuzzlePiece },
     { name: 'Mosaic Generator', path: '/mosaic-generator', icon: faImage },
-
   ];
 
   return (
@@ -70,18 +67,20 @@ export const Navbar: React.FC = () => {
               {websiteName}
             </span>
           </Link>
-          <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <button
-              onClick={toggleDarkMode}
-              className={`flex items-center justify-center w-10 h-10 rounded-lg transition-colors mr-2 ${isDarkMode ? 'bg-slate-600' : 'bg-slate-100'}`}
-              style={{ color: 'var(--text-primary)' }}
-              title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+          <div className="flex items-center md:order-2 space-x-2 md:space-x-0 rtl:space-x-reverse">
+            {/* Support Us Button in place of theme toggle */}
+            <Link
+              to="/support"
+              onClick={(e) => handleNavClick(e, '/support')}
+              className="flex items-center gap-2 px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full bg-gradient-to-r from-rose-500 to-pink-500 hover:from-rose-600 hover:to-pink-600 text-white font-bold text-xs sm:text-sm shadow-md hover:shadow-rose-500/25 transition-all mr-1 sm:mr-2 group cursor-pointer"
             >
-              <FontAwesomeIcon icon={isDarkMode ? faSun : faMoon} size="lg" />
-            </button>
+              <FontAwesomeIcon icon={faHeart} className="text-white group-hover:scale-125 transition-transform" />
+              <span>Support Us</span>
+            </Link>
+
             <button
               onClick={toggleMenu}
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden hover:bg-slate-100 focus:outline-none text-[var(--text-secondary)]"
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm rounded-lg md:hidden hover:bg-slate-100 dark:hover:bg-slate-800 focus:outline-none text-[var(--text-secondary)]"
             >
               <FontAwesomeIcon icon={isOpen ? faTimes : faBars} size="lg" />
             </button>
@@ -238,6 +237,18 @@ export const Navbar: React.FC = () => {
                     )}
                   </li>
                 ))}
+                
+                {/* Mobile Menu Support Us Button */}
+                <li className="pt-4 border-t" style={{ borderColor: 'var(--nav-border)' }}>
+                  <Link
+                    to="/support"
+                    className="flex items-center justify-center gap-2.5 py-3 px-4 rounded-2xl bg-gradient-to-r from-rose-500 to-pink-500 text-white font-bold text-base shadow-lg shadow-rose-500/20"
+                    onClick={(e) => handleNavClick(e, '/support')}
+                  >
+                    <FontAwesomeIcon icon={faHeart} className="text-white animate-pulse" />
+                    <span>Support Rubik's Art</span>
+                  </Link>
+                </li>
               </ul>
             </motion.div>
           </>

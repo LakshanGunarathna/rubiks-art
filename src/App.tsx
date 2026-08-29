@@ -11,6 +11,7 @@ import { PrivacyPolicy } from './pages/PrivacyPolicy';
 import { TermsOfService } from './pages/TermsOfService';
 import { AboutUs } from './pages/AboutUs';
 import { ContactUs } from './pages/ContactUs';
+import { SupportUs } from './pages/SupportUs';
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -27,6 +28,8 @@ const AnimatedRoutes = () => {
       <Route path="/terms" element={<TermsOfService />} />
       <Route path="/about" element={<AboutUs />} />
       <Route path="/contact" element={<ContactUs />} />
+      <Route path="/support" element={<SupportUs />} />
+      <Route path="/donate" element={<SupportUs />} />
     </Routes>
   );
 };
