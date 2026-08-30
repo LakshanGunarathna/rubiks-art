@@ -89,7 +89,7 @@ export const SupportUs: React.FC = () => {
             className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed"
             style={{ color: 'var(--text-secondary)' }}
           >
-            If you enjoy our interactive 3D cube simulators, instant step-by-step solvers, or custom mosaic generator, consider buying us a coffee! Every cup helps keep the servers running and new features rolling out.
+            Your support is truly invaluable in keeping this service running, fast, and 100% ad-free for everyone. Every contribution directly powers our high-performance solver servers, fuels new 3D features, and keeps Rubik's Art accessible to cubers worldwide.
           </p>
         </div>
 
@@ -114,10 +114,7 @@ export const SupportUs: React.FC = () => {
               </div>
             </div>
 
-            <div className="flex items-center gap-2 px-4 py-2 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold self-start sm:self-auto">
-              <FontAwesomeIcon icon={faCheck} />
-              <span>100% Free & Ad-Free Platform</span>
-            </div>
+
           </div>
 
           {/* Top Center: Prominent Buy Me a Coffee CTA Button */}
@@ -148,7 +145,7 @@ export const SupportUs: React.FC = () => {
               <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
                 Unlike many platforms, Rubik's Art is committed to providing a clean, ad-free experience with full 3D capabilities for solvers and mosaic artists worldwide.
               </p>
-              
+
               <ul className="space-y-3 pt-1">
                 {[
                   '100% Ad-Free web experience',
@@ -229,7 +226,7 @@ export const SupportUs: React.FC = () => {
                 Can't donate right now? You can still make a huge impact through these simple actions:
               </p>
             </div>
-            
+
             <button
               type="button"
               onClick={handleCopyLink}
