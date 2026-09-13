@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { MainLayout } from './components/layout/MainLayout';
 import { ScrollToTop } from './components/layout/ScrollToTop';
+import { AdSenseAutoAds } from './components/layout/AdSenseAutoAds';
 import { Home } from './pages/Home';
 
 import { CubeView } from './pages/CubeView';
@@ -38,6 +39,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
+      <AdSenseAutoAds />
       <MainLayout>
         <AnimatedRoutes />
       </MainLayout>

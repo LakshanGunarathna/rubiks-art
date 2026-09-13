@@ -557,7 +557,7 @@ export const MosaicViewer: React.FC<MosaicViewerProps> = ({
                 Support Rubiks' Art
               </span>
               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-500/10 text-blue-500 border border-blue-500/20">
-                <ThumbsUp className="w-2.5 h-2.5" /> 100% Free & Ad-Free
+                <ThumbsUp className="w-2.5 h-2.5" /> 100% Free & Open Access
               </span>
             </div>
             <h3 className="text-xl sm:text-2xl font-bold font-heading text-[var(--text-primary)]">

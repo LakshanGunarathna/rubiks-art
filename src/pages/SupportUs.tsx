@@ -28,7 +28,7 @@ export const SupportUs: React.FC = () => {
   useEffect(() => {
     updateMetaTags(
       `Support Us - ${websiteName}`,
-      `Support ${websiteName} to keep our 3D Rubik's Cube simulators, AI solvers, puzzle art galleries, and mosaic generator free and ad-free for everyone.`
+      `Support ${websiteName} to keep our 3D Rubik's Cube simulators, AI solvers, puzzle art galleries, and mosaic generator free and accessible for everyone.`
     );
   }, [websiteName]);
 
@@ -61,7 +61,7 @@ export const SupportUs: React.FC = () => {
       icon: faBolt,
       title: '100% Free & Uninterrupted',
       color: 'from-emerald-500 to-teal-500',
-      description: 'Ensuring Rubik\'s Art remains completely accessible, ad-free, and open to learners and speedcubers globally.'
+      description: 'Ensuring Rubik\'s Art remains completely accessible, fast, and open to learners and speedcubers globally.'
     }
   ];
 
@@ -89,7 +89,7 @@ export const SupportUs: React.FC = () => {
             className="text-base sm:text-lg max-w-2xl mx-auto leading-relaxed"
             style={{ color: 'var(--text-secondary)' }}
           >
-            Your support is truly invaluable in keeping this service running, fast, and 100% ad-free for everyone. Every contribution directly powers our high-performance solver servers, fuels new 3D features, and keeps Rubik's Art accessible to cubers worldwide.
+            Your support is truly invaluable in keeping this service running, fast, and 100% free for everyone. Every contribution directly powers our high-performance solver servers, fuels new 3D features, and keeps Rubik's Art accessible to cubers worldwide.
           </p>
         </div>
 
@@ -143,12 +143,12 @@ export const SupportUs: React.FC = () => {
                 Why Your Support Counts
               </h3>
               <p className="text-sm leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-                Unlike many platforms, Rubik's Art is committed to providing a clean, ad-free experience with full 3D capabilities for solvers and mosaic artists worldwide.
+                Rubik's Art is committed to providing a clean, accessible web experience with full 3D capabilities for solvers and mosaic artists worldwide.
               </p>
 
               <ul className="space-y-3 pt-1">
                 {[
-                  '100% Ad-Free web experience',
+                  '100% Free web experience',
                   'Unlimited access to 3D solvers (2x2 to 5x5)',
                   'Full-resolution mosaic pattern exports',
                   'Frequent updates & new puzzle visualizers'

@@ -721,7 +721,7 @@ export const generatePDFGuide = async ({
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(11);
   doc.setTextColor(71, 85, 105); // slate-600
-  doc.text("Help Keep Rubiks' Art 100% Free, Fast, and Ad-Free for Everyone", pageWidth / 2, 36, { align: 'center' });
+  doc.text("Help Keep Rubiks' Art 100% Free and Fast for Everyone", pageWidth / 2, 36, { align: 'center' });
 
   // --- Two Columns Layout ---
   const cardY = 46;
@@ -763,7 +763,7 @@ export const generatePDFGuide = async ({
   const bullets = [
     "* High-Performance solver servers with near-zero latency",
     "* Continuous development of 3D WebGL features & algorithms",
-    "* Keeps Rubiks' Art 100% ad-free & open for all creators",
+    "* Keeps Rubiks' Art 100% free & open for all creators",
     "* New dithering models and printable mosaic builder tools"
   ];
   bullets.forEach((b, idx) => {

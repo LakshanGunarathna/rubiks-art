@@ -1,7 +1,7 @@
 /**
- * Dynamically updates the document title and search/social meta tags.
- * This ensures search crawlers (like Google) and social sharing bots
- * index each page with its relevant metadata.
+ * Dynamically updates the document title, canonical URLs, and search/social meta tags.
+ * This ensures search crawlers (like Google) and Google AdSense reviewers
+ * index each dynamic SPA route with its relevant metadata and canonical link.
  */
 export function updateMetaTags(title: string, description: string, imageUrl?: string) {
   // Update document title
@@ -24,6 +24,19 @@ export function updateMetaTags(title: string, description: string, imageUrl?: st
   // Update OpenGraph tags
   setMetaTag('property', 'og:title', title);
   setMetaTag('property', 'og:description', description);
+
+  // Set canonical URL required for Google AdSense SPA verification
+  const currentPath = window.location.pathname;
+  const canonicalUrl = `https://www.rubiks-art.com${currentPath}`;
+  setMetaTag('property', 'og:url', canonicalUrl);
+
+  let canonicalElement = document.querySelector('link[rel="canonical"]');
+  if (!canonicalElement) {
+    canonicalElement = document.createElement('link');
+    canonicalElement.setAttribute('rel', 'canonical');
+    document.head.appendChild(canonicalElement);
+  }
+  canonicalElement.setAttribute('href', canonicalUrl);
 
   // Update image tags for Google Search and social crawlers
   if (imageUrl) {
