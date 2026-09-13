@@ -47,10 +47,10 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
 
   const selectedCubeStickers = useMemo(() => {
     if (!selectedCube) return null;
-    
+
     const { row, col } = selectedCube;
     const stickers: number[] = [];
-    
+
     for (let r = 0; r < cubeSize; r++) {
       for (let c = 0; c < cubeSize; c++) {
         const stickerRow = row * cubeSize + r;
@@ -108,7 +108,7 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
   return (
     <div className="w-full">
       <div className="rounded-3xl backdrop-blur-md border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-lg overflow-hidden flex flex-col w-full">
-        
+
         {/* Tab Links */}
         <div className="flex border-b border-[var(--nav-border)] bg-slate-100/50 dark:bg-slate-950/20">
           <button
@@ -137,7 +137,7 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
         {/* Tab Body */}
         <div className="p-6">
           <AnimatePresence mode="wait">
-            
+
             {/* 📄 PDF & PRINT INFO */}
             {activeTab === 'preview' && (
               <motion.div
@@ -230,11 +230,11 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
                   <h3 className="text-xs font-bold text-[var(--text-primary)] uppercase tracking-wider">Required Sticker count</h3>
                   <div className="flex flex-col gap-2.5">
                     {statistics.colorStats.map((color) => (
-                      <div 
+                      <div
                         key={color.name}
                         className="flex items-center gap-2.5 p-2 rounded-xl border border-slate-100 dark:border-slate-800 bg-white/40 dark:bg-slate-900/20 text-xs"
                       >
-                        <div 
+                        <div
                           className="w-7 h-7 rounded-lg border border-black/10 shadow-xs flex-shrink-0 flex items-center justify-center font-bold text-[10px]"
                           style={{ backgroundColor: color.hex, color: color.name === 'White' || color.name === 'Yellow' ? '#0f172a' : '#ffffff' }}
                         >
@@ -246,8 +246,8 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
                             <span>{color.count}</span>
                           </div>
                           <div className="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full mt-1 overflow-hidden">
-                            <div 
-                              className="h-full rounded-full" 
+                            <div
+                              className="h-full rounded-full"
                               style={{ width: `${color.percentage}%`, backgroundColor: color.hex }}
                             />
                           </div>
@@ -279,9 +279,9 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
                       </span>
                     )}
                   </div>
-                  
+
                   <div className="border border-slate-200 dark:border-slate-800 p-5 rounded-2xl bg-slate-50/50 dark:bg-slate-900/30 overflow-auto shadow-inner w-full">
-                    <div 
+                    <div
                       className="grid gap-0.5 mx-auto"
                       style={{
                         gridTemplateColumns: `repeat(${cubesWide}, minmax(12px, 1fr))`,
@@ -312,7 +312,7 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
                 {selectedCube && selectedCubeStickers && (
                   <div className="flex flex-col gap-4 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/40 dark:bg-slate-900/30">
                     <div className="flex items-center justify-center">
-                      <div 
+                      <div
                         className="grid gap-1 p-1.5 rounded-xl bg-[#0f172a] shadow-md border border-slate-700"
                         style={{ gridTemplateColumns: `repeat(${cubeSize}, minmax(0, 1fr))` }}
                       >
@@ -344,8 +344,8 @@ export const CubeGuidingSection: React.FC<CubeGuidingSectionProps> = ({
                             return Object.entries(counts).map(([name, count]) => {
                               const cDef = palette.find(c => c.name === name)!;
                               return (
-                                <span 
-                                  key={name} 
+                                <span
+                                  key={name}
                                   className="px-2 py-0.5 rounded-full font-bold border border-black/5 flex items-center gap-1 bg-white dark:bg-slate-900"
                                   style={{ color: cDef.hex === '#FFFFFF' || cDef.hex === '#ffffff' ? 'var(--text-primary)' : cDef.hex }}
                                 >

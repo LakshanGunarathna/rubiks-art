@@ -1,11 +1,17 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { 
   Download, 
-  ArrowLeft,
-  Printer,
-  Sliders
+  ArrowLeft, 
+  Printer, 
+  Sliders,
+  Heart,
+  Coffee,
+  ExternalLink,
+  ThumbsUp
 } from 'lucide-react';
+import { useSiteConfig } from '../../config/siteConfig';
 import { CubeGuidingSection } from './CubeGuidingSection';
 import { generateMosaicIndices, type PaletteColor } from '../../utils/mosaicAlgorithms';
 import { generatePDFGuide } from '../../utils/pdfGenerator';
@@ -45,6 +51,7 @@ export const MosaicViewer: React.FC<MosaicViewerProps> = ({
   PALETTE,
   imageSrc
 }) => {
+  const buyMeACoffeeUrl = useSiteConfig((state) => state.buyMeACoffeeUrl);
   const [isExportingPDF, setIsExportingPDF] = useState<boolean>(false);
   const [activePalette, setActivePalette] = useState<PaletteColor[]>(PALETTE);
 
@@ -536,6 +543,52 @@ export const MosaicViewer: React.FC<MosaicViewerProps> = ({
         statistics={statistics}
         imageSrc={imageSrc}
       />
+
+      {/* 💖 Support Us Section */}
+      <div className="rounded-3xl p-6 sm:p-8 backdrop-blur-md border border-[var(--glass-border)] bg-[var(--glass-bg)] shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+        <div className="flex flex-col sm:flex-row items-center gap-4 max-w-2xl">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-400 to-yellow-500 flex items-center justify-center text-slate-950 text-2xl shadow-lg shadow-amber-500/20 flex-shrink-0">
+            <Coffee className="w-7 h-7" />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <div className="flex items-center justify-center sm:justify-start gap-2">
+              <span className="text-xs font-bold uppercase tracking-wider text-amber-500 flex items-center gap-1.5">
+                <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />
+                Support Rubiks' Art
+              </span>
+              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-500/10 text-blue-500 border border-blue-500/20">
+                <ThumbsUp className="w-2.5 h-2.5" /> 100% Free & Ad-Free
+              </span>
+            </div>
+            <h3 className="text-xl sm:text-2xl font-bold font-heading text-[var(--text-primary)]">
+              Enjoyed Creating Your Mosaic?
+            </h3>
+            <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed">
+              If you love this tool and want to help us keep solver servers fast, cloud compute uninterrupted, and new 3D features coming, consider supporting us on Buy Me a Coffee or spreading the word!
+            </p>
+          </div>
+        </div>
+
+        <div className="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto flex-shrink-0">
+          <a
+            href={buyMeACoffeeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto py-3 px-6 rounded-2xl bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-500 hover:to-yellow-600 text-slate-950 font-extrabold text-sm transition-all shadow-md hover:shadow-lg hover:scale-105 active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
+          >
+            <Coffee className="w-4 h-4" />
+            <span>Buy Us a Coffee</span>
+            <ExternalLink className="w-3.5 h-3.5 opacity-70" />
+          </a>
+          <Link
+            to="/support"
+            className="w-full sm:w-auto py-3 px-5 rounded-2xl border border-[var(--glass-border)] hover:border-blue-500/40 bg-white/40 dark:bg-slate-900/40 hover:bg-white/60 dark:hover:bg-slate-900/60 text-[var(--text-primary)] font-bold text-sm transition-all hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
+          >
+            <Heart className="w-4 h-4 text-rose-500" />
+            <span>Support Us</span>
+          </Link>
+        </div>
+      </div>
     </motion.div>
   );
 };

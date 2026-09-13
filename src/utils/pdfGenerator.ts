@@ -46,7 +46,7 @@ export const generatePDFGuide = async ({
   const numBlocksWide = Math.ceil(cubesWide / 3);
   const numBlocksHigh = Math.ceil(cubesHigh / 3);
   const blockStickersSize = 3 * cubeSize;
-  const totalPages = 3 + numBlocksWide * numBlocksHigh;
+  const totalPages = 4 + numBlocksWide * numBlocksHigh;
 
   // Load the logo images asynchronously
   let logoImg: HTMLImageElement | null = null;
@@ -701,6 +701,158 @@ export const generatePDFGuide = async ({
       drawFooter(pageIndex, `Instruction Guide - Block ${blockLabel}`);
     }
   }
+
+  // ==========================================
+  // --- Final Page: Support Us & Buy Me a Coffee ---
+  // ==========================================
+  doc.addPage();
+  doc.setFillColor(255, 255, 255);
+  doc.rect(0, 0, pageWidth, pageHeight, 'F');
+
+  const finalPageIndex = totalPages;
+
+  // Header Title
+  doc.setTextColor(15, 23, 42); // slate-900
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(26);
+  doc.text("Satisfied With Your Mosaic Art?", pageWidth / 2, 28, { align: 'center' });
+
+  // Subtitle
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(11);
+  doc.setTextColor(71, 85, 105); // slate-600
+  doc.text("Help Keep Rubiks' Art 100% Free, Fast, and Ad-Free for Everyone", pageWidth / 2, 36, { align: 'center' });
+
+  // --- Two Columns Layout ---
+  const cardY = 46;
+  const cardW = 126;
+  const cardH = 136;
+  const leftCardX = 18;
+  const rightCardX = 153;
+
+  // Left Card: Buy Me a Coffee
+  doc.setFillColor(248, 250, 252); // slate-50
+  doc.setDrawColor(226, 232, 240); // slate-200
+  doc.setLineWidth(0.4);
+  doc.roundedRect(leftCardX, cardY, cardW, cardH, 4, 4, 'FD');
+
+  // Left Card Header Bar
+  doc.setFillColor(254, 243, 199); // amber-100
+  doc.roundedRect(leftCardX + 4, cardY + 4, cardW - 8, 14, 3, 3, 'F');
+  doc.setTextColor(180, 83, 9); // amber-700
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(11);
+  doc.text("Support Us on Buy Me a Coffee", leftCardX + cardW / 2, cardY + 13, { align: 'center' });
+
+  // Left Card Body
+  doc.setTextColor(51, 65, 85); // slate-700
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8.5);
+  const leftBody = "Rubiks' Art is an independent, community-driven project built with love for cubers and puzzle enthusiasts worldwide. If this generator and step-by-step PDF blueprint saved you time or brought your custom mosaic idea to life, consider buying us a coffee!";
+  doc.text(leftBody, leftCardX + 8, cardY + 26, { maxWidth: cardW - 16, lineHeightFactor: 1.4 });
+
+  // Impact Bullets
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(8.5);
+  doc.setTextColor(15, 23, 42);
+  doc.text("What Your Support Powers:", leftCardX + 8, cardY + 54);
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8);
+  doc.setTextColor(71, 85, 105);
+  const bullets = [
+    "* High-Performance solver servers with near-zero latency",
+    "* Continuous development of 3D WebGL features & algorithms",
+    "* Keeps Rubiks' Art 100% ad-free & open for all creators",
+    "* New dithering models and printable mosaic builder tools"
+  ];
+  bullets.forEach((b, idx) => {
+    doc.text(b, leftCardX + 8, cardY + 62 + idx * 7, { maxWidth: cardW - 16 });
+  });
+
+  // Left Card Button CTA
+  const btnW = cardW - 20;
+  const btnH = 13;
+  const btnX = leftCardX + 10;
+  const btnY = cardY + 98;
+
+  doc.setFillColor(245, 158, 11); // amber-500
+  doc.roundedRect(btnX, btnY, btnW, btnH, 3, 3, 'F');
+
+  doc.setTextColor(15, 23, 42); // slate-900
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10);
+  doc.text("Buy Us a Coffee (buymeacoffee.com)", btnX + btnW / 2, btnY + 8.5, { align: 'center' });
+  doc.link(btnX, btnY, btnW, btnH, { url: 'https://buymeacoffee.com/rubiksart' });
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(7.5);
+  doc.setTextColor(100, 116, 139);
+  doc.text("Click above or visit: https://buymeacoffee.com/rubiksart", leftCardX + cardW / 2, cardY + 122, { align: 'center' });
+  doc.link(leftCardX + 8, cardY + 118, cardW - 16, 6, { url: 'https://buymeacoffee.com/rubiksart' });
+
+  // Right Card: Show Love & Add Likes
+  doc.setFillColor(248, 250, 252); // slate-50
+  doc.setDrawColor(226, 232, 240); // slate-200
+  doc.setLineWidth(0.4);
+  doc.roundedRect(rightCardX, cardY, cardW, cardH, 4, 4, 'FD');
+
+  // Right Card Header Bar
+  doc.setFillColor(254, 226, 226); // rose-100
+  doc.roundedRect(rightCardX + 4, cardY + 4, cardW - 8, 14, 3, 3, 'F');
+  doc.setTextColor(225, 29, 72); // rose-600
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(11);
+  doc.text("Show Your Love & Add Likes", rightCardX + cardW / 2, cardY + 13, { align: 'center' });
+
+  // Right Card Body
+  doc.setTextColor(51, 65, 85); // slate-700
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8.5);
+  const rightBody = "Proud of your finished Rubik's Cube mosaic? Share your masterpiece with the cubing community and help others discover how fun building pixel puzzle art can be!";
+  doc.text(rightBody, rightCardX + 8, cardY + 26, { maxWidth: cardW - 16, lineHeightFactor: 1.4 });
+
+  // Community Bullets
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(8.5);
+  doc.setTextColor(15, 23, 42);
+  doc.text("Ways to Spread the Word:", rightCardX + 8, cardY + 54);
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8);
+  doc.setTextColor(71, 85, 105);
+  const rightBullets = [
+    "* Post photos or videos of your mosaic build on social media",
+    "* Drop a like & tag us with @rubiksart and #RubiksArt",
+    "* Share our generator with your local speedcubing clubs",
+    "* Check out our 3D Solvers, Simulators & Puzzle Arts gallery"
+  ];
+  rightBullets.forEach((b, idx) => {
+    doc.text(b, rightCardX + 8, cardY + 62 + idx * 7, { maxWidth: cardW - 16 });
+  });
+
+  // Right Card Button CTA
+  const btn2W = cardW - 20;
+  const btn2H = 13;
+  const btn2X = rightCardX + 10;
+  const btn2Y = cardY + 98;
+
+  doc.setFillColor(37, 99, 235); // blue-600
+  doc.roundedRect(btn2X, btn2Y, btn2W, btn2H, 3, 3, 'F');
+
+  doc.setTextColor(255, 255, 255); // white
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10);
+  doc.text("Visit Rubiks' Art Support Hub", btn2X + btn2W / 2, btn2Y + 8.5, { align: 'center' });
+  doc.link(btn2X, btn2Y, btn2W, btn2H, { url: 'https://www.rubiks-art.com/support' });
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(7.5);
+  doc.setTextColor(100, 116, 139);
+  doc.text("Explore more features at: https://www.rubiks-art.com/", rightCardX + cardW / 2, cardY + 122, { align: 'center' });
+  doc.link(rightCardX + 8, cardY + 118, cardW - 16, 6, { url: 'https://www.rubiks-art.com/' });
+
+  drawFooter(finalPageIndex, "Support Rubiks' Art - Buy Me a Coffee");
 
   doc.save(
     `rubiks_mosaic_block_guide_${cubesWide}x${cubesHigh}_${cubeType}_${methodName
