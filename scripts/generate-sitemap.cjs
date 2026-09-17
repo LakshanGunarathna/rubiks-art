@@ -40,7 +40,7 @@ while ((match = objectRegex.exec(content)) !== null) {
 }
 
 // Generate sitemap XML
-const domain = 'https://www.rubiks-art.com';
+const domain = 'https://rubiks-art.com';
 const today = new Date().toISOString().split('T')[0];
 
 let xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -59,7 +59,7 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
     </image:image>
   </url>
   <url>
-    <loc>${domain}/arts</loc>
+    <loc>${domain}/arts/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -70,7 +70,7 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
     </image:image>
   </url>
   <url>
-    <loc>${domain}/mosaic-generator</loc>
+    <loc>${domain}/mosaic-generator/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -83,31 +83,31 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
   
   <!-- Company & Legal Pages -->
   <url>
-    <loc>${domain}/about</loc>
+    <loc>${domain}/about/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>${domain}/support</loc>
+    <loc>${domain}/support/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>${domain}/contact</loc>
+    <loc>${domain}/contact/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>${domain}/privacy-policy</loc>
+    <loc>${domain}/privacy-policy/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>${domain}/terms</loc>
+    <loc>${domain}/terms/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -115,7 +115,7 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
   
   <!-- Cube Playgrounds -->
   <url>
-    <loc>${domain}/cubes/2x2</loc>
+    <loc>${domain}/cubes/2x2/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -126,7 +126,7 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
     </image:image>
   </url>
   <url>
-    <loc>${domain}/cubes/3x3</loc>
+    <loc>${domain}/cubes/3x3/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -137,7 +137,7 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
     </image:image>
   </url>
   <url>
-    <loc>${domain}/cubes/4x4</loc>
+    <loc>${domain}/cubes/4x4/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -148,7 +148,7 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
     </image:image>
   </url>
   <url>
-    <loc>${domain}/cubes/5x5</loc>
+    <loc>${domain}/cubes/5x5/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -161,7 +161,7 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
 
   <!-- Solvers -->
   <url>
-    <loc>${domain}/solvers/2x2</loc>
+    <loc>${domain}/solvers/2x2/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -172,7 +172,7 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
     </image:image>
   </url>
   <url>
-    <loc>${domain}/solvers/3x3</loc>
+    <loc>${domain}/solvers/3x3/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -183,7 +183,7 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
     </image:image>
   </url>
   <url>
-    <loc>${domain}/solvers/4x4</loc>
+    <loc>${domain}/solvers/4x4/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -194,7 +194,7 @@ let xml = `<?xml version="1.0" encoding="UTF-8"?>
     </image:image>
   </url>
   <url>
-    <loc>${domain}/solvers/5x5</loc>
+    <loc>${domain}/solvers/5x5/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -212,7 +212,7 @@ arts.forEach(art => {
   const fullImgUrl = `${domain}${art.imageUrl}`;
   xml += `
   <url>
-    <loc>${domain}/arts/${art.slug}</loc>
+    <loc>${domain}/arts/${art.slug}/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>

@@ -43,7 +43,7 @@ export const TermsOfService: React.FC = () => {
               1. Agreement to Terms
             </h2>
             <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
-              By accessing or using <strong>Rubik's Art</strong> (accessible via www.rubiks-art.com), you agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree with any part of these terms, you are prohibited from using or accessing our website and web applications.
+              By accessing or using <strong>Rubik's Art</strong> (accessible via rubiks-art.com), you agree to be bound by these Terms of Service and our Privacy Policy. If you do not agree with any part of these terms, you are prohibited from using or accessing our website and web applications.
             </p>
           </section>
 

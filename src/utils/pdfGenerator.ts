@@ -110,8 +110,8 @@ export const generatePDFGuide = async ({
 
     // Website URL link in footer
     doc.setTextColor(37, 99, 235); // blue-600
-    doc.text("www.rubiks-art.com", logoX + 25, logoY + 3.0);
-    doc.link(logoX + 25, logoY + 0.5, 28, 3.5, { url: 'https://www.rubiks-art.com/' });
+    doc.text("rubiks-art.com", logoX + 25, logoY + 3.0);
+    doc.link(logoX + 25, logoY + 0.5, 28, 3.5, { url: 'https://rubiks-art.com/' });
 
     // Center Text
     doc.setFont('helvetica', 'normal');
@@ -163,8 +163,8 @@ export const generatePDFGuide = async ({
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(11);
   doc.setTextColor(37, 99, 235); // blue-600
-  doc.text("Start Designing at www.rubiks-art.com", pageWidth / 2, 136, { align: 'center' });
-  doc.link(pageWidth / 2 - 40, 132, 80, 6, { url: 'https://www.rubiks-art.com/' });
+  doc.text("Start Designing at rubiks-art.com", pageWidth / 2, 136, { align: 'center' });
+  doc.link(pageWidth / 2 - 40, 132, 80, 6, { url: 'https://rubiks-art.com/' });
 
   // Small description
   doc.setFont('helvetica', 'normal');
@@ -181,7 +181,7 @@ export const generatePDFGuide = async ({
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8);
   doc.setTextColor(100, 116, 139); // slate-500
-  doc.text("© 2026 Rubiks' Art. All rights reserved.  |  https://www.rubiks-art.com/", pageWidth / 2, 181, { align: 'center' });
+  doc.text("© 2026 Rubiks' Art. All rights reserved.  |  https://rubiks-art.com/", pageWidth / 2, 181, { align: 'center' });
 
   doc.setFontSize(6.5);
   doc.setTextColor(148, 163, 184); // slate-400
@@ -844,13 +844,13 @@ export const generatePDFGuide = async ({
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(10);
   doc.text("Visit Rubiks' Art Support Hub", btn2X + btn2W / 2, btn2Y + 8.5, { align: 'center' });
-  doc.link(btn2X, btn2Y, btn2W, btn2H, { url: 'https://www.rubiks-art.com/support' });
+  doc.link(btn2X, btn2Y, btn2W, btn2H, { url: 'https://rubiks-art.com/support/' });
 
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(7.5);
   doc.setTextColor(100, 116, 139);
-  doc.text("Explore more features at: https://www.rubiks-art.com/", rightCardX + cardW / 2, cardY + 122, { align: 'center' });
-  doc.link(rightCardX + 8, cardY + 118, cardW - 16, 6, { url: 'https://www.rubiks-art.com/' });
+  doc.text("Explore more features at: https://rubiks-art.com/", rightCardX + cardW / 2, cardY + 122, { align: 'center' });
+  doc.link(rightCardX + 8, cardY + 118, cardW - 16, 6, { url: 'https://rubiks-art.com/' });
 
   drawFooter(finalPageIndex, "Support Rubiks' Art - Buy Me a Coffee");
 

@@ -66,7 +66,7 @@ export const MosaicGenerator: React.FC = () => {
       "@type": "WebApplication",
       "name": "Rubik's Cube Mosaic Generator",
       "description": "Convert any image or photo into a Rubik's Cube mosaic pattern. Features adjustable grid sizes, cube types (1x1 to 7x7), perception-based color matching, Floyd-Steinberg dithering, and step-by-step physical assembly guides with PDF export.",
-      "url": "https://www.rubiks-art.com/mosaic-generator",
+      "url": "https://rubiks-art.com/mosaic-generator/",
       "applicationCategory": "MultimediaApplication",
       "operatingSystem": "All",
       "browserRequirements": "Requires HTML5 canvas support and JavaScript.",

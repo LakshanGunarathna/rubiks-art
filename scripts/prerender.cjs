@@ -12,7 +12,7 @@ if (!fs.existsSync(templateHtmlPath)) {
 }
 
 const templateHtml = fs.readFileSync(templateHtmlPath, 'utf8');
-const domain = 'https://www.rubiks-art.com';
+const domain = 'https://rubiks-art.com';
 
 // 1. Static and Feature Routes
 const routes = [
@@ -149,7 +149,8 @@ try {
 // 3. Helper to replace/inject metadata in HTML
 function renderHtml(template, route) {
   let html = template;
-  const canonicalUrl = `${domain}${route.path === '/' ? '' : route.path}`;
+  const cleanPath = route.path === '/' ? '/' : (route.path.endsWith('/') ? route.path : `${route.path}/`);
+  const canonicalUrl = `${domain}${cleanPath}`;
   const fullImageUrl = route.image.startsWith('http') ? route.image : `${domain}${route.image}`;
 
   // Replace <title>

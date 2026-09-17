@@ -27,7 +27,8 @@ export function updateMetaTags(title: string, description: string, imageUrl?: st
 
   // Set canonical URL required for Google AdSense SPA verification
   const currentPath = window.location.pathname;
-  const canonicalUrl = `https://www.rubiks-art.com${currentPath}`;
+  const cleanPath = currentPath === '/' ? '/' : (currentPath.endsWith('/') ? currentPath : `${currentPath}/`);
+  const canonicalUrl = `https://rubiks-art.com${cleanPath}`;
   setMetaTag('property', 'og:url', canonicalUrl);
 
   let canonicalElement = document.querySelector('link[rel="canonical"]');
@@ -42,7 +43,7 @@ export function updateMetaTags(title: string, description: string, imageUrl?: st
   if (imageUrl) {
     let absoluteImageUrl = imageUrl;
     if (imageUrl.startsWith('/')) {
-      absoluteImageUrl = `https://www.rubiks-art.com${imageUrl}`;
+      absoluteImageUrl = `https://rubiks-art.com${imageUrl}`;
     }
     setMetaTag('property', 'og:image', absoluteImageUrl);
     setMetaTag('name', 'twitter:image', absoluteImageUrl);

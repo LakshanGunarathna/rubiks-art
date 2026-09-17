@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.rubiks-art.com/sitemap.xml
+Sitemap: https://rubiks-art.com/sitemap.xml
